@@ -1,2 +1,2 @@
 == kronos-interceptor
-any doc
+The interceptor object are designed to added to an endpoint. 
