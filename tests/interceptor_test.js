@@ -38,13 +38,42 @@ describe('interceptors', () => {
 
   mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", itc => {});
 
+
+  const REQUEST_LIMIT = 1;
+
   mochaInterceptorTest(LimitingInterceptor, ep, {
-    limit: 5
+    limit: REQUEST_LIMIT
   }, "request-limit", itc => {
-    it('has limit', () => assert.equal(itc.limit, 5));
+    it('has limit', () => assert.equal(itc.limit, REQUEST_LIMIT));
+
+    itc.connected = dummyEndpoint('ep');
+
+    // request value is the timeout
+    itc.connected.receive = request =>
+      new Promise((fullfilled, rejected) =>
+        setTimeout(() => fullfilled(request), 200));
+
+    xit('sending lots of request', done => {
+      let i;
+      for (i = 0; i < REQUEST_LIMIT + 1; i++) {
+        const response = itc.receive(i).then(
+          f => {
+            console.log(`fullfilled: ${f}`);
+          },
+          r => {
+            console.log(`rejected: ${r}`);
+
+            if (i === REQUEST_LIMIT) {
+              done();
+            }
+          }
+        );
+        console.log(`send: ${i} ${itc.ongoingResponses.size}`);
+      }
+    });
   });
 
-  const itc = mochaInterceptorTest(TimeoutInterceptor, ep, {
+  mochaInterceptorTest(TimeoutInterceptor, ep, {
     timeout: 15
   }, "timeout", itc => {
     it('has timeout', () => assert.equal(itc.timeout, 15));
