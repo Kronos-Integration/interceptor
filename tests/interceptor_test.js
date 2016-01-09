@@ -52,11 +52,9 @@ describe('interceptors', function () {
 
     itc.connected = dummyEndpoint('ep');
 
-    itc.connected.receive = request => {
-      return new Promise((fullfilled, rejected) => {
-        setTimeout(() => fullfilled(request), 10);
-      })
-    };
+    itc.connected.receive = request =>
+      new Promise((fullfilled, rejected) =>
+        setTimeout(() => fullfilled(request), 10));
 
     xit('long running timout request', function (done) {
       let response = itc.receive("request", 5);
