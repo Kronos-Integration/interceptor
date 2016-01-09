@@ -1,8 +1,8 @@
 /* jslint node: true, esnext: true */
 "use strict";
 
-exports.ConnectorMixin = require('./lib/connector-mixin').connectorMixin;;
-exports.Interceptor = require('./lib/interceptor').Interceptor;;
+exports.ConnectorMixin = require('./lib/connector-mixin').connectorMixin;
+exports.Interceptor = require('./lib/interceptor').Interceptor;
 
 exports.LimitingInterceptor = require('./lib/LimitingInterceptor');
 exports.TimeLoggerInterceptor = require('./lib/TimeLoggerInterceptor');
