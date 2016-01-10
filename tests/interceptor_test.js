@@ -43,7 +43,7 @@ describe('interceptors', () => {
 
   mochaInterceptorTest(LimitingInterceptor, ep, {
     limit: REQUEST_LIMIT
-  }, "request-limit", itc => {
+  }, "request-limit", (itc, withConfig) => {
     it('has limit', () => assert.equal(itc.limit, REQUEST_LIMIT));
 
     itc.connected = dummyEndpoint('ep');
@@ -75,7 +75,7 @@ describe('interceptors', () => {
 
   mochaInterceptorTest(TimeoutInterceptor, ep, {
     timeout: 15
-  }, "timeout", itc => {
+  }, "timeout", (itc, withConfig) => {
     it('has timeout', () => assert.equal(itc.timeout, 15));
 
     itc.connected = dummyEndpoint('ep');
