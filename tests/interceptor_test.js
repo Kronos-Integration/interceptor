@@ -31,6 +31,13 @@ function dummyEndpoint(name) {
 }
 
 describe('interceptors', () => {
+
+  it('get type', done => {
+    assert.equal("none", Interceptor.type);
+    done();
+  });
+
+
   const ep = dummyEndpoint('ep');
 
   mochaInterceptorTest(Interceptor, ep, {}, "none");
