@@ -53,24 +53,29 @@ describe('interceptors', () => {
   mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", itc => {});
 
 
-  const REQUEST_LIMIT = 5;
+  const REQUEST_LIMIT = 2;
 
   mochaInterceptorTest(LimitingInterceptor, ep, {
-    limit: REQUEST_LIMIT
+    limits: [{
+      count: REQUEST_LIMIT * 2,
+    }, {
+      count: REQUEST_LIMIT,
+      delay: 10
+    }]
   }, "request-limit", (itc, withConfig) => {
-    it('has limit', () => assert.equal(itc.limit, REQUEST_LIMIT));
+    it('has limits', () => assert.equal(itc.limits[0].count, REQUEST_LIMIT * 2));
 
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
     itc.connected.receive = request =>
       new Promise((fullfilled, rejected) =>
-        setTimeout(() => fullfilled(request), 200));
+        setTimeout(() => fullfilled(request), 1000));
 
     if (withConfig) {
       it('sending lots of request', done => {
         let i;
-        for (i = 0; i < REQUEST_LIMIT + 1; i++) {
+        for (i = 0; i < (REQUEST_LIMIT * 2) + 1; i++) {
           const response = itc.receive(i).then(
             f => {
               console.log(`fullfilled: ${f}`);
@@ -78,7 +83,7 @@ describe('interceptors', () => {
             r => {
               console.log(`rejected: ${r}`);
 
-              if (i >= REQUEST_LIMIT) {
+              if (i >= REQUEST_LIMIT * 2) {
                 done();
               }
             }
