@@ -40,7 +40,9 @@ function dummyEndpoint(name) {
 describe('interceptors', () => {
   const ep = dummyEndpoint('ep');
 
-  mochaInterceptorTest(Interceptor, ep, {}, "none", itc => {
+  mochaInterceptorTest(Interceptor, ep, {}, "none", (itc, withConfig) => {
+
+    if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
 
@@ -63,6 +65,12 @@ describe('interceptors', () => {
       delay: 10
     }]
   }, "request-limit", (itc, withConfig) => {
+
+    if (!withConfig) {
+      it('has limits', () => assert.equal(itc.limits[0].count, 10));
+      return;
+    }
+
     it('has limits', () => assert.equal(itc.limits[0].count, REQUEST_LIMIT * 2));
 
     itc.connected = dummyEndpoint('ep');
@@ -104,6 +112,11 @@ describe('interceptors', () => {
   mochaInterceptorTest(TimeoutInterceptor, ep, {
     timeout: 15
   }, "timeout", (itc, withConfig) => {
+    if (!withConfig) {
+      it('has timeout', () => assert.equal(itc.timeout, 1000));
+      return;
+    }
+
     it('has timeout', () => assert.equal(itc.timeout, 15));
 
     itc.connected = dummyEndpoint('ep');
