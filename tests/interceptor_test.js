@@ -70,25 +70,32 @@ describe('interceptors', () => {
     // request value is the timeout
     itc.connected.receive = request =>
       new Promise((fullfilled, rejected) =>
-        setTimeout(() => fullfilled(request), 1000));
+        setTimeout(() => fullfilled(request), 100));
 
     if (withConfig) {
       it('sending lots of request', done => {
         let i;
+        let numberOfFullfilled = 0;
+
         for (i = 0; i < (REQUEST_LIMIT * 2) + 1; i++) {
           const response = itc.receive(i).then(
             f => {
-              console.log(`fullfilled: ${f}`);
+              numberOfFullfilled += 1;
+              //console.log(`fullfilled: ${f}`);
             },
             r => {
-              console.log(`rejected: ${r}`);
+              //console.log(`rejected: ${r}`);
 
               if (i >= REQUEST_LIMIT * 2) {
-                done();
+                // wait for the first normal request to go trough
+                setTimeout(() => {
+                  assert.equal(numberOfFullfilled, REQUEST_LIMIT * 2);
+                  done();
+                }, 150);
               }
             }
           );
-          console.log(`send: ${i} ${itc.ongoingResponses.size}`);
+          //console.log(`send: ${i} ${itc.ongoingResponses.size}`);
         }
       });
     }
