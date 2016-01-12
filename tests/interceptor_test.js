@@ -89,8 +89,10 @@ describe('interceptors', () => {
 
     // request value is the timeout
     itc.connected.receive = request =>
-      new Promise((fullfilled, rejected) =>
-        setTimeout(() => fullfilled(request), request));
+      new Promise((fullfilled, rejected) => {
+        if (request === 0) rejected("error");
+        setTimeout(() => fullfilled(request), request < 0 ? -request : request);
+      });
 
     it('passing request within time', done => {
       const response = itc.receive(5); // wait 5 msecs then fullfill
@@ -106,6 +108,26 @@ describe('interceptors', () => {
       const response = itc.receive(100); // wait 100 msecs then fullfill -> timeout
       response.then(resolved => {
         console.log(`resolved ${resolved}`);
+      }).catch(rejected => {
+        //console.log(`got timeout ? ${rejected}`);
+        done();
+      });
+    });
+
+    it('handle rejecting request in time', done => {
+      const response = itc.receive(0); // produce rejecting response
+      response.then(resolved => {
+        done();
+      }).catch(rejected => {
+        //console.log(`got timeout ? ${rejected}`);
+        done();
+      });
+    });
+
+    it('handle rejecting long running request', done => {
+      const response = itc.receive(-1000); // produce rejecting response
+      response.then(resolved => {
+        done();
       }).catch(rejected => {
         //console.log(`got timeout ? ${rejected}`);
         done();
