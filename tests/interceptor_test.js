@@ -18,6 +18,13 @@ const logger = {};
 llm.defineLogLevelProperties(logger, llm.defaultLogLevels, llm.defaultLogLevels);
 
 
+function DelayedResponse(request) {
+  return new Promise((fullfilled, rejected) => {
+    if (request === 0) rejected("error");
+    setTimeout(() => fullfilled(request), request < 0 ? -request : request);
+  });
+}
+
 /* simple owner with name */
 function dummyEndpoint(name) {
   return {get name() {
@@ -31,22 +38,22 @@ function dummyEndpoint(name) {
 }
 
 describe('interceptors', () => {
-
-  it('get type', done => {
-    assert.equal("none", Interceptor.type);
-    done();
-  });
-
-
   const ep = dummyEndpoint('ep');
 
-  mochaInterceptorTest(Interceptor, ep, {}, "none");
+  mochaInterceptorTest(Interceptor, ep, {}, "none", itc => {
 
+    itc.connected = dummyEndpoint('ep');
+
+    // request value is the timeout
+    itc.connected.receive = DelayedResponse;
+
+    it('passing request', done => itc.receive(1).then(fullfilled => done()).catch(done));
+  });
 
   mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", itc => {});
 
 
-  const REQUEST_LIMIT = 1;
+  const REQUEST_LIMIT = 5;
 
   mochaInterceptorTest(LimitingInterceptor, ep, {
     limit: REQUEST_LIMIT
@@ -60,24 +67,26 @@ describe('interceptors', () => {
       new Promise((fullfilled, rejected) =>
         setTimeout(() => fullfilled(request), 200));
 
-    xit('sending lots of request', done => {
-      let i;
-      for (i = 0; i < REQUEST_LIMIT + 1; i++) {
-        const response = itc.receive(i).then(
-          f => {
-            console.log(`fullfilled: ${f}`);
-          },
-          r => {
-            console.log(`rejected: ${r}`);
+    if (withConfig) {
+      it('sending lots of request', done => {
+        let i;
+        for (i = 0; i < REQUEST_LIMIT + 1; i++) {
+          const response = itc.receive(i).then(
+            f => {
+              console.log(`fullfilled: ${f}`);
+            },
+            r => {
+              console.log(`rejected: ${r}`);
 
-            if (i === REQUEST_LIMIT) {
-              done();
+              if (i >= REQUEST_LIMIT) {
+                done();
+              }
             }
-          }
-        );
-        console.log(`send: ${i} ${itc.ongoingResponses.size}`);
-      }
-    });
+          );
+          console.log(`send: ${i} ${itc.ongoingResponses.size}`);
+        }
+      });
+    }
   });
 
   mochaInterceptorTest(TimeoutInterceptor, ep, {
@@ -88,11 +97,7 @@ describe('interceptors', () => {
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
-    itc.connected.receive = request =>
-      new Promise((fullfilled, rejected) => {
-        if (request === 0) rejected("error");
-        setTimeout(() => fullfilled(request), request < 0 ? -request : request);
-      });
+    itc.connected.receive = DelayedResponse;
 
     it('passing request within time', done => {
       const response = itc.receive(5); // wait 5 msecs then fullfill
@@ -133,6 +138,5 @@ describe('interceptors', () => {
         done();
       });
     });
-
   });
 });
