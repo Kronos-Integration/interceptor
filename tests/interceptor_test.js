@@ -82,6 +82,21 @@ describe('interceptors', () => {
         done();
       }).catch(done));
     });
+
+    describe('count failed requests', () => {
+      it('failing request', done => itc.receive({
+        delay: 2,
+        reject: true
+      }).then(fullfilled => {
+          done('error');
+        },
+        rejected => {
+          assert.equal(itc.numberOfRequests, 2);
+          assert.equal(itc.numberOfFailedRequests, 1);
+          done();
+        }
+      ));
+    });
   });
 
 
