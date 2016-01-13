@@ -14,8 +14,12 @@ const chai = require('chai'),
   TimeoutInterceptor = require('../index').TimeoutInterceptor,
   LimitingInterceptor = require('../index').LimitingInterceptor;
 
-const logger = {};
-llm.defineLogLevelProperties(logger, llm.defaultLogLevels, llm.defaultLogLevels);
+const logger = {
+  debug(a) {
+    console.log(a);
+  }
+};
+//llm.defineLogLevelProperties(logger, llm.defaultLogLevels, llm.defaultLogLevels);
 
 
 function DelayedResponse(request) {
@@ -41,7 +45,6 @@ describe('interceptors', () => {
   const ep = dummyEndpoint('ep');
 
   mochaInterceptorTest(Interceptor, ep, {}, "none", (itc, withConfig) => {
-
     if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
@@ -52,7 +55,23 @@ describe('interceptors', () => {
     it('passing request', done => itc.receive(1).then(fullfilled => done()).catch(done));
   });
 
-  mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", itc => {});
+  mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", (itc, withConfig) => {
+    if (!withConfig) return;
+
+    itc.connected = dummyEndpoint('ep');
+
+    // request value is the timeout
+    itc.connected.receive = DelayedResponse;
+
+    describe('count requests', () => {
+      it('passing request', done => itc.receive(10).then(fullfilled => {
+        assert.equal(itc.numberOfRequests, 1);
+        assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
+        assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
+        done();
+      }).catch(done));
+    });
+  });
 
 
   const REQUEST_LIMIT = 2;
