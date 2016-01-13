@@ -22,10 +22,17 @@ const logger = {
 //llm.defineLogLevelProperties(logger, llm.defaultLogLevels, llm.defaultLogLevels);
 
 
-function DelayedResponse(request) {
+function TestResponse(request) {
   return new Promise((fullfilled, rejected) => {
-    if (request === 0) rejected("error");
-    setTimeout(() => fullfilled(request), request < 0 ? -request : request);
+    if (request.delay) {
+      setTimeout(() => request.reject ? rejected(request) : fullfilled(request), request.delay);
+    } else {
+      if (request.reject) {
+        rejected(request);
+      } else {
+        fullfilled(request);
+      }
+    }
   });
 }
 
@@ -50,9 +57,11 @@ describe('interceptors', () => {
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
-    itc.connected.receive = DelayedResponse;
+    itc.connected.receive = TestResponse;
 
-    it('passing request', done => itc.receive(1).then(fullfilled => done()).catch(done));
+    it('passing request', done => itc.receive({
+      delay: 1
+    }).then(fullfilled => done()).catch(done));
   });
 
   mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", (itc, withConfig) => {
@@ -60,11 +69,12 @@ describe('interceptors', () => {
 
     itc.connected = dummyEndpoint('ep');
 
-    // request value is the timeout
-    itc.connected.receive = DelayedResponse;
+    itc.connected.receive = TestResponse;
 
     describe('count requests', () => {
-      it('passing request', done => itc.receive(10).then(fullfilled => {
+      it('passing request', done => itc.receive({
+        delay: 10
+      }).then(fullfilled => {
         assert.equal(itc.numberOfRequests, 1);
         assert.equal(itc.numberOfFailedRequests, 0);
         assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
@@ -95,10 +105,7 @@ describe('interceptors', () => {
 
     itc.connected = dummyEndpoint('ep');
 
-    // request value is the timeout
-    itc.connected.receive = request =>
-      new Promise((fullfilled, rejected) =>
-        setTimeout(() => fullfilled(request), 100));
+    itc.connected.receive = TestResponse;
 
     if (withConfig) {
       it('sending lots of request', done => {
@@ -106,20 +113,27 @@ describe('interceptors', () => {
         let numberOfFullfilled = 0;
 
         for (i = 0; i < (REQUEST_LIMIT * 2) + 1; i++) {
-          const response = itc.receive(i).then(
+          const response = itc.receive({
+            delay: 100,
+            reject: i === 2,
+            id: i
+          }).then(
             f => {
               numberOfFullfilled += 1;
-              //console.log(`fullfilled: ${f}`);
+              //console.log(`fullfilled: ${f.id}`);
             },
             r => {
-              //console.log(`rejected: ${r}`);
+              if (r.id === 2) {
+                console.log(`**** rejected: ${r.id}`);
+              }
+              //console.log(`rejected: ${r.id}`);
 
               if (i >= REQUEST_LIMIT * 2) {
                 // wait for the first normal request to go trough
                 setTimeout(() => {
                   assert.equal(numberOfFullfilled, REQUEST_LIMIT * 2);
                   done();
-                }, 150);
+                }, 190);
               }
             }
           );
@@ -142,10 +156,12 @@ describe('interceptors', () => {
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
-    itc.connected.receive = DelayedResponse;
+    itc.connected.receive = TestResponse;
 
     it('passing request within time', done => {
-      const response = itc.receive(5); // wait 5 msecs then fullfill
+      const response = itc.receive({
+        delay: 5
+      }); // wait 5 msecs then fullfill
       response.then(resolved => {
         done();
       }).catch(rejected => {
@@ -155,7 +171,9 @@ describe('interceptors', () => {
     });
 
     it('rejecting long running request', done => {
-      const response = itc.receive(100); // wait 100 msecs then fullfill -> timeout
+      const response = itc.receive({
+        delay: 100
+      }); // wait 100 msecs then fullfill -> timeout
       response.then(resolved => {
         console.log(`resolved ${resolved}`);
       }).catch(rejected => {
@@ -165,7 +183,9 @@ describe('interceptors', () => {
     });
 
     it('handle rejecting request in time', done => {
-      const response = itc.receive(0); // produce rejecting response
+      const response = itc.receive({
+        reject: true
+      }); // produce rejecting response
       response.then(resolved => {
         done();
       }).catch(rejected => {
@@ -175,7 +195,10 @@ describe('interceptors', () => {
     });
 
     it('handle rejecting long running request', done => {
-      const response = itc.receive(-1000); // produce rejecting response
+      const response = itc.receive({
+        delay: 1000,
+        reject: true
+      }); // produce rejecting response
       response.then(resolved => {
         done();
       }).catch(rejected => {
