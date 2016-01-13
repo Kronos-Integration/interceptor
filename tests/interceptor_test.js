@@ -66,6 +66,7 @@ describe('interceptors', () => {
     describe('count requests', () => {
       it('passing request', done => itc.receive(10).then(fullfilled => {
         assert.equal(itc.numberOfRequests, 1);
+        assert.equal(itc.numberOfFailedRequests, 0);
         assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
         assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
         done();
