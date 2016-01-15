@@ -7,34 +7,21 @@ const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect,
   should = chai.should(),
-  mochaInterceptorTest = require('kronos-test-interceptor').mochaInterceptorTest,
+  kti = require('kronos-test-interceptor'),
   llm = require('loglevel-mixin'),
   Interceptor = require('../index').Interceptor,
   TimeLoggerInterceptor = require('../index').TimeLoggerInterceptor,
   TimeoutInterceptor = require('../index').TimeoutInterceptor,
   LimitingInterceptor = require('../index').LimitingInterceptor;
 
+const mochaInterceptorTest = kti.mochaInterceptorTest,
+  testResponseHandler = kti.testResponseHandler;
+
 const logger = {
   debug(a) {
     console.log(a);
   }
 };
-//llm.defineLogLevelProperties(logger, llm.defaultLogLevels, llm.defaultLogLevels);
-
-
-function TestResponse(request) {
-  return new Promise((fullfilled, rejected) => {
-    if (request.delay) {
-      setTimeout(() => request.reject ? rejected(request) : fullfilled(request), request.delay);
-    } else {
-      if (request.reject) {
-        rejected(request);
-      } else {
-        fullfilled(request);
-      }
-    }
-  });
-}
 
 /* simple owner with name */
 function dummyEndpoint(name) {
@@ -57,7 +44,7 @@ describe('interceptors', () => {
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
-    itc.connected.receive = TestResponse;
+    itc.connected.receive = testResponseHandler;
 
     it('passing request', done => itc.receive({
       delay: 1
@@ -69,7 +56,7 @@ describe('interceptors', () => {
 
     itc.connected = dummyEndpoint('ep');
 
-    itc.connected.receive = TestResponse;
+    itc.connected.receive = testResponseHandler;
 
     describe('count requests', () => {
       it('passing request', done => itc.receive({
@@ -120,7 +107,7 @@ describe('interceptors', () => {
 
     itc.connected = dummyEndpoint('ep');
 
-    itc.connected.receive = TestResponse;
+    itc.connected.receive = testResponseHandler;
 
     if (withConfig) {
       it('sending lots of request', done => {
@@ -171,7 +158,7 @@ describe('interceptors', () => {
     itc.connected = dummyEndpoint('ep');
 
     // request value is the timeout
-    itc.connected.receive = TestResponse;
+    itc.connected.receive = testResponseHandler;
 
     it('passing request within time', done => {
       const response = itc.receive({
