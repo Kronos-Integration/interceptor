@@ -11,6 +11,14 @@
 [![downloads](http://img.shields.io/npm/dm/kronos-interceptor.svg?style=flat-square)](https://npmjs.org/package/kronos-interceptor)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+```javascript
+
+interceptor1.connected = interceptor2
+
+promise = interceptor1.receive(request);
+```
+
+
 install
 =======
 
