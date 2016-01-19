@@ -65,6 +65,7 @@ describe('interceptors', () => {
         assert.equal(itc.numberOfRequests, 1);
         assert.equal(itc.numberOfFailedRequests, 0);
         assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
+        assert.closeTo(itc.minRequestProcessingTime, 10, 10);
         assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
         done();
       }).catch(done));
