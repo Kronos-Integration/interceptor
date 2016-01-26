@@ -24,7 +24,7 @@
     "istanbul": "0.4.2",
     "kronos-test-interceptor": "1.6.1",
     "loglevel-mixin": "1.2.0",
-    "mocha": "^2.3.4",
+    "mocha": "^2.4.1",
     "semantic-release": "6.1.0"
   },
   "contributors": [
