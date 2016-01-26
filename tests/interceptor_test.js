@@ -10,7 +10,7 @@ const chai = require('chai'),
   kti = require('kronos-test-interceptor'),
   llm = require('loglevel-mixin'),
   Interceptor = require('../index').Interceptor,
-  TimeLoggerInterceptor = require('../index').TimeLoggerInterceptor,
+  StatsCollectorInterceptor = require('../index').StatsCollectorInterceptor,
   TimeoutInterceptor = require('../index').TimeoutInterceptor,
   LimitingInterceptor = require('../index').LimitingInterceptor;
 
@@ -51,7 +51,7 @@ describe('interceptors', () => {
     }).then(fullfilled => done()).catch(done));
   });
 
-  mochaInterceptorTest(TimeLoggerInterceptor, ep, {}, "logger-request-time", (itc, withConfig) => {
+  mochaInterceptorTest(StatsCollectorInterceptor, ep, {}, "collect-request-stats", (itc, withConfig) => {
     if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
