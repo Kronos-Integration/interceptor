@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-interceptor#readme",
   "devDependencies": {
-    "chai": "3.4.1",
+    "chai": "3.5.0",
     "istanbul": "0.4.2",
     "kronos-test-interceptor": "1.7.0",
     "loglevel-mixin": "1.2.0",
