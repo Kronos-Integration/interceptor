@@ -8,8 +8,8 @@ exports.LimitingInterceptor = require('./lib/LimitingInterceptor');
 exports.StatsCollectorInterceptor = require('./lib/StatsCollectorInterceptor');
 exports.TimeoutInterceptor = require('./lib/TimeoutInterceptor');
 
-exports.registerWithManager = function (manager) {
-	manager.registerInterceptor(exports.LimitingInterceptor);
-	manager.registerInterceptor(exports.StatsCollectorInterceptor);
-	manager.registerInterceptor(exports.TimeoutInterceptor);
-};
+exports.registerWithManager = manager => Promise.all([
+	manager.registerInterceptor(exports.TimeoutInterceptor),
+	manager.registerInterceptor(exports.LimitingInterceptor),
+	manager.registerInterceptor(exports.StatsCollectorInterceptor)
+]);
