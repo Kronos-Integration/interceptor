@@ -22,21 +22,18 @@
   "devDependencies": {
     "chai": "3.5.0",
     "istanbul": "0.4.2",
-    "kronos-test-interceptor": "1.7.0",
+    "kronos-test-interceptor": "git+https://github.com/Kronos-Integration/kronos-test-interceptor.git#api_rework",
     "loglevel-mixin": "1.2.0",
     "mocha": "^2.4.5",
     "semantic-release": "6.1.0"
   },
-  "contributors": [
-    {
-      "name": "Torsten Link",
-      "email": "torstenlink@gmx.de"
-    },
-    {
-      "name": "Markus Felten",
-      "email": "markus.felten@gmx.de"
-    }
-  ],
+  "contributors": [{
+    "name": "Torsten Link",
+    "email": "torstenlink@gmx.de"
+  }, {
+    "name": "Markus Felten",
+    "email": "markus.felten@gmx.de"
+  }],
   "license": "BSD-2-Clause",
   "engines": {
     "node": ">=4.2.1"
