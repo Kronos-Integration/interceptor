@@ -25,7 +25,7 @@
     "kronos-test-interceptor": "git+https://github.com/Kronos-Integration/kronos-test-interceptor.git#api_rework",
     "loglevel-mixin": "1.2.0",
     "mocha": "^2.4.5",
-    "semantic-release": "6.1.0"
+    "semantic-release": "6.2.0"
   },
   "contributors": [{
     "name": "Torsten Link",
@@ -36,6 +36,6 @@
   }],
   "license": "BSD-2-Clause",
   "engines": {
-    "node": ">=4.2.1"
+    "node": ">=5"
   }
 }
