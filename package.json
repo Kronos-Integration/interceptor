@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kronos-Integration/kronos-interceptor.git"
+    "url": "https://github.com/Kronos-Integration/kronos-interceptor.git"
   },
   "bugs": {
     "url": "https://github.com/Kronos-Integration/kronos-interceptor/issues"
