@@ -26,7 +26,8 @@
     "loglevel-mixin": "1.2.0",
     "mocha": "2.4.5",
     "semantic-release": "6.2.0",
-    "jsdoc": "3.4.0"
+    "jsdoc": "3.4.0",
+    "cz-conventional-changelog": "1.1.5"
   },
   "contributors": [
     {
@@ -41,5 +42,10 @@
   "license": "BSD-2-Clause",
   "engines": {
     "node": ">=5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
