@@ -1,2 +1,0 @@
-== kronos-interceptor
-The interceptor object are designed to added to an endpoint. 
