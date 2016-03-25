@@ -1,4 +1,4 @@
 # Summary
 
-* [index](index.md)
+* [index](doc/index.md)
 
