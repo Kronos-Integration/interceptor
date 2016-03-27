@@ -49,6 +49,14 @@ describe('interceptors', () => {
     it('passing request', done => itc.receive({
       delay: 1
     }).then(fullfilled => done()).catch(done));
+
+    describe('json', () => {
+      it('toJSON', () => {
+        assert.deepEqual(itc.toJSON(), {
+          type: "none"
+        });
+      });
+    });
   });
 
   mochaInterceptorTest(StatsCollectorInterceptor, ep, {}, "collect-request-stats", (itc, withConfig) => {
@@ -85,6 +93,14 @@ describe('interceptors', () => {
         }
       ));
     });
+
+    describe('json', () => {
+      it('toJSON', () => {
+        assert.deepEqual(itc.toJSON(), {
+          type: "collect-request-stats"
+        });
+      });
+    });
   });
 
 
@@ -98,6 +114,29 @@ describe('interceptors', () => {
       delay: 10
     }]
   }, "request-limit", (itc, withConfig) => {
+
+    describe('json', () => {
+      it('toJSON', () => {
+        if (withConfig) {
+          assert.deepEqual(itc.toJSON(), {
+            type: "request-limit",
+            limits: [{
+              count: 4
+            }, {
+              count: 2,
+              delay: 10
+            }]
+          });
+        } else {
+          assert.deepEqual(itc.toJSON(), {
+            type: "request-limit",
+            limits: [{
+              count: 10
+            }]
+          });
+        }
+      });
+    });
 
     if (!withConfig) {
       it('has limits', () => assert.equal(itc.limits[0].count, 10));
@@ -149,6 +188,23 @@ describe('interceptors', () => {
   mochaInterceptorTest(TimeoutInterceptor, ep, {
     timeout: 15
   }, "timeout", (itc, withConfig) => {
+
+    describe('json', () => {
+      it('toJSON', () => {
+        if (withConfig) {
+          assert.deepEqual(itc.toJSON(), {
+            type: "timeout",
+            timeout: 15
+          });
+        } else {
+          assert.deepEqual(itc.toJSON(), {
+            type: "timeout",
+            timeout: 1000
+          });
+        }
+      });
+    });
+
     if (!withConfig) {
       it('has timeout', () => assert.equal(itc.timeout, 1000));
       return;
