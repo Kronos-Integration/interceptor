@@ -1,7 +1,10 @@
 /* jslint node: true, esnext: true */
-"use strict";
+'use strict';
 
-exports.ConnectorMixin = require('./lib/connector-mixin').connectorMixin;
+const cm = require('./lib/connector-mixin');
+
+exports.ConnectorMixin = cm.connectorMixin;
+exports.rejectingReceiver = cm.rejectingReceiver;
 exports.Interceptor = require('./lib/interceptor').Interceptor;
 
 exports.LimitingInterceptor = require('./lib/LimitingInterceptor');
