@@ -1,7 +1,7 @@
 /* global describe, it, xit */
 /* jslint node: true, esnext: true */
 
-"use strict";
+'use strict';
 
 const chai = require('chai'),
   assert = chai.assert,
@@ -31,14 +31,14 @@ function dummyEndpoint(name) {
     toString() {
       return this.name;
     },
-    "step": logger
+    step: logger
   };
 }
 
 describe('interceptors', () => {
   const ep = dummyEndpoint('ep');
 
-  mochaInterceptorTest(Interceptor, ep, {}, "none", (itc, withConfig) => {
+  mochaInterceptorTest(Interceptor, ep, {}, 'none', (itc, withConfig) => {
     if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
@@ -53,13 +53,13 @@ describe('interceptors', () => {
     describe('json', () => {
       it('toJSON', () => {
         assert.deepEqual(itc.toJSON(), {
-          type: "none"
+          type: 'none'
         });
       });
     });
   });
 
-  mochaInterceptorTest(StatsCollectorInterceptor, ep, {}, "collect-request-stats", (itc, withConfig) => {
+  mochaInterceptorTest(StatsCollectorInterceptor, ep, {}, 'collect-request-stats', (itc, withConfig) => {
     if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
@@ -97,7 +97,7 @@ describe('interceptors', () => {
     describe('json', () => {
       it('toJSON', () => {
         assert.deepEqual(itc.toJSON(), {
-          type: "collect-request-stats"
+          type: 'collect-request-stats'
         });
       });
     });
@@ -113,13 +113,13 @@ describe('interceptors', () => {
       count: REQUEST_LIMIT,
       delay: 10
     }]
-  }, "request-limit", (itc, withConfig) => {
+  }, 'request-limit', (itc, withConfig) => {
 
     describe('json', () => {
       it('toJSON', () => {
         if (withConfig) {
           assert.deepEqual(itc.toJSON(), {
-            type: "request-limit",
+            type: 'request-limit',
             limits: [{
               count: 4
             }, {
@@ -129,7 +129,7 @@ describe('interceptors', () => {
           });
         } else {
           assert.deepEqual(itc.toJSON(), {
-            type: "request-limit",
+            type: 'request-limit',
             limits: [{
               count: 10
             }]
@@ -187,18 +187,18 @@ describe('interceptors', () => {
 
   mochaInterceptorTest(TimeoutInterceptor, ep, {
     timeout: 15
-  }, "timeout", (itc, withConfig) => {
+  }, 'timeout', (itc, withConfig) => {
 
     describe('json', () => {
       it('toJSON', () => {
         if (withConfig) {
           assert.deepEqual(itc.toJSON(), {
-            type: "timeout",
+            type: 'timeout',
             timeout: 15
           });
         } else {
           assert.deepEqual(itc.toJSON(), {
-            type: "timeout",
+            type: 'timeout',
             timeout: 1000
           });
         }
