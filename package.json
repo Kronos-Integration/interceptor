@@ -27,7 +27,7 @@
     "kronos-test-interceptor": "^2.0.4",
     "loglevel-mixin": "1.4.2",
     "mocha": "2.5.3",
-    "semantic-release": "6.2.2"
+    "semantic-release": "6.3.0"
   },
   "contributors": [
     {
