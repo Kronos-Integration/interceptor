@@ -46,9 +46,9 @@ describe('interceptors', () => {
     // request value is the timeout
     itc.connected.receive = testResponseHandler;
 
-    it('passing request', done => itc.receive({
+    it('passing request', () => itc.receive({
       delay: 1
-    }).then(fullfilled => done()).catch(done));
+    }));
 
     describe('json', () => {
       it('toJSON', () => {
@@ -66,8 +66,8 @@ describe('interceptors', () => {
 
     itc.connected.receive = testResponseHandler;
 
-    describe('count requests', () => {
-      it('passing request', done => itc.receive({
+    describe('count requests', () =>
+      it('passing request', () => itc.receive({
         delay: 10
       }).then(fullfilled => {
         assert.equal(itc.numberOfRequests, 1);
@@ -75,21 +75,17 @@ describe('interceptors', () => {
         assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
         assert.closeTo(itc.minRequestProcessingTime, 10, 10);
         assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
-        done();
-      }).catch(done));
-    });
+      })));
 
     describe('count failed requests', () => {
-      it('failing request', done => itc.receive({
+      it('failing request', () => itc.receive({
         delay: 2,
         reject: true
-      }).then(fullfilled => {
-          done('error');
-        },
+      }).then(fullfilled =>
+        Promise.reject(new Error('epected to be not fullfilled')),
         rejected => {
           assert.equal(itc.numberOfRequests, 2);
           assert.equal(itc.numberOfFailedRequests, 1);
-          done();
         }
       ));
     });
