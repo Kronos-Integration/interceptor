@@ -38,7 +38,7 @@ function dummyEndpoint(name) {
 describe('interceptors', () => {
   const ep = dummyEndpoint('ep');
 
-  mochaInterceptorTest(Interceptor, ep, {}, 'none', (itc, withConfig) => {
+  mochaInterceptorTest(Interceptor, ep, {}, 'Interceptor', (itc, withConfig) => {
     if (!withConfig) return;
 
     itc.connected = dummyEndpoint('ep');
@@ -53,7 +53,7 @@ describe('interceptors', () => {
     describe('json', () => {
       it('toJSON', () => {
         assert.deepEqual(itc.toJSON(), {
-          type: 'none'
+          type: 'Interceptor'
         });
       });
     });
