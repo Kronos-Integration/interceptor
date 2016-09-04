@@ -19,6 +19,9 @@
     "url": "https://github.com/Kronos-Integration/kronos-interceptor/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-interceptor#readme",
+  "dependencies": {
+    "model-attributes": "^1.5.1"
+  },
   "devDependencies": {
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.2.0",
