@@ -182,7 +182,7 @@ describe('interceptors', () => {
   });
 
   mochaInterceptorTest(TimeoutInterceptor, ep, {
-    timeout: 15
+    timeout: 0.015
   }, 'timeout', (itc, withConfig) => {
 
     describe('json', () => {
@@ -190,23 +190,23 @@ describe('interceptors', () => {
         if (withConfig) {
           assert.deepEqual(itc.toJSON(), {
             type: 'timeout',
-            timeout: 15
+            timeout: 0.015
           });
         } else {
           assert.deepEqual(itc.toJSON(), {
             type: 'timeout',
-            timeout: 1000
+            timeout: 1
           });
         }
       });
     });
 
     if (!withConfig) {
-      it('has timeout', () => assert.equal(itc.timeout, 1000));
+      it('has timeout', () => assert.equal(itc.timeout, 1));
       return;
     }
 
-    it('has timeout', () => assert.equal(itc.timeout, 15));
+    it('has timeout', () => assert.equal(itc.timeout, 0.015));
 
     itc.connected = dummyEndpoint('ep');
 
@@ -217,36 +217,25 @@ describe('interceptors', () => {
       const response = itc.receive({
         delay: 5
       }); // wait 5 msecs then fullfill
-      response.then(resolved => {
-        done();
-      }).catch(rejected => {
-        //console.log(`got timeout ? ${rejected}`);
-        done(rejected);
-      });
+      response.then(resolved =>
+        done()).catch(rejected =>
+        done(rejected));
     });
 
     it('rejecting long running request', done => {
       const response = itc.receive({
         delay: 100
       }); // wait 100 msecs then fullfill -> timeout
-      response.then(resolved => {
-        console.log(`resolved ${resolved}`);
-      }).catch(rejected => {
-        //console.log(`got timeout ? ${rejected}`);
-        done();
-      });
+      response.then(resolved =>
+        console.log(`resolved ${resolved}`)
+      ).catch(rejected => done());
     });
 
     it('handle rejecting request in time', done => {
       const response = itc.receive({
         reject: true
       }); // produce rejecting response
-      response.then(resolved => {
-        done();
-      }).catch(rejected => {
-        //console.log(`got timeout ? ${rejected}`);
-        done();
-      });
+      response.then(resolved => done()).catch(rejected => done());
     });
 
     it('handle rejecting long running request', done => {
@@ -254,12 +243,7 @@ describe('interceptors', () => {
         delay: 1000,
         reject: true
       }); // produce rejecting response
-      response.then(resolved => {
-        done();
-      }).catch(rejected => {
-        //console.log(`got timeout ? ${rejected}`);
-        done();
-      });
+      response.then(resolved => done()).catch(rejected => done());
     });
   });
 });
