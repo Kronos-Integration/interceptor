@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-interceptor#readme",
   "dependencies": {
-    "model-attributes": "^1.7.0"
+    "model-attributes": "^1.7.1"
   },
   "devDependencies": {
     "chai": "3.5.0",
