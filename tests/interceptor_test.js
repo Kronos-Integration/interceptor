@@ -8,10 +8,10 @@ const chai = require('chai'),
   expect = chai.expect,
   should = chai.should(),
   kti = require('kronos-test-interceptor'),
-  Interceptor = require('../index').Interceptor,
-  StatsCollectorInterceptor = require('../index').StatsCollectorInterceptor,
-  TimeoutInterceptor = require('../index').TimeoutInterceptor,
-  LimitingInterceptor = require('../index').LimitingInterceptor;
+  Interceptor = require('../dist/index').Interceptor,
+  StatsCollectorInterceptor = require('../dist/index').StatsCollectorInterceptor,
+  TimeoutInterceptor = require('../dist/index').TimeoutInterceptor,
+  LimitingInterceptor = require('../dist/index').LimitingInterceptor;
 
 const mochaInterceptorTest = kti.mochaInterceptorTest,
   testResponseHandler = kti.testResponseHandler;

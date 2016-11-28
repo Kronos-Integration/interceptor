@@ -2,16 +2,20 @@
 
 'use strict';
 
-const Interceptor = require('./interceptor').Interceptor,
-	mat = require('model-attributes');
+import Interceptor from './Interceptor';
+
+import {
+	mergeAttributes, createAttributes
+}
+from 'model-attributes';
 
 /**
  * Rejects a request if it does not resolve in a given time
  */
-class TimeoutInterceptor extends Interceptor {
+export default class TimeoutInterceptor extends Interceptor {
 
 	static get configurationAttributes() {
-		return mat.mergeAttributes(mat.createAttributes({
+		return mergeAttributes(createAttributes({
 			timeout: {
 				description: 'request timeout',
 				default: 1,
@@ -47,5 +51,3 @@ function rejectUnlessResolvedWithin(promise, timeout, name) {
 		});
 	});
 }
-
-module.exports = TimeoutInterceptor;

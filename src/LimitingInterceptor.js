@@ -2,8 +2,12 @@
 
 'use strict';
 
-const Interceptor = require('./interceptor').Interceptor,
-	mat = require('model-attributes');
+import Interceptor from './Interceptor';
+
+import {
+	mergeAttributes, createAttributes
+}
+from 'model-attributes';
 
 
 /**
@@ -21,13 +25,13 @@ const Interceptor = require('./interceptor').Interceptor,
  * 20      : reject
  * default is to reject when more than 10 requests are on the way
  */
-class LimitingInterceptor extends Interceptor {
+export default class LimitingInterceptor extends Interceptor {
 	static get name() {
 		return 'request-limit';
 	}
 
 	static get configurationAttributes() {
-		return mat.mergeAttributes(mat.createAttributes({
+		return mergeAttributes(createAttributes({
 			limits: {
 				default: [{
 					count: 10
@@ -107,5 +111,3 @@ class LimitingInterceptor extends Interceptor {
 		return currentResponse;
 	}
 }
-
-module.exports = LimitingInterceptor;

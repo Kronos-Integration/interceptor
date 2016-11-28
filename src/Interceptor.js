@@ -1,16 +1,21 @@
 /* jslint node: true, esnext: true */
 'use strict';
 
-// The mixin contains the base methods for endpoints and mixins
-const connectorMixin = require('./connector-mixin').connectorMixin,
-  mat = require('model-attributes');
+import {
+  ConnectorMixin
+}
+from './ConnectorMixin';
+import {
+  setAttributes, getAttributes
+}
+from 'model-attributes';
 
 class _DummyInterceptor {}
 
 /**
  * Base interceptor. The base class for all the interceptors
  */
-class Interceptor extends connectorMixin(_DummyInterceptor) {
+export default class Interceptor extends ConnectorMixin(_DummyInterceptor) {
 
   static get configurationAttributes() {
     return {};
@@ -65,7 +70,7 @@ class Interceptor extends connectorMixin(_DummyInterceptor) {
    * @param {Object} config
    */
   configure(config) {
-    mat.setAttributes(this, this.configurationAttributes, config);
+    setAttributes(this, this.configurationAttributes, config);
   }
 
   toString() {
@@ -77,7 +82,7 @@ class Interceptor extends connectorMixin(_DummyInterceptor) {
    * @return {Object} json representation
    */
   toJSON() {
-    const json = mat.getAttributes(this, this.configurationAttributes);
+    const json = getAttributes(this, this.configurationAttributes);
     json.type = this.type;
     return json;
   }
@@ -103,5 +108,3 @@ class Interceptor extends connectorMixin(_DummyInterceptor) {
     return this.connected.receive(request, oldRequest);
   }
 }
-
-module.exports.Interceptor = Interceptor;

@@ -2,12 +2,13 @@
 
 'use strict';
 
-const Interceptor = require('./interceptor').Interceptor;
+import Interceptor from './Interceptor';
+
 /**
  * Interceptor to collect processing time, number of processed and
  * failed requests
  */
-class StatsCollectorInterceptor extends Interceptor {
+export default class StatsCollectorInterceptor extends Interceptor {
   static get name() {
     return 'collect-request-stats';
   }
@@ -70,5 +71,3 @@ class StatsCollectorInterceptor extends Interceptor {
     });
   }
 }
-
-module.exports = StatsCollectorInterceptor;
