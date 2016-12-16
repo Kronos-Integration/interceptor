@@ -19,11 +19,18 @@ kronos-interceptor
 =====
 introspects / modifies requests as they pass between endpoints
 
+<!-- skip-example -->
 ```javascript
+const ki = require('kronos-interceptor');
+
+const endpoint = { get name() { return 'aName'; }, receive() {}};
+const interceptor1 = new ki.Interceptor({},endpoint);
+const interceptor2 = new ki.Interceptor({},endpoint);
 
 interceptor1.connected = interceptor2
 
-promise = interceptor1.receive(request);
+const request = {};
+const promise = interceptor1.receive(request);
 ```
 
 # API Reference
