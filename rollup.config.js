@@ -3,5 +3,7 @@
 
 export default {
   format: 'cjs',
-  plugins: []
+  plugins: [],
+  external: ['model-attributes']
+
 };
