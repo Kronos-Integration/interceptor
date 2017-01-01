@@ -6,11 +6,11 @@
     "kronos-interceptor"
   ],
   "scripts": {
-    "cover": "npm run prepublish && node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -u exports tests/*_test.js",
-    "test": "node_modules/.bin/mocha tests/*_test.js",
+    "cover": "npm run prepublish && istanbul cover node_modules/.bin/_mocha -- -u exports tests/*_test.js",
+    "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js > README.md",
-    "prepublish": "node_modules/rollup/bin/rollup --output=dist/index.js -c -- src/index.js",
+    "prepublish": "rollup --output=dist/index.js -c -- src/index.js",
     "pretest": "npm run prepublish",
     "posttest": "markdown-doctest"
   },
