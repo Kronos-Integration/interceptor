@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-interceptor#readme",
   "dependencies": {
-    "model-attributes": "^3.0.5"
+    "model-attributes": "^3.0.6"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^1.2.0",
