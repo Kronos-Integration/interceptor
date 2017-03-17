@@ -37,16 +37,19 @@
     "rollup": "^0.41.6",
     "semantic-release": "^6.3.6"
   },
-  "contributors": [{
-    "name": "Torsten Link",
-    "email": "torstenlink@gmx.de"
-  }, {
-    "name": "Markus Felten",
-    "email": "markus.felten@gmx.de"
-  }],
+  "contributors": [
+    {
+      "name": "Torsten Link",
+      "email": "torstenlink@gmx.de"
+    },
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    }
+  ],
   "license": "BSD-2-Clause",
   "engines": {
-    "node": ">=6.10.0"
+    "node": ">=7.7.3"
   },
   "config": {
     "commitizen": {
