@@ -70,7 +70,7 @@ export default class LimitingInterceptor extends Interceptor {
 	receive(request, oldRequest) {
 		//console.log(`got #${this.ongoingRequests}`);
 
-		for (let limit of this.limits) {
+		for (const limit of this.limits) {
 			if (this.ongoingRequests >= limit.count) {
 				if (limit.delay === undefined) {
 					//console.log(`-> reject`);
