@@ -2,18 +2,16 @@
   "name": "kronos-interceptor",
   "version": "0.0.0-semantic-release",
   "description": "introspects / modifies requests as they pass between endpoints",
-  "keywords": [
-    "kronos-interceptor"
-  ],
+  "keywords": ["kronos-interceptor"],
   "scripts": {
     "cover": "nyc npm test",
     "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js >README.md",
-    "prepublish": "rollup --output=dist/index.js -c -- src/index.js",
-    "pretest": "npm run prepublish",
+    "pretest": "npm run prepare",
     "posttest": "markdown-doctest",
-    "precover": "npm run prepublish"
+    "precover": "rollup -c",
+    "prepare": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -33,7 +31,7 @@
     "markdown-doctest": "^0.9.1",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
-    "rollup": "^0.47.6",
+    "rollup": "^0.48.2",
     "semantic-release": "^7.0.2"
   },
   "contributors": [
@@ -53,12 +51,8 @@
   "module": "src/index.js",
   "main": "dist/index.js",
   "nyc": {
-    "include": [
-      "dist/**/*.js"
-    ],
-    "reporter": [
-      "lcov"
-    ],
+    "include": ["dist/**/*.js"],
+    "reporter": ["lcov"],
     "report-dir": "./coverage"
   },
   "template": {

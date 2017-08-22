@@ -1,8 +1,12 @@
-/* jslint node: true, esnext: true */
-'use strict';
+import pkg from './package.json';
 
 export default {
-  format: 'cjs',
   plugins: [],
-  external: ['model-attributes']
+  external: ['model-attributes'],
+  input: pkg.module,
+
+  output: {
+    file: pkg.main,
+    format: 'cjs'
+  }
 };
