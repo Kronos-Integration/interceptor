@@ -4,5 +4,6 @@
 export default {
   format: 'cjs',
   plugins: [],
-  external: ['model-attributes']
+  external: ['model-attributes'],
+  input: pkg.module
 };
