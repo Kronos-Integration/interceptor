@@ -13,7 +13,8 @@
     "prepublish": "rollup --output=dist/index.js -c -- src/index.js",
     "pretest": "npm run prepublish",
     "posttest": "markdown-doctest",
-    "precover": "npm run prepublish"
+    "precover": "rollup -c",
+    "prepare": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
     "markdown-doctest": "^0.9.1",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
-    "rollup": "^0.47.6",
+    "rollup": "^0.48.2",
     "semantic-release": "^7.0.2"
   },
   "contributors": [
