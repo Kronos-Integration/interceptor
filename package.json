@@ -2,13 +2,15 @@
   "name": "kronos-interceptor",
   "version": "0.0.0-semantic-release",
   "description": "introspects / modifies requests as they pass between endpoints",
-  "keywords": ["kronos-interceptor"],
+  "keywords": [
+    "kronos-interceptor"
+  ],
   "scripts": {
     "cover": "nyc npm test",
     "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js >README.md",
-    "pretest": "npm run prepare",
+    "pretest": "rollup -c",
     "posttest": "markdown-doctest",
     "precover": "rollup -c",
     "prepare": "rollup -c"
@@ -51,8 +53,12 @@
   "module": "src/index.js",
   "main": "dist/index.js",
   "nyc": {
-    "include": ["dist/**/*.js"],
-    "reporter": ["lcov"],
+    "include": [
+      "dist/**/*.js"
+    ],
+    "reporter": [
+      "lcov"
+    ],
     "report-dir": "./coverage"
   },
   "template": {
