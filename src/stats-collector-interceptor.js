@@ -40,32 +40,30 @@ export default class StatsCollectorInterceptor extends Interceptor {
   /**
    * Logs the time the requests takes
    */
-  receive(request, oldRequest) {
+  async receive(request, oldRequest) {
     this._numberOfRequests += 1;
 
     const start = new Date();
-    const response = this.connected.receive(request, oldRequest);
-    return response.then(
-      f => {
-        const now = new Date();
-        const pt = now - start;
-        this._totalRequestProcessingTime += pt;
 
-        if (pt > this._maxRequestProcessingTime) {
-          this._maxRequestProcessingTime = pt;
-        }
+    try {
+      const response = await this.connected.receive(request, oldRequest);
+      const now = new Date();
+      const pt = now - start;
+      this._totalRequestProcessingTime += pt;
 
-        if (pt < this._minRequestProcessingTime) {
-          this._minRequestProcessingTime = pt;
-        }
-
-        this.logger.debug(`took ${pt} ms for ${request}`);
-        return f;
-      },
-      r => {
-        this._numberOfFailedRequests += 1;
-        return Promise.reject(r);
+      if (pt > this._maxRequestProcessingTime) {
+        this._maxRequestProcessingTime = pt;
       }
-    );
+
+      if (pt < this._minRequestProcessingTime) {
+        this._minRequestProcessingTime = pt;
+      }
+
+      this.logger.debug(`took ${pt} ms for ${request}`);
+      return response;
+    } catch (err) {
+      this._numberOfFailedRequests += 1;
+      throw err;
+    }
   }
 }

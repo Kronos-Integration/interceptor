@@ -2,7 +2,7 @@
  * rejecting receiver used to signal a not present connection
  * when used always delivers a rejecting promise
  */
-function rejectingReceiver(request) {
+export function rejectingReceiver(request) {
   return Promise.reject(new Error('Receiver not defined'));
 }
 
@@ -11,7 +11,7 @@ function rejectingReceiver(request) {
  * Forms a single linked list
  */
 
-function ConnectorMixin(superclass) {
+export function ConnectorMixin(superclass) {
   return class extends superclass {
     set connected(e) {
       this._connected = e;
@@ -63,5 +63,3 @@ function ConnectorMixin(superclass) {
     }
   };
 }
-
-export { rejectingReceiver, ConnectorMixin };
