@@ -1,29 +1,24 @@
-/* jslint node: true, esnext: true */
-'use strict';
+import { ConnectorMixin, rejectingReceiver } from './connector-mixin';
 
-import {
-	ConnectorMixin, rejectingReceiver
-}
-from './ConnectorMixin';
-
-import Interceptor from './Interceptor';
-import TimeoutInterceptor from './TimeoutInterceptor';
-import StatsCollectorInterceptor from './StatsCollectorInterceptor';
-import LimitingInterceptor from './LimitingInterceptor';
+import Interceptor from './interceptor';
+import TimeoutInterceptor from './timeout-interceptor';
+import StatsCollectorInterceptor from './stats-collector-interceptor';
+import LimitingInterceptor from './limiting-interceptor';
 
 function registerWithManager(manager) {
-	return Promise.all([
-		manager.registerInterceptor(TimeoutInterceptor),
-		manager.registerInterceptor(exports.LimitingInterceptor),
-		manager.registerInterceptor(exports.StatsCollectorInterceptor)
-	]);
+  return Promise.all([
+    manager.registerInterceptor(TimeoutInterceptor),
+    manager.registerInterceptor(exports.LimitingInterceptor),
+    manager.registerInterceptor(exports.StatsCollectorInterceptor)
+  ]);
 }
 
 export {
-	registerWithManager,
-	ConnectorMixin, rejectingReceiver,
-	Interceptor,
-	TimeoutInterceptor,
-	StatsCollectorInterceptor,
-	LimitingInterceptor
+  registerWithManager,
+  ConnectorMixin,
+  rejectingReceiver,
+  Interceptor,
+  TimeoutInterceptor,
+  StatsCollectorInterceptor,
+  LimitingInterceptor
 };

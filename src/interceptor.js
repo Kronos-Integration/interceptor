@@ -1,14 +1,5 @@
-/* jslint node: true, esnext: true */
-'use strict';
-
-import {
-  ConnectorMixin
-}
-from './ConnectorMixin';
-import {
-  setAttributes, getAttributes
-}
-from 'model-attributes';
+import { ConnectorMixin } from './connector-mixin';
+import { setAttributes, getAttributes } from 'model-attributes';
 
 class _DummyInterceptor {}
 
@@ -16,7 +7,6 @@ class _DummyInterceptor {}
  * Base interceptor. The base class for all the interceptors
  */
 export default class Interceptor extends ConnectorMixin(_DummyInterceptor) {
-
   static get configurationAttributes() {
     return {};
   }

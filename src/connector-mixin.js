@@ -1,7 +1,3 @@
-/* jslint node: true, esnext: true */
-
-'use strict';
-
 /**
  * rejecting receiver used to signal a not present connection
  * when used always delivers a rejecting promise
@@ -26,7 +22,9 @@ function ConnectorMixin(superclass) {
     }
 
     get isConnected() {
-      return (this._connected && this._connected != rejectingReceiver) ? true : false;
+      return this._connected && this._connected != rejectingReceiver
+        ? true
+        : false;
     }
 
     /**
@@ -66,7 +64,4 @@ function ConnectorMixin(superclass) {
   };
 }
 
-export {
-  rejectingReceiver,
-  ConnectorMixin
-};
+export { rejectingReceiver, ConnectorMixin };
