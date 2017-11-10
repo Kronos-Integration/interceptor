@@ -1,16 +1,10 @@
-/* global describe, it, xit */
-/* jslint node: true, esnext: true */
+import Interceptor from '../src/interceptor';
+import StatsCollectorInterceptor from '../src/stats-collector-interceptor';
+import TimeoutInterceptor from '../src/timeout-interceptor';
+import LimitingInterceptor from '../src/limiting-interceptor';
+import test from 'ava';
 
-const chai = require('chai'),
-  assert = chai.assert,
-  expect = chai.expect,
-  should = chai.should(),
-  kti = require('kronos-test-interceptor'),
-  Interceptor = require('../dist/index').Interceptor,
-  StatsCollectorInterceptor = require('../dist/index')
-    .StatsCollectorInterceptor,
-  TimeoutInterceptor = require('../dist/index').TimeoutInterceptor,
-  LimitingInterceptor = require('../dist/index').LimitingInterceptor;
+(kti = require('kronos-test-interceptor')),
 
 const mochaInterceptorTest = kti.mochaInterceptorTest,
   testResponseHandler = kti.testResponseHandler;
