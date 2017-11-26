@@ -3,7 +3,7 @@ import StatsCollectorInterceptor from '../src/stats-collector-interceptor';
 import TimeoutInterceptor from '../src/timeout-interceptor';
 import LimitingInterceptor from '../src/limiting-interceptor';
 import test from 'ava';
-import { interceptorTest } from 'kronos-test-interceptor';
+import { interceptorTest, testResponseHandler } from 'kronos-test-interceptor';
 
 const logger = {
   debug(a) {
@@ -31,77 +31,63 @@ test(
   {},
   'Interceptor',
   async (t, interceptor, withConfig) => {
+    t.deepEqual(interceptor.toJSON(), {
+      type: 'Interceptor'
+    });
+
     if (!withConfig) return;
 
     interceptor.connected = dummyEndpoint('ep');
     interceptor.connected.receive = testResponseHandler;
-    interceptor.receive({
+    await interceptor.receive({
       delay: 1
-    });
-
-    t.deepEqual(interceptor.toJSON(), {
-      type: 'Interceptor'
     });
   }
 );
 
-/*
-describe('interceptors', () => {
-  const ep = dummyEndpoint('ep');
+test(
+  'basic',
+  interceptorTest,
+  StatsCollectorInterceptor,
+  dummyEndpoint('ep1'),
+  {},
+  'collect-request-stats',
+  async (t, interceptor, withConfig) => {
+    t.deepEqual(interceptor.toJSON(), {
+      type: 'collect-request-stats'
+    });
 
-  mochaInterceptorTest(
-    StatsCollectorInterceptor,
-    ep,
-    {},
-    'collect-request-stats',
-    (itc, withConfig) => {
-      if (!withConfig) return;
+    if (!withConfig) return;
 
-      itc.connected = dummyEndpoint('ep');
+    interceptor.connected = dummyEndpoint('ep');
 
-      itc.connected.receive = testResponseHandler;
+    interceptor.connected.receive = testResponseHandler;
 
-      describe('count requests', () =>
-        it('passing request', () =>
-          itc
-            .receive({
-              delay: 10
-            })
-            .then(fullfilled => {
-              assert.equal(itc.numberOfRequests, 1);
-              assert.equal(itc.numberOfFailedRequests, 0);
-              assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
-              assert.closeTo(itc.minRequestProcessingTime, 10, 10);
-              assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
-            })));
+    await interceptor.receive({
+      delay: 10
+    });
 
-      describe('count failed requests', () => {
-        it('failing request', () =>
-          itc
-            .receive({
-              delay: 2,
-              reject: true
-            })
-            .then(
-              fullfilled =>
-                Promise.reject(new Error('epected to be not fullfilled')),
-              rejected => {
-                assert.equal(itc.numberOfRequests, 2);
-                assert.equal(itc.numberOfFailedRequests, 1);
-              }
-            ));
+    t.is(interceptor.numberOfRequests, 1);
+    t.is(interceptor.numberOfFailedRequests, 0);
+    t.is(interceptor.maxRequestProcessingTime, 10, 10);
+    t.is(interceptor.minRequestProcessingTime, 10, 10);
+    t.is(interceptor.totalRequestProcessingTime, 10, 10);
+
+    try {
+      await interceptor.receive({
+        delay: 2,
+        reject: true
       });
 
-      describe('json', () => {
-        it('toJSON', () => {
-          assert.deepEqual(itc.toJSON(), {
-            type: 'collect-request-stats'
-          });
-        });
-      });
+      throw new Error('expected to be not fullfilled');
+    } catch (e) {
+      t.is(interceptor.numberOfRequests, 2);
+      t.is(interceptor.numberOfFailedRequests, 1);
     }
-  );
+  }
+);
 
+/*
   const REQUEST_LIMIT = 2;
 
   mochaInterceptorTest(
