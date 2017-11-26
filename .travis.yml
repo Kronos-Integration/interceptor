@@ -17,8 +17,7 @@ before_install:
   - npm i -g npm@latest
 before_script:
   - npm prune
-  - npm install -g codecov
-  - npm install coveralls
+  - npm install -g --production coveralls codecov
 script:
   - npm run cover
 after_script:
