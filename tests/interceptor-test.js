@@ -3,11 +3,7 @@ import StatsCollectorInterceptor from '../src/stats-collector-interceptor';
 import TimeoutInterceptor from '../src/timeout-interceptor';
 import LimitingInterceptor from '../src/limiting-interceptor';
 import test from 'ava';
-
-(kti = require('kronos-test-interceptor')),
-
-const mochaInterceptorTest = kti.mochaInterceptorTest,
-  testResponseHandler = kti.testResponseHandler;
+import { interceptorTest } from 'kronos-test-interceptor';
 
 const logger = {
   debug(a) {
@@ -15,7 +11,6 @@ const logger = {
   }
 };
 
-/* simple owner with name */
 function dummyEndpoint(name) {
   return {
     get name() {
@@ -28,36 +23,31 @@ function dummyEndpoint(name) {
   };
 }
 
+test(
+  'basic',
+  interceptorTest,
+  Interceptor,
+  dummyEndpoint('ep1'),
+  {},
+  'Interceptor',
+  async (t, interceptor, withConfig) => {
+    if (!withConfig) return;
+
+    interceptor.connected = dummyEndpoint('ep');
+    interceptor.connected.receive = testResponseHandler;
+    interceptor.receive({
+      delay: 1
+    });
+
+    t.deepEqual(interceptor.toJSON(), {
+      type: 'Interceptor'
+    });
+  }
+);
+
+/*
 describe('interceptors', () => {
   const ep = dummyEndpoint('ep');
-
-  mochaInterceptorTest(
-    Interceptor,
-    ep,
-    {},
-    'Interceptor',
-    (itc, withConfig) => {
-      if (!withConfig) return;
-
-      itc.connected = dummyEndpoint('ep');
-
-      // request value is the timeout
-      itc.connected.receive = testResponseHandler;
-
-      it('passing request', () =>
-        itc.receive({
-          delay: 1
-        }));
-
-      describe('json', () => {
-        it('toJSON', () => {
-          assert.deepEqual(itc.toJSON(), {
-            type: 'Interceptor'
-          });
-        });
-      });
-    }
-  );
 
   mochaInterceptorTest(
     StatsCollectorInterceptor,
@@ -278,3 +268,4 @@ describe('interceptors', () => {
     }
   );
 });
+*/
