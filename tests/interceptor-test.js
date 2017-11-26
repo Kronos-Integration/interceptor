@@ -1,19 +1,9 @@
-/* global describe, it, xit */
-/* jslint node: true, esnext: true */
-
-const chai = require('chai'),
-  assert = chai.assert,
-  expect = chai.expect,
-  should = chai.should(),
-  kti = require('kronos-test-interceptor'),
-  Interceptor = require('../dist/index').Interceptor,
-  StatsCollectorInterceptor = require('../dist/index')
-    .StatsCollectorInterceptor,
-  TimeoutInterceptor = require('../dist/index').TimeoutInterceptor,
-  LimitingInterceptor = require('../dist/index').LimitingInterceptor;
-
-const mochaInterceptorTest = kti.mochaInterceptorTest,
-  testResponseHandler = kti.testResponseHandler;
+import Interceptor from '../src/interceptor';
+import StatsCollectorInterceptor from '../src/stats-collector-interceptor';
+import TimeoutInterceptor from '../src/timeout-interceptor';
+import LimitingInterceptor from '../src/limiting-interceptor';
+import test from 'ava';
+import { interceptorTest, testResponseHandler } from 'kronos-test-interceptor';
 
 const logger = {
   debug(a) {
@@ -21,7 +11,6 @@ const logger = {
   }
 };
 
-/* simple owner with name */
 function dummyEndpoint(name) {
   return {
     get name() {
@@ -34,148 +23,130 @@ function dummyEndpoint(name) {
   };
 }
 
-describe('interceptors', () => {
-  const ep = dummyEndpoint('ep');
+test(
+  'basic',
+  interceptorTest,
+  Interceptor,
+  dummyEndpoint('ep1'),
+  {},
+  'Interceptor',
+  async (t, interceptor, withConfig) => {
+    t.deepEqual(interceptor.toJSON(), {
+      type: 'Interceptor'
+    });
 
-  mochaInterceptorTest(
-    Interceptor,
-    ep,
-    {},
-    'Interceptor',
-    (itc, withConfig) => {
-      if (!withConfig) return;
+    if (!withConfig) return;
 
-      itc.connected = dummyEndpoint('ep');
+    interceptor.connected = dummyEndpoint('ep');
+    interceptor.connected.receive = testResponseHandler;
+    /*
+    const response = await interceptor.receive({
+      delay: 1
+    });
+    */
+  }
+);
 
-      // request value is the timeout
-      itc.connected.receive = testResponseHandler;
+test(
+  'basic',
+  interceptorTest,
+  StatsCollectorInterceptor,
+  dummyEndpoint('ep1'),
+  {},
+  'collect-request-stats',
+  async (t, interceptor, withConfig) => {
+    t.deepEqual(interceptor.toJSON(), {
+      type: 'collect-request-stats'
+    });
 
-      it('passing request', () =>
-        itc.receive({
-          delay: 1
-        }));
+    if (!withConfig) return;
 
-      describe('json', () => {
-        it('toJSON', () => {
-          assert.deepEqual(itc.toJSON(), {
-            type: 'Interceptor'
-          });
-        });
+    interceptor.connected = dummyEndpoint('ep');
+    interceptor.connected.receive = testResponseHandler;
+
+    /*
+
+    await interceptor.receive({
+      delay: 10
+    });
+
+    t.is(interceptor.numberOfRequests, 1);
+    t.is(interceptor.numberOfFailedRequests, 0);
+    t.is(interceptor.maxRequestProcessingTime, 10, 10);
+    t.is(interceptor.minRequestProcessingTime, 10, 10);
+    t.is(interceptor.totalRequestProcessingTime, 10, 10);
+
+    try {
+      await interceptor.receive({
+        delay: 2,
+        reject: true
       });
+
+      throw new Error('expected to be not fullfilled');
+    } catch (e) {
+      t.is(interceptor.numberOfRequests, 2);
+      t.is(interceptor.numberOfFailedRequests, 1);
     }
-  );
+    */
+  }
+);
 
-  mochaInterceptorTest(
-    StatsCollectorInterceptor,
-    ep,
-    {},
-    'collect-request-stats',
-    (itc, withConfig) => {
-      if (!withConfig) return;
+const REQUEST_LIMIT = 2;
 
-      itc.connected = dummyEndpoint('ep');
-
-      itc.connected.receive = testResponseHandler;
-
-      describe('count requests', () =>
-        it('passing request', () =>
-          itc
-            .receive({
-              delay: 10
-            })
-            .then(fullfilled => {
-              assert.equal(itc.numberOfRequests, 1);
-              assert.equal(itc.numberOfFailedRequests, 0);
-              assert.closeTo(itc.maxRequestProcessingTime, 10, 10);
-              assert.closeTo(itc.minRequestProcessingTime, 10, 10);
-              assert.closeTo(itc.totalRequestProcessingTime, 10, 10);
-            })));
-
-      describe('count failed requests', () => {
-        it('failing request', () =>
-          itc
-            .receive({
-              delay: 2,
-              reject: true
-            })
-            .then(
-              fullfilled =>
-                Promise.reject(new Error('epected to be not fullfilled')),
-              rejected => {
-                assert.equal(itc.numberOfRequests, 2);
-                assert.equal(itc.numberOfFailedRequests, 1);
-              }
-            ));
-      });
-
-      describe('json', () => {
-        it('toJSON', () => {
-          assert.deepEqual(itc.toJSON(), {
-            type: 'collect-request-stats'
-          });
-        });
-      });
-    }
-  );
-
-  const REQUEST_LIMIT = 2;
-
-  mochaInterceptorTest(
-    LimitingInterceptor,
-    ep,
-    {
-      limits: [
-        {
-          count: REQUEST_LIMIT * 2
-        },
-        {
-          count: REQUEST_LIMIT,
-          delay: 10
-        }
-      ]
-    },
-    'request-limit',
-    (itc, withConfig) => {
-      describe('json', () => {
-        it('toJSON', () => {
-          if (withConfig) {
-            assert.deepEqual(itc.toJSON(), {
-              type: 'request-limit',
-              limits: [
-                {
-                  count: 4
-                },
-                {
-                  count: 2,
-                  delay: 10
-                }
-              ]
-            });
-          } else {
-            assert.deepEqual(itc.toJSON(), {
-              type: 'request-limit',
-              limits: [
-                {
-                  count: 10
-                }
-              ]
-            });
-          }
-        });
-      });
-
-      if (!withConfig) {
-        it('has limits', () => assert.equal(itc.limits[0].count, 10));
-        return;
+test(
+  'basic',
+  interceptorTest,
+  LimitingInterceptor,
+  dummyEndpoint('ep1'),
+  {
+    limits: [
+      {
+        count: REQUEST_LIMIT * 2
+      },
+      {
+        count: REQUEST_LIMIT,
+        delay: 10
       }
+    ]
+  },
+  'request-limit',
+  async (t, interceptor, withConfig) => {
+    if (withConfig) {
+      t.deepEqual(interceptor.toJSON(), {
+        type: 'request-limit',
+        limits: [
+          {
+            count: 4
+          },
+          {
+            count: 2,
+            delay: 10
+          }
+        ]
+      });
+    } else {
+      t.deepEqual(interceptor.toJSON(), {
+        type: 'request-limit',
+        limits: [
+          {
+            count: 10
+          }
+        ]
+      });
 
-      it('has limits', () =>
-        assert.equal(itc.limits[0].count, REQUEST_LIMIT * 2));
+      t.is(interceptor.limits[0].count, 10);
+      return;
+    }
 
-      itc.connected = dummyEndpoint('ep');
+    t.is(interceptor.limits[0].count, REQUEST_LIMIT * 2);
 
-      itc.connected.receive = testResponseHandler;
+    interceptor.connected = dummyEndpoint('ep');
 
+    interceptor.connected.receive = testResponseHandler;
+  }
+);
+
+/*
       if (withConfig) {
         it('sending lots of request', done => {
           let i;
@@ -214,43 +185,42 @@ describe('interceptors', () => {
       }
     }
   );
+*/
 
-  mochaInterceptorTest(
-    TimeoutInterceptor,
-    ep,
-    {
-      timeout: 0.015
-    },
-    'timeout',
-    (itc, withConfig) => {
-      describe('json', () => {
-        it('toJSON', () => {
-          if (withConfig) {
-            assert.deepEqual(itc.toJSON(), {
-              type: 'timeout',
-              timeout: 0.015
-            });
-          } else {
-            assert.deepEqual(itc.toJSON(), {
-              type: 'timeout',
-              timeout: 1
-            });
-          }
-        });
+test(
+  'basic',
+  interceptorTest,
+  TimeoutInterceptor,
+  dummyEndpoint('ep1'),
+  {
+    timeout: 0.015
+  },
+  'timeout',
+  async (t, interceptor, withConfig) => {
+    if (withConfig) {
+      t.deepEqual(interceptor.toJSON(), {
+        type: 'timeout',
+        timeout: 0.015
+      });
+    } else {
+      t.deepEqual(interceptor.toJSON(), {
+        type: 'timeout',
+        timeout: 1
       });
 
-      if (!withConfig) {
-        it('has timeout', () => assert.equal(itc.timeout, 1));
-        return;
-      }
+      t.is(interceptor.timeout, 1);
+      return;
+    }
 
-      it('has timeout', () => assert.equal(itc.timeout, 0.015));
+    t.is(interceptor.timeout, 0.015);
 
-      itc.connected = dummyEndpoint('ep');
+    interceptor.connected = dummyEndpoint('ep');
 
-      // request value is the timeout
-      itc.connected.receive = testResponseHandler;
+    interceptor.connected.receive = testResponseHandler;
+  }
+);
 
+/*
       it('passing request within time', done => {
         const response = itc.receive({
           delay: 5
@@ -283,4 +253,4 @@ describe('interceptors', () => {
       });
     }
   );
-});
+*/
