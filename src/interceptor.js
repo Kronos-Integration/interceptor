@@ -1,12 +1,10 @@
 import { ConnectorMixin } from './connector-mixin';
 import { setAttributes, getAttributes } from 'model-attributes';
 
-class _DummyInterceptor {}
-
 /**
  * Base interceptor. The base class for all the interceptors
  */
-export default class Interceptor extends ConnectorMixin(_DummyInterceptor) {
+export default class Interceptor extends ConnectorMixin(class {}) {
   static get configurationAttributes() {
     return {};
   }
