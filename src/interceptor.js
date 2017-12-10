@@ -18,22 +18,24 @@ export default class Interceptor extends ConnectorMixin(class {}) {
   constructor(config, endpoint) {
     super();
 
-    const props = {
+    Object.defineProperties(this, {
       endpoint: {
         value: endpoint
-      },
-      logger: {
-        value: endpoint.step
       },
       config: {
         value: config
       }
-    };
-
-    Object.defineProperties(this, props);
+    });
 
     this.configure(config);
     this.reset();
+  }
+
+  /**
+   * use endpoint owner as logger
+   */
+  get logger() {
+    return this.endpoint.owner;
   }
 
   /**
