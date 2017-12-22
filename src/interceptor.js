@@ -3,18 +3,14 @@ import { setAttributes, getAttributes } from 'model-attributes';
 
 /**
  * Base interceptor. The base class for all the interceptors
+ * Calls configure() and reset().
+ * @param {Object} endpoint the endpoint object this interceptor will be attached to.
+ * @param {Object} config The interceptor configuration object.
  */
 export default class Interceptor extends ConnectorMixin(class {}) {
   static get configurationAttributes() {
     return {};
   }
-
-  /**
-   * Creates a new interceptor.
-   * Calls configure() and reset().
-   * @param endpoint {object} the endpoint object this interceptor will be attached to.
-   * @param config {object} The interceptor configuration object.
-   */
   constructor(config, endpoint) {
     super();
 
@@ -85,8 +81,8 @@ export default class Interceptor extends ConnectorMixin(class {}) {
   /**
    * The receive method. This method receives the request from the leading interceptor and calls the
    * trailing interceptor
-   * @param request {object} the request from the leading interceptor
-   * @param oldRequest {object} the oldRequest from the leading interceptor.
+   * @param {Object} request the request from the leading interceptor
+   * @param {Object} oldRequest the oldRequest from the leading interceptor.
    *        This is a special case. As some interceptors are in charge of copying and creating the
    *        request objects, the step will call the interceptor chain with the both requests.
    *        At some point of the interceptor chain only the request itself will survive.

@@ -33,7 +33,10 @@ export default class TimeoutInterceptor extends Interceptor {
 }
 
 /**
- *
+ * @param {Promise} promise
+ * @param {number} timeout in miliseconds
+ * @param {string} name
+ * @return {Promise}
  */
 function rejectUnlessResolvedWithin(promise, timeout, name) {
   if (timeout === 0) return promise;
