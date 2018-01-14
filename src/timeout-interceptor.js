@@ -19,6 +19,9 @@ export default class TimeoutInterceptor extends Interceptor {
     );
   }
 
+  /**
+   * @return {string} 'timeout'
+   */
   static get name() {
     return 'timeout';
   }

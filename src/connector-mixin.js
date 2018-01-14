@@ -1,6 +1,7 @@
 /**
  * rejecting receiver used to signal a not present connection
  * when used always delivers a rejecting promise
+ * @return {Promise<Error>}
  */
 export function rejectingReceiver(request) {
   return Promise.reject(new Error('Receiver not defined'));
@@ -33,7 +34,7 @@ export function ConnectorMixin(superclass) {
      * a.connected = b
      * b.connected = c
      * then a.otherEnd === c
-     * @return undefined if not connected at all
+     * @return {undefined} if not connected at all
      */
     get otherEnd() {
       let c = this;

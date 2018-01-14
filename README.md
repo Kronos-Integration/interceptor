@@ -46,15 +46,20 @@ const promise = interceptor1.receive(request);
 -   [Interceptor](#interceptor)
     -   [logger](#logger)
     -   [type](#type)
+    -   [configurationAttributes](#configurationattributes)
     -   [configure](#configure)
     -   [toJSON](#tojson)
     -   [reset](#reset)
     -   [receive](#receive)
+    -   [configurationAttributes](#configurationattributes-1)
 -   [TimeoutInterceptor](#timeoutinterceptor)
+    -   [name](#name)
 -   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
+    -   [name](#name-1)
 -   [LimitingInterceptor](#limitinginterceptor)
+    -   [name](#name-2)
 
 ## rejectingReceiver
 
@@ -64,6 +69,8 @@ when used always delivers a rejecting promise
 **Parameters**
 
 -   `request`  
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)>** 
 
 ## ConnectorMixin
 
@@ -94,6 +101,14 @@ use endpoint owner as logger
 
 The instance method returning the type.
 Defaults to the constructors name (class name)
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### configurationAttributes
+
+Meta description of the configuration
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### configure
 
@@ -133,11 +148,23 @@ trailing interceptor
            But all interceptors designed to be inserted early in the interceptor chain of a sending
            endpoint should pass both requests to the next interceptor.
 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+
+### configurationAttributes
+
+Meta description of the configuration
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
 ## TimeoutInterceptor
 
 **Extends Interceptor**
 
 Rejects a request if it does not resolve in a given time
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'timeout'
 
 ## rejectUnlessResolvedWithin
 
@@ -165,6 +192,10 @@ Logs the time the requests takes
 -   `request`  
 -   `oldRequest`  
 
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'collect-request-stats'
+
 ## LimitingInterceptor
 
 **Extends Interceptor**
@@ -187,6 +218,10 @@ default is to reject when more than 10 requests are on the way
 
 -   `config`  
 -   `endpoint`  
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'request-limit'
 
 # install
 

@@ -5,6 +5,9 @@ import Interceptor from './interceptor';
  * failed requests
  */
 export default class StatsCollectorInterceptor extends Interceptor {
+  /**
+   * @return {string} 'collect-request-stats'
+   */
   static get name() {
     return 'collect-request-stats';
   }

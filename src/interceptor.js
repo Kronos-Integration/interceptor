@@ -8,9 +8,14 @@ import { setAttributes, getAttributes } from 'model-attributes';
  * @param {Object} config The interceptor configuration object.
  */
 export default class Interceptor extends ConnectorMixin(class {}) {
+  /**
+   * Meta description of the configuration
+   * @return {Object}
+   */
   static get configurationAttributes() {
     return {};
   }
+
   constructor(config, endpoint) {
     super();
 
@@ -37,11 +42,16 @@ export default class Interceptor extends ConnectorMixin(class {}) {
   /**
    * The instance method returning the type.
    * Defaults to the constructors name (class name)
+   * @return {string}
    */
   get type() {
     return this.constructor.name;
   }
 
+  /**
+   * Meta description of the configuration
+   * @return {Object}
+   */
   get configurationAttributes() {
     return this.constructor.configurationAttributes;
   }
@@ -88,8 +98,9 @@ export default class Interceptor extends ConnectorMixin(class {}) {
    *        At some point of the interceptor chain only the request itself will survive.
    *        But all interceptors designed to be inserted early in the interceptor chain of a sending
    *        endpoint should pass both requests to the next interceptor.
+   * @return {Promise}
    */
-  receive(request, oldRequest) {
+  async receive(request, oldRequest) {
     // This is a dummy implementation. Must be overwritten by the derived object.
     return this.connected.receive(request, oldRequest);
   }

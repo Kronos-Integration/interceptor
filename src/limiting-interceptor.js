@@ -18,6 +18,9 @@ import { mergeAttributes, createAttributes } from 'model-attributes';
  * default is to reject when more than 10 requests are on the way
  */
 export default class LimitingInterceptor extends Interceptor {
+  /**
+   * @return {string} 'request-limit'
+   */
   static get name() {
     return 'request-limit';
   }
@@ -68,27 +71,24 @@ export default class LimitingInterceptor extends Interceptor {
     this.ongoingRequests = 0;
   }
 
-  receive(request, oldRequest) {
+  async receive(request, oldRequest) {
     //console.log(`got #${this.ongoingRequests}`);
 
     for (const limit of this.limits) {
       if (this.ongoingRequests >= limit.count) {
         if (limit.delay === undefined) {
-          //console.log(`-> reject`);
-          return Promise.reject(
-            new Error(`Limit of ongoing requests ${limit.count} reached`)
-          );
+          throw new Error(`Limit of ongoing requests ${limit.count} reached`);
         }
 
         //console.log(`-> delay ${limit.delay}`);
         this.ongoingRequests += 1;
 
-        return new Promise((fullfill, reject) => {
-          setTimeout(() => {
-            //console.log(`${limit.delay} done -> go on`);
-            fullfill(this._processRequest(request, oldRequest));
-          }, limit.delay);
-        });
+        return new Promise((resolve, reject) =>
+          setTimeout(
+            () => resolve(this._processRequest(request, oldRequest)),
+            limit.delay
+          )
+        );
       }
     }
 
