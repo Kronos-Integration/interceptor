@@ -1,6 +1,9 @@
 {
   "name": "kronos-interceptor",
   "version": "0.0.0-semantic-release",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "module": "src/index.js",
   "description": "introspects / modifies requests as they pass between endpoints",
