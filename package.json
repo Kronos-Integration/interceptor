@@ -30,7 +30,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "model-attributes": "^3.0.10"
+    "model-attributes": "^4.0.0"
   },
   "devDependencies": {
     "ava": "^1.2.1",
