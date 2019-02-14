@@ -1,7 +1,7 @@
-import Interceptor from '../src/interceptor';
-import StatsCollectorInterceptor from '../src/stats-collector-interceptor';
-import TimeoutInterceptor from '../src/timeout-interceptor';
-import LimitingInterceptor from '../src/limiting-interceptor';
+import { Interceptor } from '../src/interceptor';
+import { StatsCollectorInterceptor } from '../src/stats-collector-interceptor';
+import { TimeoutInterceptor } from '../src/timeout-interceptor';
+import { LimitingInterceptor } from '../src/limiting-interceptor';
 import test from 'ava';
 import { interceptorTest, testResponseHandler } from 'kronos-test-interceptor';
 

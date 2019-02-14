@@ -22,11 +22,11 @@ introspects / modifies requests as they pass between endpoints
 <!-- skip-example -->
 
 ```javascript
-const ki = require('kronos-interceptor');
+const { Interceptor } from 'kronos-interceptor';
 
 const endpoint = { get name() { return 'aName'; }, receive() {}};
-const interceptor1 = new ki.Interceptor({},endpoint);
-const interceptor2 = new ki.Interceptor({},endpoint);
+const interceptor1 = new Interceptor({},endpoint);
+const interceptor2 = new Interceptor({},endpoint);
 
 interceptor1.connected = interceptor2
 
@@ -69,7 +69,7 @@ when used always delivers a rejecting promise
 
 -   `request`  
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)>** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)>**
 
 ## ConnectorMixin
 
@@ -101,13 +101,13 @@ use endpoint owner as logger
 The instance method returning the type.
 Defaults to the constructors name (class name)
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 
 ### configurationAttributes
 
 Meta description of the configuration
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
 
 ### configure
 
@@ -120,7 +120,7 @@ or simply assign the attribute value
 
 **Parameters**
 
--   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
 
 ### toJSON
 
@@ -147,13 +147,13 @@ trailing interceptor
            But all interceptors designed to be inserted early in the interceptor chain of a sending
            endpoint should pass both requests to the next interceptor.
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
 
 ### configurationAttributes
 
 Meta description of the configuration
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
 
 ## TimeoutInterceptor
 
@@ -169,11 +169,11 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 **Parameters**
 
--   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+-   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
 -   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
 
 ## StatsCollectorInterceptor
 

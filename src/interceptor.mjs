@@ -7,7 +7,7 @@ import { setAttributes, getAttributes } from 'model-attributes';
  * @param {Object} endpoint the endpoint object this interceptor will be attached to.
  * @param {Object} config The interceptor configuration object.
  */
-export default class Interceptor extends ConnectorMixin(class {}) {
+export class Interceptor extends ConnectorMixin(class {}) {
   /**
    * Meta description of the configuration
    * @return {Object}

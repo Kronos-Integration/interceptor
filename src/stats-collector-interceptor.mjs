@@ -1,10 +1,10 @@
-import Interceptor from './interceptor';
+import { Interceptor } from './interceptor';
 
 /**
  * Interceptor to collect processing time, number of processed and
  * failed requests
  */
-export default class StatsCollectorInterceptor extends Interceptor {
+export class StatsCollectorInterceptor extends Interceptor {
   /**
    * @return {string} 'collect-request-stats'
    */

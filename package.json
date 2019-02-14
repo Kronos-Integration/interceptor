@@ -4,8 +4,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/index.js",
-  "module": "src/index.js",
+  "main": "src/index.mjs",
+  "module": "src/index.mjs",
   "description": "introspects / modifies requests as they pass between endpoints",
   "keywords": [
     "kronos-interceptor"
@@ -23,8 +23,8 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "cover": "c8 --temp-directory build/coverage ava && c8 report -r lcov --temp-directory build/coverage",
-    "docs": "documentation readme src/index.js --section=API",
-    "lint": "documentation lint src/index.js",
+    "docs": "documentation readme src/index.mjs --section=API",
+    "lint": "documentation lint src/index.mjs",
     "posttest": "markdown-doctest && npm run prepare",
     "test": "ava"
   },

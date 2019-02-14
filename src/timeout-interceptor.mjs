@@ -1,11 +1,11 @@
-import Interceptor from './interceptor';
+import { Interceptor } from './interceptor';
 
 import { mergeAttributes, createAttributes } from 'model-attributes';
 
 /**
  * Rejects a request if it does not resolve in a given time
  */
-export default class TimeoutInterceptor extends Interceptor {
+export class TimeoutInterceptor extends Interceptor {
   static get configurationAttributes() {
     return mergeAttributes(
       createAttributes({

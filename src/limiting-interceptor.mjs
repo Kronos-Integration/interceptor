@@ -1,4 +1,4 @@
-import Interceptor from './interceptor';
+import { Interceptor } from './interceptor';
 
 import { mergeAttributes, createAttributes } from 'model-attributes';
 
@@ -17,7 +17,7 @@ import { mergeAttributes, createAttributes } from 'model-attributes';
  * 20      : reject
  * default is to reject when more than 10 requests are on the way
  */
-export default class LimitingInterceptor extends Interceptor {
+export class LimitingInterceptor extends Interceptor {
   /**
    * @return {string} 'request-limit'
    */
