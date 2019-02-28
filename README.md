@@ -4,7 +4,6 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Build Status](https://secure.travis-ci.org/Kronos-Integration/kronos-interceptor.png)](http://travis-ci.org/Kronos-Integration/kronos-interceptor)
 [![codecov.io](http://codecov.io/github/Kronos-Integration/kronos-interceptor/coverage.svg?branch=master)](http://codecov.io/github/Kronos-Integration/kronos-interceptor?branch=master)
-[![Coverage Status](https://coveralls.io/repos/Kronos-Integration/kronos-interceptor/badge.svg)](https://coveralls.io/r/Kronos-Integration/kronos-interceptor)
 [![Known Vulnerabilities](https://snyk.io/test/github/Kronos-Integration/kronos-interceptor/badge.svg)](https://snyk.io/test/github/Kronos-Integration/kronos-interceptor)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/kronos-interceptor.svg?style=flat-square)](https://github.com/Kronos-Integration/kronos-interceptor/issues)
 [![Stories in Ready](https://badge.waffle.io/Kronos-Integration/kronos-interceptor.svg?label=ready&title=Ready)](http://waffle.io/Kronos-Integration/kronos-interceptor)
