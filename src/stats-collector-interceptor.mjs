@@ -1,4 +1,4 @@
-import { Interceptor } from './interceptor';
+import { Interceptor } from './interceptor.mjs';
 
 /**
  * Interceptor to collect processing time, number of processed and

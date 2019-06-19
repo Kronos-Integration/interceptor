@@ -1,5 +1,5 @@
-import { ConnectorMixin } from './connector-mixin';
 import { setAttributes, getAttributes } from 'model-attributes';
+import { ConnectorMixin } from './connector-mixin.mjs';
 
 /**
  * Base interceptor. The base class for all the interceptors

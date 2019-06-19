@@ -1,9 +1,9 @@
-import { Interceptor } from '../src/interceptor';
-import { StatsCollectorInterceptor } from '../src/stats-collector-interceptor';
-import { TimeoutInterceptor } from '../src/timeout-interceptor';
-import { LimitingInterceptor } from '../src/limiting-interceptor';
 import test from 'ava';
 import { interceptorTest, testResponseHandler } from 'kronos-test-interceptor';
+import { Interceptor } from '../src/interceptor.mjs';
+import { StatsCollectorInterceptor } from '../src/stats-collector-interceptor.mjs';
+import { TimeoutInterceptor } from '../src/timeout-interceptor.mjs';
+import { LimitingInterceptor } from '../src/limiting-interceptor.mjs';
 
 const logger = {
   debug(a) {

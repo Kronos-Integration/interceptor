@@ -1,6 +1,6 @@
-import { Interceptor } from './interceptor';
 
 import { mergeAttributes, createAttributes } from 'model-attributes';
+import { Interceptor } from './interceptor.mjs';
 
 /**
  * Limits the number of concurrent requests.

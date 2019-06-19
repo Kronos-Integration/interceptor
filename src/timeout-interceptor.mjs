@@ -1,6 +1,6 @@
-import { Interceptor } from './interceptor';
 
 import { mergeAttributes, createAttributes } from 'model-attributes';
+import { Interceptor } from './interceptor.mjs';
 
 /**
  * Rejects a request if it does not resolve in a given time

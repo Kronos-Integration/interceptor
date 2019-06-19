@@ -1,9 +1,9 @@
-import { ConnectorMixin, rejectingReceiver } from "./connector-mixin";
+import { ConnectorMixin, rejectingReceiver } from "./connector-mixin.mjs";
 
-import { Interceptor } from "./interceptor";
-import { TimeoutInterceptor } from "./timeout-interceptor";
-import { StatsCollectorInterceptor } from "./stats-collector-interceptor";
-import { LimitingInterceptor } from "./limiting-interceptor";
+import { Interceptor } from "./interceptor.mjs";
+import { TimeoutInterceptor } from "./timeout-interceptor.mjs";
+import { StatsCollectorInterceptor } from "./stats-collector-interceptor.mjs";
+import { LimitingInterceptor } from "./limiting-interceptor.mjs";
 
 export function registerWithManager(manager) {
   return Promise.all([
