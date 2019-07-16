@@ -34,6 +34,7 @@ export class Interceptor extends ConnectorMixin(class {}) {
 
   /**
    * use endpoint owner as logger
+   * @return {Object} 
    */
   get logger() {
     return this.endpoint.owner;
