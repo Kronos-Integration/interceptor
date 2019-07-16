@@ -1,5 +1,5 @@
 /**
- * rejecting receiver used to signal a not present connection
+ * rejecting receiver used to signal a none present connection
  * when used always delivers a rejecting promise
  * @return {Promise<Error>}
  */
