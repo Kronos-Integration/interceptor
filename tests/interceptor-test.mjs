@@ -24,7 +24,6 @@ function dummyEndpoint(name) {
 }
 
 test(
-  'basic',
   interceptorTest,
   Interceptor,
   dummyEndpoint('ep1'),
@@ -48,7 +47,6 @@ test(
 );
 
 test(
-  'basic',
   interceptorTest,
   StatsCollectorInterceptor,
   dummyEndpoint('ep1'),
@@ -94,7 +92,6 @@ test(
 const REQUEST_LIMIT = 2;
 
 test(
-  'basic',
   interceptorTest,
   LimitingInterceptor,
   dummyEndpoint('ep1'),
@@ -188,7 +185,6 @@ test(
 */
 
 test(
-  'basic',
   interceptorTest,
   TimeoutInterceptor,
   dummyEndpoint('ep1'),
