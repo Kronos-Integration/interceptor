@@ -1,5 +1,5 @@
 import test from 'ava';
-import { interceptorTest, testResponseHandler } from '@kronos-integration/test-interceptor';
+import { interceptorTest } from '@kronos-integration/test-interceptor';
 import { Interceptor } from '../src/interceptor.mjs';
 import { StatsCollectorInterceptor } from '../src/stats-collector-interceptor.mjs';
 import { TimeoutInterceptor } from '../src/timeout-interceptor.mjs';
@@ -22,6 +22,11 @@ function dummyEndpoint(name) {
     step: logger
   };
 }
+
+const testResponseHandler = {
+  async receive(request, oldRequest) {
+  }
+};
 
 test(
   interceptorTest,

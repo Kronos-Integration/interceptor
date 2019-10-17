@@ -1,5 +1,4 @@
 import { ConnectorMixin, rejectingReceiver } from "./connector-mixin.mjs";
-
 import { Interceptor } from "./interceptor.mjs";
 import { TimeoutInterceptor } from "./timeout-interceptor.mjs";
 import { StatsCollectorInterceptor } from "./stats-collector-interceptor.mjs";
