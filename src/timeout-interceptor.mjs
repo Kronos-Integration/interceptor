@@ -52,7 +52,7 @@ function rejectUnlessResolvedWithin(promise, timeout, name) {
     );
 
     return promise.then(
-      reject => {
+      fullfilled => {
         clearTimeout(th);
         resolve(fullfilled);
       },

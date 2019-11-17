@@ -38,42 +38,50 @@ const promise = interceptor1.receive(request);
 ### Table of Contents
 
 -   [rejectingReceiver](#rejectingreceiver)
+    -   [Parameters](#parameters)
 -   [ConnectorMixin](#connectormixin)
+    -   [Parameters](#parameters-1)
 -   [Interceptor](#interceptor)
+    -   [Parameters](#parameters-2)
     -   [logger](#logger)
     -   [type](#type)
     -   [configurationAttributes](#configurationattributes)
     -   [configure](#configure)
+        -   [Parameters](#parameters-3)
     -   [toJSON](#tojson)
     -   [reset](#reset)
     -   [receive](#receive)
+        -   [Parameters](#parameters-4)
     -   [configurationAttributes](#configurationattributes-1)
 -   [TimeoutInterceptor](#timeoutinterceptor)
     -   [name](#name)
 -   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
+    -   [Parameters](#parameters-5)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
+        -   [Parameters](#parameters-6)
     -   [name](#name-1)
 -   [LimitingInterceptor](#limitinginterceptor)
+    -   [Parameters](#parameters-7)
     -   [name](#name-2)
 
 ## rejectingReceiver
 
-rejecting receiver used to signal a not present connection
+rejecting receiver used to signal a none present connection
 when used always delivers a rejecting promise
 
-**Parameters**
+### Parameters
 
 -   `request`  
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)>**
+Returns **void** always throws
 
 ## ConnectorMixin
 
 Mixin to make endpoints/interceptors connectable
 Forms a single linked list
 
-**Parameters**
+### Parameters
 
 -   `superclass`  
 
@@ -84,7 +92,7 @@ Forms a single linked list
 Base interceptor. The base class for all the interceptors
 Calls configure() and reset().
 
-**Parameters**
+### Parameters
 
 -   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
 -   `endpoint` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the endpoint object this interceptor will be attached to.
@@ -93,18 +101,20 @@ Calls configure() and reset().
 
 use endpoint owner as logger
 
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
 ### type
 
 The instance method returning the type.
 Defaults to the constructors name (class name)
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### configurationAttributes
 
 Meta description of the configuration
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### configure
 
@@ -115,9 +125,9 @@ Which means we loop over all configuration attributes
 and then for each attribute decide if we use the default, call a setter function
 or simply assign the attribute value
 
-**Parameters**
+#### Parameters
 
--   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
+-   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### toJSON
 
@@ -134,7 +144,7 @@ forget all accumulated information
 The receive method. This method receives the request from the leading interceptor and calls the
 trailing interceptor
 
-**Parameters**
+#### Parameters
 
 -   `request` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the request from the leading interceptor
 -   `oldRequest` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the oldRequest from the leading interceptor.
@@ -144,13 +154,13 @@ trailing interceptor
            But all interceptors designed to be inserted early in the interceptor chain of a sending
            endpoint should pass both requests to the next interceptor.
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ### configurationAttributes
 
 Meta description of the configuration
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ## TimeoutInterceptor
 
@@ -164,13 +174,13 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## rejectUnlessResolvedWithin
 
-**Parameters**
+### Parameters
 
--   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
+-   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 -   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ## StatsCollectorInterceptor
 
@@ -183,7 +193,7 @@ failed requests
 
 Logs the time the requests takes
 
-**Parameters**
+#### Parameters
 
 -   `request`  
 -   `oldRequest`  
@@ -210,7 +220,7 @@ Sample config:
 20      : reject
 default is to reject when more than 10 requests are on the way
 
-**Parameters**
+### Parameters
 
 -   `config`  
 -   `endpoint`  

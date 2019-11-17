@@ -1,10 +1,10 @@
 /**
  * rejecting receiver used to signal a none present connection
  * when used always delivers a rejecting promise
- * @return {Promise<Error>}
+ * @return {void} always throws
  */
-export function rejectingReceiver(request) {
-  return Promise.reject(new Error('Receiver not defined'));
+export async function rejectingReceiver(request) {
+  throw new Error('Receiver not defined');
 }
 
 /**
