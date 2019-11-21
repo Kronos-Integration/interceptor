@@ -40,6 +40,8 @@ const promise = interceptor1.receive(request);
 -   [rejectingReceiver](#rejectingreceiver)
     -   [Parameters](#parameters)
 -   [CONNECTED](#connected)
+-   [Connectable](#connectable)
+    -   [Properties](#properties)
 -   [ConnectorMixin](#connectormixin)
     -   [Parameters](#parameters-1)
 -   [Interceptor](#interceptor)
@@ -80,6 +82,14 @@ Returns **void** always throws
 ## CONNECTED
 
 slot holding the actual connection value
+
+## Connectable
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+### Properties
+
+-   `connected` **([Connectable](#connectable) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
 
 ## ConnectorMixin
 

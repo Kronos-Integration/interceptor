@@ -13,6 +13,11 @@ export async function rejectingReceiver(request) {
 export const CONNECTED = Symbol("connected");
 
 /**
+ * @typedef {Object} Connectable 
+ * @property {Connectable|undefined} connected
+ */
+
+/**
  * Mixin to make endpoints/interceptors connectable
  * Forms a single linked list
  */
@@ -26,6 +31,9 @@ export function ConnectorMixin(superclass) {
       return this[CONNECTED];
     }
 
+    /**
+     * @return {boolean} true if we are connected
+     */
     get isConnected() {
       return this[CONNECTED] && this[CONNECTED] !== rejectingReceiver
         ? true
@@ -38,7 +46,7 @@ export function ConnectorMixin(superclass) {
      * a.connected = b
      * b.connected = c
      * then a.otherEnd === c
-     * @return {undefined} if not connected at all
+     * @return {Connectable|undefined} if not connected at all
      */
     get otherEnd() {
       let c = this;
@@ -50,12 +58,12 @@ export function ConnectorMixin(superclass) {
     }
 
     /**
-     * Injects a endpoint after ourselfs.
-     * @param {Endpoint} endpoint to be injected (after ourselfs)
+     * Injects a connectable after ourselfs.
+     * @param {Connectable} connectable to be injected (after ourselfs)
      */
-    injectNext(endpoint) {
-      endpoint.connected = this.connected;
-      this.connected = endpoint;
+    injectNext(connectable) {
+      connectable.connected = this.connected;
+      this.connected = connectable;
     }
 
     /**
