@@ -39,6 +39,7 @@ const promise = interceptor1.receive(request);
 
 -   [rejectingReceiver](#rejectingreceiver)
     -   [Parameters](#parameters)
+-   [CONNECTED](#connected)
 -   [ConnectorMixin](#connectormixin)
     -   [Parameters](#parameters-1)
 -   [Interceptor](#interceptor)
@@ -75,6 +76,10 @@ when used always delivers a rejecting promise
 -   `request`  
 
 Returns **void** always throws
+
+## CONNECTED
+
+slot holding the actual connection value
 
 ## ConnectorMixin
 

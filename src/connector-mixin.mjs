@@ -8,22 +8,26 @@ export async function rejectingReceiver(request) {
 }
 
 /**
+ * slot holding the actual connection value
+ */
+export const CONNECTED = Symbol("connected");
+
+/**
  * Mixin to make endpoints/interceptors connectable
  * Forms a single linked list
  */
-
 export function ConnectorMixin(superclass) {
   return class extends superclass {
     set connected(e) {
-      this._connected = e;
+      this[CONNECTED] = e;
     }
 
     get connected() {
-      return this._connected;
+      return this[CONNECTED];
     }
 
     get isConnected() {
-      return this._connected && this._connected != rejectingReceiver
+      return this[CONNECTED] && this[CONNECTED] !== rejectingReceiver
         ? true
         : false;
     }
