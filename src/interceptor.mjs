@@ -16,7 +16,7 @@ export class Interceptor extends ConnectorMixin(class {}) {
     return {};
   }
 
-  constructor(config, endpoint) {
+  constructor(endpoint, config) {
     super();
 
     Object.defineProperties(this, {

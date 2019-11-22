@@ -109,8 +109,8 @@ Calls configure() and reset().
 
 ### Parameters
 
--   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
 -   `endpoint` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the endpoint object this interceptor will be attached to.
+-   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
 
 ### logger
 
@@ -237,8 +237,8 @@ default is to reject when more than 10 requests are on the way
 
 ### Parameters
 
--   `config`  
 -   `endpoint`  
+-   `config`  
 
 ### name
 

@@ -68,7 +68,6 @@ test(
     interceptor.connected.receive = testResponseHandler;
 
     /*
-
     await interceptor.receive({
       delay: 10
     });

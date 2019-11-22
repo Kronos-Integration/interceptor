@@ -46,8 +46,8 @@ export class LimitingInterceptor extends Interceptor {
     );
   }
 
-  constructor(config, endpoint) {
-    super(config, endpoint);
+  constructor(endpoint, config) {
+    super(endpoint, config);
 
     Object.defineProperty(this, 'limits', {
       value: config
