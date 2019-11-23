@@ -92,13 +92,7 @@ export class Interceptor extends ConnectorMixin(class {}) {
   /**
    * The receive method. This method receives the request from the leading interceptor and calls the
    * trailing interceptor
-   * @param {Object} request the request from the leading interceptor
-   * @param {Object} oldRequest the oldRequest from the leading interceptor.
-   *        This is a special case. As some interceptors are in charge of copying and creating the
-   *        request objects, the step will call the interceptor chain with the both requests.
-   *        At some point of the interceptor chain only the request itself will survive.
-   *        But all interceptors designed to be inserted early in the interceptor chain of a sending
-   *        endpoint should pass both requests to the next interceptor.
+   * @param {any[]} args the request from the leading interceptor
    * @return {Promise}
    */
   async receive(...args) {

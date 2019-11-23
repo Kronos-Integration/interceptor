@@ -67,6 +67,8 @@ const promise = interceptor1.receive(request);
 -   [LimitingInterceptor](#limitinginterceptor)
     -   [Parameters](#parameters-7)
     -   [name](#name-2)
+-   [LoggingInterceptor](#logginginterceptor)
+    -   [name](#name-3)
 
 ## rejectingReceiver
 
@@ -161,13 +163,7 @@ trailing interceptor
 
 #### Parameters
 
--   `request` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the request from the leading interceptor
--   `oldRequest` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the oldRequest from the leading interceptor.
-           This is a special case. As some interceptors are in charge of copying and creating the
-           request objects, the step will call the interceptor chain with the both requests.
-           At some point of the interceptor chain only the request itself will survive.
-           But all interceptors designed to be inserted early in the interceptor chain of a sending
-           endpoint should pass both requests to the next interceptor.
+-   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;any>** the request from the leading interceptor
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
@@ -210,8 +206,7 @@ Logs the time the requests takes
 
 #### Parameters
 
--   `request`  
--   `oldRequest`  
+-   `args` **...any** 
 
 ### name
 
@@ -243,6 +238,16 @@ default is to reject when more than 10 requests are on the way
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'request-limit'
+
+## LoggingInterceptor
+
+**Extends Interceptor**
+
+logs args and result
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'logging'
 
 # install
 
