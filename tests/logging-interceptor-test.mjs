@@ -19,14 +19,14 @@ test(
 
     const entries = [];
     interceptor.endpoint.owner = {
-        info(a) {
-            entries.push(a);
-          }
-        };
+      info(a) {
+        entries.push(a);
+      }
+    };
 
     await interceptor.receive(1, 2);
 
-    t.truthy(entries.find(e => e.match(/request 1,2/)),"request logged");
+    t.truthy(entries.find(e => e.match(/request \[1,2\]/)), "request logged");
     t.truthy(entries.find(e => e.match(/result 77/)), "result logged");
   }
 );
