@@ -13,7 +13,7 @@ export class LoggingInterceptor extends Interceptor {
 
   async receive(...args) {
     const logger = this.logger;
-    logger.info(`${this.endpoint.identifier}: request ${[...args]}`);
+    logger.info(`${this.endpoint.identifier}: request ${JSON.stringify([...args])}`);
 
     try {
       const result = await this.connected.receive(...args);
