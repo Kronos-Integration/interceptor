@@ -26,9 +26,9 @@ export class TimeoutInterceptor extends Interceptor {
     return 'timeout';
   }
 
-  receive(request) {
+  receive(...args) {
     return rejectUnlessResolvedWithin(
-      this.connected.receive(request),
+      this.connected.receive(...args),
       this.timeout * 1000,
       this
     );

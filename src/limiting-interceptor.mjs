@@ -71,7 +71,7 @@ export class LimitingInterceptor extends Interceptor {
     this.ongoingRequests = 0;
   }
 
-  async receive(request, oldRequest) {
+  async receive(...args) {
     //console.log(`got #${this.ongoingRequests}`);
 
     for (const limit of this.limits) {
@@ -85,7 +85,7 @@ export class LimitingInterceptor extends Interceptor {
 
         return new Promise((resolve, reject) =>
           setTimeout(
-            () => resolve(this._processRequest(request, oldRequest)),
+            () => resolve(this._processRequest(...args)),
             limit.delay
           )
         );
@@ -95,12 +95,12 @@ export class LimitingInterceptor extends Interceptor {
     //console.log(`-> normal`);
     this.ongoingRequests += 1;
 
-    return this._processRequest(request, oldRequest);
+    return this._processRequest(...args);
   }
 
-  _processRequest(request, oldRequest) {
+  _processRequest(...args) {
     const currentResponse = this.connected
-      .receive(request, oldRequest)
+      .receive(...args)
       .then(resolved => {
         this.ongoingResponses.delete(currentResponse);
         this.ongoingRequests -= 1;

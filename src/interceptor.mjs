@@ -101,8 +101,8 @@ export class Interceptor extends ConnectorMixin(class {}) {
    *        endpoint should pass both requests to the next interceptor.
    * @return {Promise}
    */
-  async receive(request, oldRequest) {
+  async receive(...args) {
     // This is a dummy implementation. Must be overwritten by the derived object.
-    return this.connected.receive(request, oldRequest);
+    return this.connected.receive(...args);
   }
 }
