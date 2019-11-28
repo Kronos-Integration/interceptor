@@ -3,7 +3,6 @@ import { dummyEndpoint, testResponseHandler } from "./util.mjs";
 import { interceptorTest } from "@kronos-integration/test-interceptor";
 import { Interceptor } from "../src/interceptor.mjs";
 import { StatsCollectorInterceptor } from "../src/stats-collector-interceptor.mjs";
-import { TimeoutInterceptor } from "../src/timeout-interceptor.mjs";
 import { LimitingInterceptor } from "../src/limiting-interceptor.mjs";
 
 test(
@@ -166,69 +165,3 @@ test(
   );
 */
 
-test(
-  interceptorTest,
-  TimeoutInterceptor,
-  dummyEndpoint("ep1"),
-  {
-    timeout: 0.015
-  },
-  "timeout",
-  async (t, interceptor, withConfig) => {
-    if (withConfig) {
-      t.deepEqual(interceptor.toJSON(), {
-        type: "timeout",
-        timeout: 0.015
-      });
-    } else {
-      t.deepEqual(interceptor.toJSON(), {
-        type: "timeout",
-        timeout: 1
-      });
-
-      t.is(interceptor.timeout, 1);
-      return;
-    }
-
-    t.is(interceptor.timeout, 0.015);
-
-    interceptor.connected = dummyEndpoint("ep");
-
-    interceptor.connected.receive = testResponseHandler;
-  }
-);
-
-/*
-      it('passing request within time', done => {
-        const response = itc.receive({
-          delay: 5
-        }); // wait 5 msecs then fullfill
-        response.then(resolved => done()).catch(rejected => done(rejected));
-      });
-
-      it('rejecting long running request', done => {
-        const response = itc.receive({
-          delay: 100
-        }); // wait 100 msecs then fullfill -> timeout
-        response
-          .then(resolved => console.log(`resolved ${resolved}`))
-          .catch(rejected => done());
-      });
-
-      it('handle rejecting request in time', done => {
-        const response = itc.receive({
-          reject: true
-        }); // produce rejecting response
-        response.then(resolved => done()).catch(rejected => done());
-      });
-
-      it('handle rejecting long running request', done => {
-        const response = itc.receive({
-          delay: 1000,
-          reject: true
-        }); // produce rejecting response
-        response.then(resolved => done()).catch(rejected => done());
-      });
-    }
-  );
-*/

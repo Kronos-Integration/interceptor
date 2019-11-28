@@ -1,6 +1,5 @@
-
-import { mergeAttributes, createAttributes } from 'model-attributes';
-import { Interceptor } from './interceptor.mjs';
+import { mergeAttributes, createAttributes } from "model-attributes";
+import { Interceptor } from "./interceptor.mjs";
 
 /**
  * Rejects a request if it does not resolve in a given time
@@ -10,9 +9,9 @@ export class TimeoutInterceptor extends Interceptor {
     return mergeAttributes(
       createAttributes({
         timeout: {
-          description: 'request timeout',
+          description: "request timeout",
           default: 1,
-          type: 'duration'
+          type: "duration"
         }
       }),
       Interceptor.configurationAttributes
@@ -23,7 +22,7 @@ export class TimeoutInterceptor extends Interceptor {
    * @return {string} 'timeout'
    */
   static get name() {
-    return 'timeout';
+    return "timeout";
   }
 
   receive(...args) {
@@ -44,22 +43,13 @@ export class TimeoutInterceptor extends Interceptor {
 function rejectUnlessResolvedWithin(promise, timeout, name) {
   if (timeout === 0) return promise;
 
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const th = setTimeout(
       () =>
         reject(new Error(`${name} request not resolved within ${timeout}ms`)),
       timeout
     );
-
-    return promise.then(
-      fullfilled => {
-        clearTimeout(th);
-        resolve(fullfilled);
-      },
-      err => {
-        clearTimeout(th);
-        reject(err);
-      }
-    );
+    
+    promise.then(resolve, reject).finally(() => clearTimeout(th));
   });
 }
