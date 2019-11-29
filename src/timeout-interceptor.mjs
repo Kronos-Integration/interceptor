@@ -44,7 +44,7 @@ export class TimeoutInterceptor extends Interceptor {
 function rejectUnlessResolvedWithin(promise, timeout, name) {
   if (timeout === 0) return promise;
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const th = setTimeout(
       () =>
         reject(new Error(`${name} request not resolved within ${timeout}ms`)),
