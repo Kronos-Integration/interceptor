@@ -35,6 +35,7 @@ export class TimeoutInterceptor extends Interceptor {
 }
 
 /**
+ * Rejects promise when it ia not resolved within given timeout
  * @param {Promise} promise
  * @param {number} timeout in miliseconds
  * @param {string} name
