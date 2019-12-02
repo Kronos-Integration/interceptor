@@ -37,34 +37,33 @@ const promise = interceptor1.receive(request);
 ### Table of Contents
 
 -   [rejectingReceiver](#rejectingreceiver)
-    -   [Parameters](#parameters)
 -   [CONNECTED](#connected)
 -   [Connectable](#connectable)
     -   [Properties](#properties)
 -   [ConnectorMixin](#connectormixin)
-    -   [Parameters](#parameters-1)
+    -   [Parameters](#parameters)
 -   [Interceptor](#interceptor)
-    -   [Parameters](#parameters-2)
+    -   [Parameters](#parameters-1)
     -   [logger](#logger)
     -   [type](#type)
     -   [configurationAttributes](#configurationattributes)
     -   [configure](#configure)
-        -   [Parameters](#parameters-3)
+        -   [Parameters](#parameters-2)
     -   [toJSON](#tojson)
     -   [reset](#reset)
     -   [receive](#receive)
-        -   [Parameters](#parameters-4)
+        -   [Parameters](#parameters-3)
     -   [configurationAttributes](#configurationattributes-1)
 -   [TimeoutInterceptor](#timeoutinterceptor)
     -   [name](#name)
 -   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
-    -   [Parameters](#parameters-5)
+    -   [Parameters](#parameters-4)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
-        -   [Parameters](#parameters-6)
+        -   [Parameters](#parameters-5)
     -   [name](#name-1)
 -   [LimitingInterceptor](#limitinginterceptor)
-    -   [Parameters](#parameters-7)
+    -   [Parameters](#parameters-6)
     -   [name](#name-2)
 -   [LoggingInterceptor](#logginginterceptor)
     -   [name](#name-3)
@@ -73,10 +72,6 @@ const promise = interceptor1.receive(request);
 
 rejecting receiver used to signal a none present connection
 when used always delivers a rejecting promise
-
-### Parameters
-
--   `request`  
 
 Returns **void** always throws
 
@@ -183,6 +178,8 @@ Rejects a request if it does not resolve in a given time
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'timeout'
 
 ## rejectUnlessResolvedWithin
+
+Rejects promise when it ia not resolved within given timeout
 
 ### Parameters
 

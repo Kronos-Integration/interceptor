@@ -3,7 +3,7 @@
  * when used always delivers a rejecting promise
  * @return {void} always throws
  */
-export async function rejectingReceiver(request) {
+export async function rejectingReceiver() {
   throw new Error('Receiver not defined');
 }
 
@@ -38,23 +38,6 @@ export function ConnectorMixin(superclass) {
       return this[CONNECTED] && this[CONNECTED] !== rejectingReceiver
         ? true
         : false;
-    }
-
-    /**
-     * Delivers the other end of the connection chain
-     * Given:
-     * a.connected = b
-     * b.connected = c
-     * then a.otherEnd === c
-     * @return {Connectable|undefined} if not connected at all
-     */
-    get otherEnd() {
-      let c = this;
-
-      while (c.isConnected) {
-        c = c.connected;
-      }
-      return c === this ? undefined : c;
     }
 
     /**
