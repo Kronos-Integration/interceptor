@@ -21,13 +21,9 @@ introspects / modifies requests as they pass between endpoints
 const { Interceptor } from 'kronos-interceptor';
 
 const endpoint = { get name() { return 'aName'; }, receive() {}};
-const interceptor1 = new Interceptor({},endpoint);
-const interceptor2 = new Interceptor({},endpoint);
+const interceptor = new Interceptor();
 
-interceptor1.connected = interceptor2
-
-const request = {};
-const promise = interceptor1.receive(request);
+const response = interceptor.receive(endpoint, arg1, arg2);
 ```
 
 # API
