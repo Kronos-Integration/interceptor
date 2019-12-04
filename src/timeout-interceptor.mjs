@@ -25,12 +25,8 @@ export class TimeoutInterceptor extends Interceptor {
     return "timeout";
   }
 
-  receive(...args) {
-    return rejectUnlessResolvedWithin(
-      this.connected.receive(...args),
-      this.timeout * 1000,
-      this
-    );
+  receive(endpoint, next, ...args) {
+    return rejectUnlessResolvedWithin(next(...args), this.timeout * 1000, this);
   }
 }
 
@@ -50,7 +46,7 @@ function rejectUnlessResolvedWithin(promise, timeout, name) {
         reject(new Error(`${name} request not resolved within ${timeout}ms`)),
       timeout
     );
-    
+
     promise.then(resolve, reject).finally(() => clearTimeout(th));
   });
 }

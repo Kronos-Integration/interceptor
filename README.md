@@ -36,83 +36,39 @@ const promise = interceptor1.receive(request);
 
 ### Table of Contents
 
--   [rejectingReceiver](#rejectingreceiver)
--   [CONNECTED](#connected)
--   [Connectable](#connectable)
-    -   [Properties](#properties)
--   [ConnectorMixin](#connectormixin)
-    -   [Parameters](#parameters)
 -   [Interceptor](#interceptor)
-    -   [Parameters](#parameters-1)
-    -   [logger](#logger)
+    -   [Parameters](#parameters)
     -   [type](#type)
     -   [configurationAttributes](#configurationattributes)
     -   [configure](#configure)
-        -   [Parameters](#parameters-2)
+        -   [Parameters](#parameters-1)
     -   [toJSON](#tojson)
     -   [reset](#reset)
     -   [receive](#receive)
-        -   [Parameters](#parameters-3)
+        -   [Parameters](#parameters-2)
     -   [configurationAttributes](#configurationattributes-1)
 -   [TimeoutInterceptor](#timeoutinterceptor)
     -   [name](#name)
 -   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
-    -   [Parameters](#parameters-4)
+    -   [Parameters](#parameters-3)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
-        -   [Parameters](#parameters-5)
+        -   [Parameters](#parameters-4)
     -   [name](#name-1)
 -   [LimitingInterceptor](#limitinginterceptor)
-    -   [Parameters](#parameters-6)
+    -   [Parameters](#parameters-5)
     -   [name](#name-2)
 -   [LoggingInterceptor](#logginginterceptor)
     -   [name](#name-3)
 
-## rejectingReceiver
-
-rejecting receiver used to signal a none present connection
-when used always delivers a rejecting promise
-
-Returns **void** always throws
-
-## CONNECTED
-
-slot holding the actual connection value
-
-## Connectable
-
-Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
-
-### Properties
-
--   `connected` **([Connectable](#connectable) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
-
-## ConnectorMixin
-
-Mixin to make endpoints/interceptors connectable
-Forms a single linked list
-
-### Parameters
-
--   `superclass`  
-
 ## Interceptor
-
-**Extends ConnectorMixin(class {})**
 
 Base interceptor. The base class for all the interceptors
 Calls configure() and reset().
 
 ### Parameters
 
--   `endpoint` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the endpoint object this interceptor will be attached to.
 -   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
-
-### logger
-
-use endpoint owner as logger
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### type
 
@@ -157,6 +113,8 @@ trailing interceptor
 
 #### Parameters
 
+-   `enpoint`  
+-   `next`  
 -   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;any>** the request from the leading interceptor
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
@@ -202,6 +160,7 @@ Logs the time the requests takes
 
 #### Parameters
 
+-   `endpoint`  
 -   `args` **...any** 
 
 ### name
@@ -228,7 +187,6 @@ default is to reject when more than 10 requests are on the way
 
 ### Parameters
 
--   `endpoint`  
 -   `config`  
 
 ### name

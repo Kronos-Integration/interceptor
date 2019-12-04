@@ -1,13 +1,11 @@
-import { setAttributes, getAttributes } from 'model-attributes';
-import { ConnectorMixin } from './connector-mixin.mjs';
+import { setAttributes, getAttributes } from "model-attributes";
 
 /**
  * Base interceptor. The base class for all the interceptors
  * Calls configure() and reset().
- * @param {Object} endpoint the endpoint object this interceptor will be attached to.
  * @param {Object} config The interceptor configuration object.
  */
-export class Interceptor extends ConnectorMixin(class {}) {
+export class Interceptor {
   /**
    * Meta description of the configuration
    * @return {Object}
@@ -16,13 +14,8 @@ export class Interceptor extends ConnectorMixin(class {}) {
     return {};
   }
 
-  constructor(endpoint, config) {
-    super();
-
+  constructor(config) {
     Object.defineProperties(this, {
-      endpoint: {
-        value: endpoint
-      },
       config: {
         value: config
       }
@@ -30,14 +23,6 @@ export class Interceptor extends ConnectorMixin(class {}) {
 
     this.configure(config);
     this.reset();
-  }
-
-  /**
-   * use endpoint owner as logger
-   * @return {Object} 
-   */
-  get logger() {
-    return this.endpoint.owner;
   }
 
   /**
@@ -71,7 +56,7 @@ export class Interceptor extends ConnectorMixin(class {}) {
   }
 
   toString() {
-    return `${this.endpoint}[${this.type}]`;
+    return `${this.type}`;
   }
 
   /**
@@ -95,8 +80,8 @@ export class Interceptor extends ConnectorMixin(class {}) {
    * @param {any[]} args the request from the leading interceptor
    * @return {Promise}
    */
-  async receive(...args) {
+  async receive(enpoint, next, ...args) {
     // This is a dummy implementation. Must be overwritten by the derived object.
-    return this.connected.receive(...args);
+    return next(...args);
   }
 }

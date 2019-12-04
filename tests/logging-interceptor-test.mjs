@@ -1,31 +1,26 @@
 import test from "ava";
-import { dummyEndpoint } from "./util.mjs";
-import { interceptorTest } from "@kronos-integration/test-interceptor";
+import { dummyEndpoint, it } from "./util.mjs";
 import { LoggingInterceptor } from "../src/logging-interceptor.mjs";
 
+const e = dummyEndpoint("ep1");
+
+const entries = [];
+
+e.logger = {
+  info(a) {
+    entries.push(a);
+  }
+};
+
 test(
-  interceptorTest,
+  it,
   LoggingInterceptor,
-  dummyEndpoint("ep1"),
   undefined,
-  "logging",
-  async (t, interceptor, withConfig) => {
-    t.deepEqual(interceptor.toJSON(), {
-      type: "logging"
-    });
-
-    interceptor.connected = dummyEndpoint("ep");
-    interceptor.connected.receive = () => 77;
-
-    const entries = [];
-    interceptor.endpoint.owner = {
-      info(a) {
-        entries.push(a);
-      }
-    };
-
-    await interceptor.receive(1, 2);
-
+  { type: "logging", json: { type: 'logging'} },
+  e,
+  [1,2],
+  () => 77,
+  async (t, interceptor, e, next, result) => {
     t.truthy(entries.find(e => e.match(/request \[1,2\]/)), "request logged");
     t.truthy(entries.find(e => e.match(/result 77/)), "result logged");
   }

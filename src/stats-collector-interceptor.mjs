@@ -43,7 +43,7 @@ export class StatsCollectorInterceptor extends Interceptor {
   /**
    * Logs the time the requests takes
    */
-  async receive(...args) {
+  async receive(endpoint,...args) {
     this._numberOfRequests += 1;
 
     const start = new Date();
@@ -62,7 +62,7 @@ export class StatsCollectorInterceptor extends Interceptor {
         this._minRequestProcessingTime = pt;
       }
 
-      this.logger.debug(`took ${pt} ms for ${[...args]}`);
+      endpoint.logger.debug(`took ${pt} ms for ${[...args]}`);
       return response;
     } catch (err) {
       this._numberOfFailedRequests += 1;

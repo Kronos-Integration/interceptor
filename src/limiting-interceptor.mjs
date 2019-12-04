@@ -1,6 +1,5 @@
-
-import { mergeAttributes, createAttributes } from 'model-attributes';
-import { Interceptor } from './interceptor.mjs';
+import { mergeAttributes, createAttributes } from "model-attributes";
+import { Interceptor } from "./interceptor.mjs";
 
 /**
  * Limits the number of concurrent requests.
@@ -22,7 +21,7 @@ export class LimitingInterceptor extends Interceptor {
    * @return {string} 'request-limit'
    */
   static get name() {
-    return 'request-limit';
+    return "request-limit";
   }
 
   static get configurationAttributes() {
@@ -35,10 +34,10 @@ export class LimitingInterceptor extends Interceptor {
             }
           ],
           count: {
-            type: 'unsigned-integer'
+            type: "unsigned-integer"
           },
           delay: {
-            type: 'duration'
+            type: "duration"
           }
         }
       }),
@@ -46,10 +45,10 @@ export class LimitingInterceptor extends Interceptor {
     );
   }
 
-  constructor(endpoint, config) {
-    super(endpoint, config);
+  constructor(config) {
+    super(config);
 
-    Object.defineProperty(this, 'limits', {
+    Object.defineProperty(this, "limits", {
       value: config
         ? config.limits
         : [
@@ -71,7 +70,7 @@ export class LimitingInterceptor extends Interceptor {
     this.ongoingRequests = 0;
   }
 
-  async receive(...args) {
+  async receive(endpoint, next, ...args) {
     //console.log(`got #${this.ongoingRequests}`);
 
     for (const limit of this.limits) {
@@ -85,32 +84,23 @@ export class LimitingInterceptor extends Interceptor {
 
         return new Promise((resolve, reject) =>
           setTimeout(
-            () => resolve(this._processRequest(...args)),
+            () => resolve(this._processRequest(next, ...args)),
             limit.delay
           )
         );
       }
     }
 
-    //console.log(`-> normal`);
     this.ongoingRequests += 1;
 
-    return this._processRequest(...args);
+    return this._processRequest(next, ...args);
   }
 
-  _processRequest(...args) {
-    const currentResponse = this.connected
-      .receive(...args)
-      .then(resolved => {
-        this.ongoingResponses.delete(currentResponse);
-        this.ongoingRequests -= 1;
-        return resolved;
-      })
-      .catch(rejected => {
-        this.ongoingResponses.delete(currentResponse);
-        this.ongoingRequests -= 1;
-        return rejected;
-      });
+  _processRequest(next, ...args) {
+    const currentResponse = next(...args).finally(() => {
+      this.ongoingResponses.delete(currentResponse);
+      this.ongoingRequests -= 1;
+    });
 
     this.ongoingResponses.add(currentResponse);
 
