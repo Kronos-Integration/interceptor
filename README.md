@@ -109,8 +109,8 @@ trailing interceptor
 
 #### Parameters
 
--   `enpoint`  
--   `next`  
+-   `endpoint` **Endpoint** 
+-   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
 -   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;any>** the request from the leading interceptor
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 

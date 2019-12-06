@@ -14,13 +14,10 @@ export class Interceptor {
     return {};
   }
 
-  constructor(config) {
-    Object.defineProperties(this, {
-      config: {
-        value: config
-      }
-    });
+  config;
 
+  constructor(config) {
+    this.config = config;
     this.configure(config);
     this.reset();
   }
@@ -77,10 +74,12 @@ export class Interceptor {
   /**
    * The receive method. This method receives the request from the leading interceptor and calls the
    * trailing interceptor
+   * @param {Endpoint} endpoint
+   * @param {Function} next
    * @param {any[]} args the request from the leading interceptor
    * @return {Promise}
    */
-  async receive(enpoint, next, ...args) {
+  async receive(endpoint, next, ...args) {
     // This is a dummy implementation. Must be overwritten by the derived object.
     return next(...args);
   }

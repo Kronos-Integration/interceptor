@@ -45,18 +45,18 @@ export class LimitingInterceptor extends Interceptor {
     );
   }
 
+  limits = [
+    {
+      count: 10
+    }
+  ];
+
   constructor(config) {
     super(config);
 
-    Object.defineProperty(this, "limits", {
-      value: config
-        ? config.limits
-        : [
-            {
-              count: 10
-            }
-          ]
-    });
+    if (config.limits) {
+      this.limits = config.limits;
+    }
   }
 
   toJSON() {
