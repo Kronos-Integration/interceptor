@@ -54,7 +54,7 @@ export class LimitingInterceptor extends Interceptor {
   constructor(config) {
     super(config);
 
-    if (config.limits) {
+    if (config && config.limits) {
       this.limits = config.limits;
     }
   }
