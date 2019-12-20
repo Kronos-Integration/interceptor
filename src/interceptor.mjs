@@ -56,14 +56,23 @@ export class Interceptor {
     return `${this.type}`;
   }
 
+  toJSON() {
+    return this.toJSONWithOptions({
+      includeConfig: true
+    });
+  }
+
   /**
    * Deliver the json representation
    * @return {Object} json representation
    */
-  toJSON() {
-    const json = getAttributes(this, this.configurationAttributes);
-    json.type = this.type;
-    return json;
+  toJSONWithOptions(options) {
+    return options.includeConfig
+      ? {
+          type: this.type,
+          ...getAttributes(this, this.configurationAttributes)
+        }
+      : { type: this.type };
   }
 
   /**
