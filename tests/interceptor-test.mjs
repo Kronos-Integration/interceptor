@@ -1,10 +1,10 @@
 import test from "ava";
-import { dummyEndpoint, it } from "./util.mjs";
+import { dummyEndpoint, interceptorTest } from "@kronos-integration/test-interceptor";
 
 import { Interceptor } from "../src/interceptor.mjs";
 
 test(
-  it,
+  interceptorTest,
   Interceptor,
   undefined,
   { type: "Interceptor", json: { type: 'Interceptor'} },

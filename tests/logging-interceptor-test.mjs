@@ -1,5 +1,5 @@
 import test from "ava";
-import { dummyEndpoint, it } from "./util.mjs";
+import { dummyEndpoint, interceptorTest } from "@kronos-integration/test-interceptor";
 import { LoggingInterceptor } from "../src/logging-interceptor.mjs";
 
 const e = dummyEndpoint("ep1");
@@ -13,7 +13,7 @@ e.logger = {
 };
 
 test(
-  it,
+  interceptorTest,
   LoggingInterceptor,
   undefined,
   { type: "logging", json: { type: 'logging'} },

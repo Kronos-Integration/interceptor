@@ -1,5 +1,5 @@
 import test from "ava";
-import { dummyEndpoint, wait, it } from "./util.mjs";
+import { dummyEndpoint, wait, interceptorTest } from "@kronos-integration/test-interceptor";
 import { TimeoutInterceptor } from "../src/timeout-interceptor.mjs";
 
 const next = async delay => {
@@ -14,7 +14,7 @@ const next = async delay => {
 };
 
 test(
-  it,
+  interceptorTest,
   TimeoutInterceptor,
   {
     timeout: 0.015
