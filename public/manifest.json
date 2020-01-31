@@ -1,0 +1,10 @@
+{
+  "name": "@kronos-integration/interceptor",
+  "description": "introspects / modifies requests as they pass between endpoints",
+  "icons": [
+    {
+      "src": "facicon.ico",
+      "sizes": "16x16"
+    }
+  ]
+}
