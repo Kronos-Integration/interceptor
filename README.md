@@ -38,21 +38,22 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     -   [configurationAttributes](#configurationattributes)
     -   [configure](#configure)
         -   [Parameters](#parameters-1)
-    -   [toJSON](#tojson)
+    -   [toJSONWithOptions](#tojsonwithoptions)
+        -   [Parameters](#parameters-2)
     -   [reset](#reset)
     -   [receive](#receive)
-        -   [Parameters](#parameters-2)
+        -   [Parameters](#parameters-3)
     -   [configurationAttributes](#configurationattributes-1)
 -   [TimeoutInterceptor](#timeoutinterceptor)
     -   [name](#name)
 -   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
-    -   [Parameters](#parameters-3)
+    -   [Parameters](#parameters-4)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
-        -   [Parameters](#parameters-4)
+        -   [Parameters](#parameters-5)
     -   [name](#name-1)
 -   [LimitingInterceptor](#limitinginterceptor)
-    -   [Parameters](#parameters-5)
+    -   [Parameters](#parameters-6)
     -   [name](#name-2)
 -   [LoggingInterceptor](#logginginterceptor)
     -   [name](#name-3)
@@ -92,9 +93,13 @@ or simply assign the attribute value
 
 -   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
-### toJSON
+### toJSONWithOptions
 
 Deliver the json representation
+
+#### Parameters
+
+-   `options`  
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** json representation
 
@@ -133,7 +138,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## rejectUnlessResolvedWithin
 
-Rejects promise when it ia not resolved within given timeout
+Rejects promise when it is not resolved within given timeout
 
 ### Parameters
 

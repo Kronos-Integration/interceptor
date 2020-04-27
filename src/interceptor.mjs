@@ -14,10 +14,7 @@ export class Interceptor {
     return {};
   }
 
-  config;
-
   constructor(config) {
-    this.config = config;
     this.configure(config);
     this.reset();
   }
