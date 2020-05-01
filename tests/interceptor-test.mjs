@@ -1,7 +1,6 @@
 import test from "ava";
 import { dummyEndpoint, interceptorTest } from "@kronos-integration/test-interceptor";
-
-import { Interceptor } from "../src/interceptor.mjs";
+import { Interceptor } from "@kronos-integration/interceptor";
 
 test(
   interceptorTest,

@@ -1,6 +1,6 @@
 import test from "ava";
 import { dummyEndpoint, interceptorTest, wait } from "@kronos-integration/test-interceptor";
-import { LimitingInterceptor } from "../src/limiting-interceptor.mjs";
+import { LimitingInterceptor } from "@kronos-integration/interceptor";
 
 const REQUEST_LIMIT = 2;
 
