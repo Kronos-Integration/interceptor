@@ -1,7 +1,6 @@
 name: API to readme
 'on':
   schedule:
-    - cron: 56 10 * * *
     - cron: 19 11 * * *
 jobs:
   update_readme_api:
