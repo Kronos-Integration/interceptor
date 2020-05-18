@@ -57,6 +57,8 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     -   [name](#name-2)
 -   [LoggingInterceptor](#logginginterceptor)
     -   [name](#name-3)
+-   [StreamTransformInterceptor](#streamtransforminterceptor)
+    -   [name](#name-4)
 
 ## Interceptor
 
@@ -203,6 +205,16 @@ logs args and result
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'logging'
+
+## StreamTransformInterceptor
+
+**Extends Interceptor**
+
+pipes requests though a transformer stream
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'stream-transform'
 
 # install
 
