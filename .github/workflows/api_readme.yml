@@ -1,7 +1,7 @@
 name: API to readme
 on:
   schedule:
-    - cron: "2 2 * * *"
+    - cron: "11 11 * * *"
 
 jobs:
   update_routes:
@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: "${{ matrix.node-version }}"
       - run: npm install
+      - run: rm package-lock.json
       - run: npm run docs
       - uses: gr2m/create-or-update-pull-request-action@v1.x
         env:
