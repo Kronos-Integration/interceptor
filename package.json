@@ -8,8 +8,7 @@
   "type": "module",
   "main": "./src/index.mjs",
   "exports": {
-    ".": "./src/index.mjs",
-    "./": "./"
+    ".": "./src/index.mjs"
   },
   "description": "introspects / modifies requests as they pass between endpoints",
   "keywords": [
