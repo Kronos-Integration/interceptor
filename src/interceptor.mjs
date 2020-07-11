@@ -73,7 +73,7 @@ export class Interceptor {
   }
 
   /**
-   * forget all accumulated information
+   * Forget all accumulated information
    */
   reset() {}
 
