@@ -107,7 +107,7 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ### reset
 
-forget all accumulated information
+Forget all accumulated information
 
 ### receive
 
