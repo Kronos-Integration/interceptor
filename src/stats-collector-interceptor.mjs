@@ -1,8 +1,8 @@
 import { Interceptor } from './interceptor.mjs';
 
 /**
- * Interceptor to collect processing time, number of processed and
- * failed requests
+ * Interceptor to collect processing time, number of
+ * processed and failed requests.
  */
 export class StatsCollectorInterceptor extends Interceptor {
   /**

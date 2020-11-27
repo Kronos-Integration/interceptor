@@ -39,10 +39,10 @@ export class Interceptor {
   /**
    * Takes attribute values from config parameters
    * and copies them over to the object.
-   * Copying is done according to configurationAttributes
+   * Copying is done according to configurationAttributes.
    * Which means we loop over all configuration attributes
-   * and then for each attribute decide if we use the default, call a setter function
-   * or simply assign the attribute value
+   * and then for each attribute decide if we use the default, call
+   * a setter function or simply assign the attribute value.
    * @param {Object} config
    */
   configure(config) {
@@ -60,7 +60,7 @@ export class Interceptor {
   }
 
   /**
-   * Deliver the json representation
+   * Deliver the json representation.
    * @return {Object} json representation
    */
   toJSONWithOptions(options) {
@@ -78,8 +78,8 @@ export class Interceptor {
   reset() {}
 
   /**
-   * The receive method. This method receives the request from the leading interceptor and calls the
-   * trailing interceptor
+   * The receive method. This method receives the request from the leading interceptor
+   * and calls the trailing interceptor.
    * @param {Endpoint} endpoint
    * @param {Function} next
    * @param {any[]} args the request from the leading interceptor

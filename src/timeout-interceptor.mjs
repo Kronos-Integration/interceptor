@@ -2,7 +2,7 @@ import { mergeAttributes, createAttributes } from "model-attributes";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
- * Rejects a request if it does not resolve in a given time
+ * Rejects a request if it does not resolve in a given time.
  */
 export class TimeoutInterceptor extends Interceptor {
   static get configurationAttributes() {
@@ -31,7 +31,7 @@ export class TimeoutInterceptor extends Interceptor {
 }
 
 /**
- * Rejects promise when it is not resolved within given timeout
+ * Rejects promise when it is not resolved within given timeout.
  * @param {Promise} promise
  * @param {number} timeout in miliseconds
  * @param {string} name
