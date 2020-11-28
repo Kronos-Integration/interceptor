@@ -1,5 +1,9 @@
 import test from "ava";
-import { dummyEndpoint, wait, interceptorTest } from "@kronos-integration/test-interceptor";
+import {
+  dummyEndpoint,
+  wait,
+  interceptorTest
+} from "@kronos-integration/test-interceptor";
 import { TimeoutInterceptor } from "@kronos-integration/interceptor";
 
 const next = async delay => {
@@ -31,7 +35,7 @@ test(
   next,
   async (t, interceptor, endpoint, next, result) => {
     t.is(result, 77);
-    
+
     /*
     await t.throwsAsync(
       () => interceptor.receive(endpoint, next, 5),

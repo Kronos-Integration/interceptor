@@ -1,5 +1,9 @@
 import test from "ava";
-import { dummyEndpoint, interceptorTest, wait } from "@kronos-integration/test-interceptor";
+import {
+  dummyEndpoint,
+  interceptorTest,
+  wait
+} from "@kronos-integration/test-interceptor";
 import { LimitingInterceptor } from "@kronos-integration/interceptor";
 
 const REQUEST_LIMIT = 2;
@@ -53,7 +57,7 @@ test("sending lots of request", async t => {
   let numberOfFullfilled = 0;
   let i;
 
-  for (i = 0; i < REQUEST_LIMIT * 5+ 1; i++) {
+  for (i = 0; i < REQUEST_LIMIT * 5 + 1; i++) {
     try {
       const r = await interceptor.receive(
         undefined,
@@ -74,7 +78,7 @@ test("sending lots of request", async t => {
     }
   }
 
-  t.is(numberOfFullfilled,REQUEST_LIMIT * 5);
+  t.is(numberOfFullfilled, REQUEST_LIMIT * 5);
 });
 
 /*
