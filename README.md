@@ -78,10 +78,10 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Takes attribute values from config parameters
 and copies them over to the object.
-Copying is done according to configurationAttributes
+Copying is done according to configurationAttributes.
 Which means we loop over all configuration attributes
-and then for each attribute decide if we use the default, call a setter function
-or simply assign the attribute value
+and then for each attribute decide if we use the default, call
+a setter function or simply assign the attribute value.
 
 #### Parameters
 
@@ -89,7 +89,7 @@ or simply assign the attribute value
 
 ### toJSONWithOptions
 
-Deliver the json representation
+Deliver the json representation.
 
 #### Parameters
 
@@ -103,8 +103,8 @@ Forget all accumulated information
 
 ### receive
 
-The receive method. This method receives the request from the leading interceptor and calls the
-trailing interceptor
+The receive method. This method receives the request from the leading interceptor
+and calls the trailing interceptor.
 
 #### Parameters
 
@@ -124,7 +124,7 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 **Extends Interceptor**
 
-Rejects a request if it does not resolve in a given time
+Rejects a request if it does not resolve in a given time.
 
 ### name
 
@@ -132,7 +132,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## rejectUnlessResolvedWithin
 
-Rejects promise when it is not resolved within given timeout
+Rejects promise when it is not resolved within given timeout.
 
 ### Parameters
 
@@ -146,8 +146,8 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 **Extends Interceptor**
 
-Interceptor to collect processing time, number of processed and
-failed requests
+Interceptor to collect processing time, number of
+processed and failed requests.
 
 ### receive
 
