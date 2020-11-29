@@ -64,12 +64,22 @@ export class Interceptor {
    * @return {Object} json representation
    */
   toJSONWithOptions(options) {
-    return options.includeConfig
-      ? {
-          type: this.type,
-          ...getAttributes(this, this.configurationAttributes)
-        }
-      : { type: this.type };
+    if (!options.includeConfig) {
+      return { type: this.type };
+    }
+
+    let atts = getAttributes(this, this.configurationAttributes);
+
+    if (!options.includePrivate) {
+      atts = Object.fromEntries(
+        Object.entries(atts).filter(([k, v]) => !v.private)
+      );
+    }
+
+    return {
+      type: this.type,
+      ...atts
+    };
   }
 
   /**
