@@ -29,7 +29,7 @@ export class Interceptor {
   }
 
   /**
-   * Meta description of the configuration
+   * Meta description of the configuration.
    * @return {Object}
    */
   get configurationAttributes() {
@@ -83,7 +83,7 @@ export class Interceptor {
   }
 
   /**
-   * Forget all accumulated information
+   * Forget all accumulated information.
    */
   reset() {}
 
