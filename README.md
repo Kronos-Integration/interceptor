@@ -51,6 +51,10 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     -   [name](#name-2)
 -   [LoggingInterceptor](#logginginterceptor)
     -   [name](#name-3)
+-   [TemplateInterceptor](#templateinterceptor)
+    -   [name](#name-4)
+-   [expand](#expand)
+    -   [Parameters](#parameters-7)
 
 ## Interceptor
 
@@ -70,7 +74,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ### configurationAttributes
 
-Meta description of the configuration
+Meta description of the configuration.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
@@ -99,7 +103,7 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ### reset
 
-Forget all accumulated information
+Forget all accumulated information.
 
 ### receive
 
@@ -197,6 +201,27 @@ logs args and result
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'logging'
+
+## TemplateInterceptor
+
+**Extends Interceptor**
+
+Map params into requests.
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'template'
+
+## expand
+
+Expands '{{exp}}' expressions.
+
+### Parameters
+
+-   `value` **any** 
+-   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+Returns **any** expanded value
 
 # install
 
