@@ -232,7 +232,7 @@ Returns **any** expanded value
 With [npm](http://npmjs.org) do:
 
 ```shell
-npm install kronos-interceptor
+npm install @kronos-integration/interceptor
 ```
 
 # license
