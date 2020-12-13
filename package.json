@@ -8,7 +8,7 @@
   "exports": {
     ".": "./src/index.mjs"
   },
-  "description": "introspects / modifies requests as they pass between endpoints",
+  "description": "intercepects / modifies requests as they pass between endpoints",
   "keywords": [
     "interceptor"
   ],

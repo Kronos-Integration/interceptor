@@ -11,7 +11,7 @@
 
 # @kronos-integration/interceptor
 
-introspects / modifies requests as they pass between endpoints
+intercepects / modifies requests as they pass between endpoints
 
 <!-- skip-example -->
 
