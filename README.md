@@ -42,21 +42,21 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     -   [receive](#receive)
         -   [Parameters](#parameters-3)
     -   [configurationAttributes](#configurationattributes-1)
--   [TimeoutInterceptor](#timeoutinterceptor)
-    -   [name](#name)
--   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
+-   [LimitingInterceptor](#limitinginterceptor)
     -   [Parameters](#parameters-4)
+    -   [name](#name)
+-   [LoggingInterceptor](#logginginterceptor)
+    -   [name](#name-1)
 -   [StatsCollectorInterceptor](#statscollectorinterceptor)
     -   [receive](#receive-1)
         -   [Parameters](#parameters-5)
-    -   [name](#name-1)
--   [LimitingInterceptor](#limitinginterceptor)
-    -   [Parameters](#parameters-6)
     -   [name](#name-2)
--   [LoggingInterceptor](#logginginterceptor)
-    -   [name](#name-3)
 -   [TemplateInterceptor](#templateinterceptor)
+    -   [name](#name-3)
+-   [TimeoutInterceptor](#timeoutinterceptor)
     -   [name](#name-4)
+-   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
+    -   [Parameters](#parameters-6)
 -   [expand](#expand)
     -   [Parameters](#parameters-7)
 
@@ -128,48 +128,6 @@ Meta description of the configuration
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
-## TimeoutInterceptor
-
-**Extends Interceptor**
-
-Rejects a request if it does not resolve in a given time.
-
-### name
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'timeout'
-
-## rejectUnlessResolvedWithin
-
-Rejects promise when it is not resolved within given timeout.
-
-### Parameters
-
--   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
--   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
-## StatsCollectorInterceptor
-
-**Extends Interceptor**
-
-Interceptor to collect processing time, number of
-processed and failed requests.
-
-### receive
-
-Logs the time the requests takes
-
-#### Parameters
-
--   `endpoint`  
--   `args` **...any** 
-
-### name
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'collect-request-stats'
-
 ## LimitingInterceptor
 
 **Extends Interceptor**
@@ -206,6 +164,26 @@ logs args and result
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'logging'
 
+## StatsCollectorInterceptor
+
+**Extends Interceptor**
+
+Interceptor to collect processing time, number of
+processed and failed requests.
+
+### receive
+
+Logs the time the requests takes
+
+#### Parameters
+
+-   `endpoint`  
+-   `args` **...any** 
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'collect-request-stats'
+
 ## TemplateInterceptor
 
 **Extends Interceptor**
@@ -215,6 +193,28 @@ Map params into requests.
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'template'
+
+## TimeoutInterceptor
+
+**Extends Interceptor**
+
+Rejects a request if it does not resolve in a given time.
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'timeout'
+
+## rejectUnlessResolvedWithin
+
+Rejects promise when it is not resolved within given timeout.
+
+### Parameters
+
+-   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+-   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ## expand
 
