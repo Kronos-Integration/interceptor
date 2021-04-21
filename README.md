@@ -3,7 +3,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/@kronos-integration/interceptor)](https://bundlephobia.com/result?p=@kronos-integration/interceptor)
 [![downloads](http://img.shields.io/npm/dm/@kronos-integration/interceptor.svg?style=flat-square)](https://npmjs.org/package/@kronos-integration/interceptor)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/interceptor.svg?style=flat-square)](https://github.com/Kronos-Integration/interceptor/issues)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FKronos-Integration%2Finterceptor%2Fbadge&style=flat)](https://actions-badge.atrox.dev/Kronos-Integration/interceptor/goto)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FKronos-Integration%2Finterceptor%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/Kronos-Integration/interceptor/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/Kronos-Integration/interceptor/badge.svg)](https://snyk.io/test/github/Kronos-Integration/interceptor)
@@ -30,35 +30,35 @@ const response = interceptor.receive(endpoint, arg1, arg2);
 
 ### Table of Contents
 
--   [Interceptor](#interceptor)
-    -   [Parameters](#parameters)
-    -   [type](#type)
-    -   [configurationAttributes](#configurationattributes)
-    -   [configure](#configure)
-        -   [Parameters](#parameters-1)
-    -   [toJSONWithOptions](#tojsonwithoptions)
-        -   [Parameters](#parameters-2)
-    -   [reset](#reset)
-    -   [receive](#receive)
-        -   [Parameters](#parameters-3)
-    -   [configurationAttributes](#configurationattributes-1)
--   [LimitingInterceptor](#limitinginterceptor)
-    -   [Parameters](#parameters-4)
-    -   [name](#name)
--   [LoggingInterceptor](#logginginterceptor)
-    -   [name](#name-1)
--   [StatsCollectorInterceptor](#statscollectorinterceptor)
-    -   [receive](#receive-1)
-        -   [Parameters](#parameters-5)
-    -   [name](#name-2)
--   [TemplateInterceptor](#templateinterceptor)
-    -   [name](#name-3)
--   [TimeoutInterceptor](#timeoutinterceptor)
-    -   [name](#name-4)
--   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
-    -   [Parameters](#parameters-6)
--   [expand](#expand)
-    -   [Parameters](#parameters-7)
+*   [Interceptor](#interceptor)
+    *   [Parameters](#parameters)
+    *   [type](#type)
+    *   [configurationAttributes](#configurationattributes)
+    *   [configure](#configure)
+        *   [Parameters](#parameters-1)
+    *   [toJSONWithOptions](#tojsonwithoptions)
+        *   [Parameters](#parameters-2)
+    *   [reset](#reset)
+    *   [receive](#receive)
+        *   [Parameters](#parameters-3)
+    *   [configurationAttributes](#configurationattributes-1)
+*   [LimitingInterceptor](#limitinginterceptor)
+    *   [Parameters](#parameters-4)
+    *   [name](#name)
+*   [LoggingInterceptor](#logginginterceptor)
+    *   [name](#name-1)
+*   [StatsCollectorInterceptor](#statscollectorinterceptor)
+    *   [receive](#receive-1)
+        *   [Parameters](#parameters-5)
+    *   [name](#name-2)
+*   [TemplateInterceptor](#templateinterceptor)
+    *   [name](#name-3)
+*   [TimeoutInterceptor](#timeoutinterceptor)
+    *   [name](#name-4)
+*   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
+    *   [Parameters](#parameters-6)
+*   [expand](#expand)
+    *   [Parameters](#parameters-7)
 
 ## Interceptor
 
@@ -67,7 +67,7 @@ Calls configure() and reset().
 
 ### Parameters
 
--   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
 
 ### type
 
@@ -93,7 +93,7 @@ a setter function or simply assign the attribute value.
 
 #### Parameters
 
--   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 ### toJSONWithOptions
 
@@ -101,7 +101,7 @@ Deliver the json representation.
 
 #### Parameters
 
--   `options`  
+*   `options`  
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** json representation
 
@@ -116,9 +116,9 @@ and calls the trailing interceptor.
 
 #### Parameters
 
--   `endpoint` **Endpoint** 
--   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
--   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;any>** the request from the leading interceptor
+*   `endpoint` **Endpoint** 
+*   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>** the request from the leading interceptor
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
@@ -135,20 +135,20 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 Limits the number of concurrent requests.
 Requests can be delayed or rejected.
 Sample config:
-[
- { count: 20 },
- { count: 10, delay:  100 },
- { count:  5, delay:   10 }
+\[
+{ count: 20 },
+{ count: 10, delay:  100 },
+{ count:  5, delay:   10 }
 ]
- 1 -  4 : no delay
- 5 -  9 : 10ms delay
+1 -  4 : no delay
+5 -  9 : 10ms delay
 10 - 19 : 100ms delay
 20      : reject
 default is to reject when more than 10 requests are on the way
 
 ### Parameters
 
--   `config`  
+*   `config`  
 
 ### name
 
@@ -177,8 +177,8 @@ Logs the time the requests takes
 
 #### Parameters
 
--   `endpoint`  
--   `args` **...any** 
+*   `endpoint`  
+*   `args` **...any** 
 
 ### name
 
@@ -210,9 +210,9 @@ Rejects promise when it is not resolved within given timeout.
 
 ### Parameters
 
--   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
--   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+*   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
@@ -222,8 +222,8 @@ Expands '{{exp}}' expressions.
 
 ### Parameters
 
--   `value` **any** 
--   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `value` **any** 
+*   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **any** expanded value
 
