@@ -17,7 +17,7 @@ export function expand(value, params) {
 
   if (typeof value === "string") {
     return value.replace(/\{\{(\w+)\}\}/, (match, g1) =>
-      params[g1] ? params[g1] : g1
+      params[g1] || g1
     );
   }
 
