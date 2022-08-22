@@ -74,13 +74,13 @@ Calls configure() and reset().
 The instance method returning the type.
 Defaults to the constructors name (class name)
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### configurationAttributes
 
 Meta description of the configuration.
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ### configure
 
@@ -93,7 +93,7 @@ a setter function or simply assign the attribute value.
 
 #### Parameters
 
-*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ### toJSONWithOptions
 
@@ -101,7 +101,7 @@ Deliver the json representation.
 
 #### Parameters
 
-*   `options`  
+*   `options` &#x20;
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** json representation
 
@@ -116,17 +116,17 @@ and calls the trailing interceptor.
 
 #### Parameters
 
-*   `endpoint` **Endpoint** 
-*   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `endpoint` **Endpoint**&#x20;
+*   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**&#x20;
 *   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>** the request from the leading interceptor
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**&#x20;
 
 ### configurationAttributes
 
 Meta description of the configuration
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ## LimitingInterceptor
 
@@ -148,7 +148,7 @@ default is to reject when more than 10 requests are on the way
 
 ### Parameters
 
-*   `config`  
+*   `config` &#x20;
 
 ### name
 
@@ -177,8 +177,8 @@ Logs the time the requests takes
 
 #### Parameters
 
-*   `endpoint`  
-*   `args` **...any** 
+*   `endpoint` &#x20;
+*   `args` **...any**&#x20;
 
 ### name
 
@@ -210,11 +210,11 @@ Rejects promise when it is not resolved within given timeout.
 
 ### Parameters
 
-*   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+*   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**&#x20;
 *   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
-*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**&#x20;
 
 ## expand
 
@@ -222,8 +222,8 @@ Expands '{{exp}}' expressions.
 
 ### Parameters
 
-*   `value` **any** 
-*   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `value` **any**&#x20;
+*   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 Returns **any** expanded value
 
