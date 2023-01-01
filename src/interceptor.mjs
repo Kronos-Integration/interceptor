@@ -50,7 +50,7 @@ export class Interceptor {
   }
 
   toString() {
-    return `${this.type}`;
+    return this.type;
   }
 
   toJSON() {
