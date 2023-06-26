@@ -1,4 +1,4 @@
-import { Interceptor } from './interceptor.mjs';
+import { Interceptor } from './interceptor.mjs';
 
 /**
  * Interceptor to collect processing time, number of
@@ -12,39 +12,45 @@ export class StatsCollectorInterceptor extends Interceptor {
     return 'collect-request-stats';
   }
 
+  #numberOfRequests;
+  #numberOfFailedRequests;;
+  #minRequestProcessingTime;;
+  #maxRequestProcessingTime;
+  #totalRequestProcessingTime;
+
   reset() {
-    this._numberOfRequests = 0;
-    this._numberOfFailedRequests = 0;
-    this._minRequestProcessingTime = Number.MAX_VALUE;
-    this._maxRequestProcessingTime = 0;
-    this._totalRequestProcessingTime = 0;
+    this.#numberOfRequests = 0;
+    this.#numberOfFailedRequests = 0;
+    this.#minRequestProcessingTime = Number.MAX_VALUE;
+    this.#maxRequestProcessingTime = 0;
+    this.#totalRequestProcessingTime = 0;
   }
 
   get numberOfRequests() {
-    return this._numberOfRequests;
+    return this.#numberOfRequests;
   }
 
   get numberOfFailedRequests() {
-    return this._numberOfFailedRequests;
+    return this.#numberOfFailedRequests;
   }
 
   get maxRequestProcessingTime() {
-    return this._maxRequestProcessingTime;
+    return this.#maxRequestProcessingTime;
   }
 
   get minRequestProcessingTime() {
-    return this._minRequestProcessingTime;
+    return this.#minRequestProcessingTime;
   }
 
   get totalRequestProcessingTime() {
-    return this._totalRequestProcessingTime;
+    return this.#totalRequestProcessingTime;
   }
 
   /**
    * Logs the time the requests takes
    */
   async receive(endpoint,...args) {
-    this._numberOfRequests += 1;
+    this.#numberOfRequests += 1;
 
     const start = new Date();
 
@@ -52,20 +58,20 @@ export class StatsCollectorInterceptor extends Interceptor {
       const response = await this.connected.receive(...args);
       const now = new Date();
       const pt = now - start;
-      this._totalRequestProcessingTime += pt;
+      this.#totalRequestProcessingTime += pt;
 
-      if (pt > this._maxRequestProcessingTime) {
-        this._maxRequestProcessingTime = pt;
+      if (pt > this.#maxRequestProcessingTime) {
+        this.#maxRequestProcessingTime = pt;
       }
 
-      if (pt < this._minRequestProcessingTime) {
-        this._minRequestProcessingTime = pt;
+      if (pt < this.#minRequestProcessingTime) {
+        this.#minRequestProcessingTime = pt;
       }
 
       endpoint.logger.debug(`took ${pt} ms for ${[...args]}`);
       return response;
     } catch (err) {
-      this._numberOfFailedRequests += 1;
+      this.#numberOfFailedRequests += 1;
       throw err;
     }
   }
