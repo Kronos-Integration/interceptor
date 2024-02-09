@@ -34,16 +34,16 @@ export class TimeoutInterceptor extends Interceptor {
  * Rejects promise when it is not resolved within given timeout.
  * @param {Promise} promise
  * @param {number} timeout in miliseconds
- * @param {string} name
+ * @param {Interceptor} source
  * @return {Promise<any>}
  */
-function rejectUnlessResolvedWithin(promise, timeout, name) {
+function rejectUnlessResolvedWithin(promise, timeout, source) {
   if (timeout === 0) return promise;
 
   return new Promise((resolve, reject) => {
     const th = setTimeout(
       () =>
-        reject(new Error(`${name} request not resolved within ${timeout}ms`)),
+        reject(new Error(`${source} request not resolved within ${timeout}ms`)),
       timeout
     );
 
