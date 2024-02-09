@@ -52,11 +52,11 @@ export class StatsCollectorInterceptor extends Interceptor {
   async receive(endpoint,...args) {
     this.#numberOfRequests += 1;
 
-    const start = new Date();
+    const start = Date.now();
 
     try {
       const response = await this.connected.receive(...args);
-      const now = new Date();
+      const now = Date.now();
       const pt = now - start;
       this.#totalRequestProcessingTime += pt;
 
