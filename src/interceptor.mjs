@@ -93,7 +93,7 @@ export class Interceptor {
    * @param {Endpoint} endpoint
    * @param {Function} next
    * @param {any[]} args the request from the leading interceptor
-   * @return {Promise}
+   * @return {Promise<any>}
    */
   async receive(endpoint, next, ...args) {
     // This is a dummy implementation. Must be overwritten by the derived object.
