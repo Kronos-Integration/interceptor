@@ -55,6 +55,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
 *   [TemplateInterceptor](#templateinterceptor)
     *   [name](#name-3)
 *   [TimeoutInterceptor](#timeoutinterceptor)
+    *   [Properties](#properties)
     *   [name](#name-4)
 *   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
     *   [Parameters](#parameters-6)
@@ -201,6 +202,10 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Rejects a request if it does not resolve in a given time.
 
+### Properties
+
+*   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
+
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'timeout'
@@ -213,7 +218,7 @@ Rejects promise when it is not resolved within given timeout.
 
 *   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**&#x20;
 *   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
-*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+*   `source` **[Interceptor](#interceptor)**&#x20;
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
 
