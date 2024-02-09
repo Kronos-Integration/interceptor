@@ -3,6 +3,7 @@ import { Interceptor } from "./interceptor.mjs";
 
 /**
  * Rejects a request if it does not resolve in a given time.
+ * @property {number} timeout
  */
 export class TimeoutInterceptor extends Interceptor {
   static get configurationAttributes() {
