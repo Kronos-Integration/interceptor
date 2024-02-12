@@ -1,6 +1,10 @@
 import { setAttributes, getAttributes } from "model-attributes";
 
 /**
+ * @typedef {Object} Endpoint
+ */
+
+/**
  * Base interceptor. The base class for all the interceptors
  * Calls configure() and reset().
  * @param {Object} config The interceptor configuration object.
