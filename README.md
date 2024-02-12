@@ -31,6 +31,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
 
 ### Table of Contents
 
+*   [Endpoint](#endpoint)
 *   [Interceptor](#interceptor)
     *   [Parameters](#parameters)
     *   [type](#type)
@@ -61,6 +62,10 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [Parameters](#parameters-6)
 *   [expand](#expand)
     *   [Parameters](#parameters-7)
+
+## Endpoint
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 ## Interceptor
 
@@ -118,7 +123,7 @@ and calls the trailing interceptor.
 
 #### Parameters
 
-*   `endpoint` **Endpoint**&#x20;
+*   `endpoint` **[Endpoint](#endpoint)**&#x20;
 *   `next` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**&#x20;
 *   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>** the request from the leading interceptor
 
