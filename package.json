@@ -5,13 +5,21 @@
     "access": "public",
     "provenance": true
   },
+  "types": "./types/index.d.mts",
   "exports": {
     ".": {
+      "0": "{",
+      "1": "{",
+      "2": "m",
+      "3": "a",
+      "4": "i",
+      "5": "n",
+      "6": "}",
+      "7": "}",
       "types": "./types/index.d.mts",
       "default": "./src/index.mjs"
     }
   },
-  "types": "./types/index.d.mts",
   "description": "intercepects / modifies requests as they pass between endpoints",
   "keywords": [
     "interceptor"
