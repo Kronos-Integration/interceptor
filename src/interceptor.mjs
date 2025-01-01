@@ -7,7 +7,7 @@ import { setAttributes, getAttributes } from "model-attributes";
 /**
  * Base interceptor. The base class for all the interceptors
  * Calls configure() and reset().
- * @param {Object} config The interceptor configuration object.
+ * @param {Object?} config The interceptor configuration object.
  */
 export class Interceptor {
   /**
@@ -47,7 +47,7 @@ export class Interceptor {
    * Which means we loop over all configuration attributes
    * and then for each attribute decide if we use the default, call
    * a setter function or simply assign the attribute value.
-   * @param {Object} config
+   * @param {Object?} config
    */
   configure(config) {
     setAttributes(this, this.configurationAttributes, config);
