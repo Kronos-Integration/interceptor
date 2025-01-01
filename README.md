@@ -71,7 +71,7 @@ Calls configure() and reset().
 
 ### Parameters
 
-*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The interceptor configuration object.
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** The interceptor configuration object.
 
 ### type
 
@@ -97,7 +97,7 @@ a setter function or simply assign the attribute value.
 
 #### Parameters
 
-*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 ### toJSONWithOptions
 
