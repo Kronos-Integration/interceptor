@@ -1,5 +1,8 @@
 import { Interceptor } from "./interceptor.mjs";
-import { mergeAttributes, createAttributes } from "model-attributes";
+import {
+  mergeAttributeDefinitions,
+  prepareAttributesDefinitions
+} from "model-attributes";
 import { expand } from "./util.mjs";
 
 /**
@@ -14,18 +17,13 @@ export class TemplateInterceptor extends Interceptor {
   }
 
   static get configurationAttributes() {
-    return mergeAttributes(
-      createAttributes({
+    return mergeAttributeDefinitions(
+      prepareAttributesDefinitions({
         request: {
           description: "request template",
           default: {},
           type: "object"
-        }/*,
-        response: {
-          description: "response template",
-          default: {},
-          type: "object"
-        }*/
+        }
       }),
       Interceptor.configurationAttributes
     );

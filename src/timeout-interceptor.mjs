@@ -1,4 +1,7 @@
-import { mergeAttributes, createAttributes } from "model-attributes";
+import {
+  mergeAttributeDefinitions,
+  prepareAttributesDefinitions
+} from "model-attributes";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -7,8 +10,8 @@ import { Interceptor } from "./interceptor.mjs";
  */
 export class TimeoutInterceptor extends Interceptor {
   static get configurationAttributes() {
-    return mergeAttributes(
-      createAttributes({
+    return mergeAttributeDefinitions(
+      prepareAttributesDefinitions({
         timeout: {
           description: "request timeout",
           default: 1,

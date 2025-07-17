@@ -1,4 +1,4 @@
-import { mergeAttributes, createAttributes } from "model-attributes";
+import { mergeAttributeDefinitions, prepareAttributesDefinitions } from "model-attributes";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -25,8 +25,8 @@ export class LimitingInterceptor extends Interceptor {
   }
 
   static get configurationAttributes() {
-    return mergeAttributes(
-      createAttributes({
+    return mergeAttributeDefinitions(
+      prepareAttributesDefinitions({
         limits: {
           default: [
             {
