@@ -2,7 +2,7 @@ import { Interceptor } from "./interceptor.mjs";
 import {
   mergeAttributeDefinitions,
   prepareAttributesDefinitions
-} from "model-attributes";
+} from "pacc";
 import { expand } from "./util.mjs";
 
 /**

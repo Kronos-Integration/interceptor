@@ -1,4 +1,4 @@
-import { setAttributes, getAttributes } from "model-attributes";
+import { setAttributes, getAttributes } from "pacc";
 
 /**
  * @typedef {Object} Endpoint
@@ -50,7 +50,7 @@ export class Interceptor {
    * @param {Object?} config
    */
   configure(config) {
-    setAttributes(this, this.configurationAttributes, config);
+    setAttributes(this, config, this.configurationAttributes);
   }
 
   toString() {

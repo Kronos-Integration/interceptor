@@ -1,4 +1,4 @@
-import { mergeAttributeDefinitions, prepareAttributesDefinitions } from "model-attributes";
+import { mergeAttributeDefinitions, prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**

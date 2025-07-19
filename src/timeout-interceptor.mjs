@@ -1,7 +1,7 @@
 import {
   mergeAttributeDefinitions,
   prepareAttributesDefinitions
-} from "model-attributes";
+} from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
