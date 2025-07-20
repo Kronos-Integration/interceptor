@@ -14,9 +14,7 @@ export class Interceptor {
    * Meta description of the configuration
    * @return {Object}
    */
-  static get attributes() {
-    return {};
-  }
+  static attributes = {};
 
   constructor(config) {
     this.configure(config);

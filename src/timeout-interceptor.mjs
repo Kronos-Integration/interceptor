@@ -1,23 +1,19 @@
 import { prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
-const ATTRIBUTES = prepareAttributesDefinitions({
-  timeout: {
-    description: "request timeout",
-    default: 1,
-    type: "duration"
-  },
-  ...Interceptor.attributes
-});
-
 /**
  * Rejects a request if it does not resolve in a given time.
  * @property {number} timeout
  */
 export class TimeoutInterceptor extends Interceptor {
-  static get attributes() {
-    return ATTRIBUTES;
-  }
+  static attributes = prepareAttributesDefinitions({
+    timeout: {
+      description: "request timeout",
+      default: 1,
+      type: "duration"
+    },
+    ...Interceptor.attributes
+  });
 
   /**
    * @return {string} 'timeout'

@@ -1,23 +1,6 @@
 import { prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
-const ATTRIBUTES = prepareAttributesDefinitions({
-  limits: {
-    default: [
-      {
-        count: 10
-      }
-    ],
-    count: {
-      type: "unsigned-integer"
-    },
-    delay: {
-      type: "duration"
-    }
-  },
-  ...Interceptor.attributes
-});
-
 /**
  * Limits the number of concurrent requests.
  * Requests can be delayed or rejected.
@@ -41,9 +24,22 @@ export class LimitingInterceptor extends Interceptor {
     return "request-limit";
   }
 
-  static get attributes() {
-    return ATTRIBUTES;
-  }
+  static attributes = prepareAttributesDefinitions({
+    limits: {
+      default: [
+        {
+          count: 10
+        }
+      ],
+      count: {
+        type: "unsigned-integer"
+      },
+      delay: {
+        type: "duration"
+      }
+    },
+    ...Interceptor.attributes
+  });
 
   constructor(config) {
     super(config);
