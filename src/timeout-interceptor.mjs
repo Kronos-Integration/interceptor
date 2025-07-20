@@ -1,8 +1,14 @@
-import {
-  mergeAttributeDefinitions,
-  prepareAttributesDefinitions
-} from "pacc";
+import { prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
+
+const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
+  timeout: {
+    description: "request timeout",
+    default: 1,
+    type: "duration"
+  },
+  ...Interceptor.configurationAttributes
+});
 
 /**
  * Rejects a request if it does not resolve in a given time.
@@ -10,16 +16,7 @@ import { Interceptor } from "./interceptor.mjs";
  */
 export class TimeoutInterceptor extends Interceptor {
   static get configurationAttributes() {
-    return mergeAttributeDefinitions(
-      prepareAttributesDefinitions({
-        timeout: {
-          description: "request timeout",
-          default: 1,
-          type: "duration"
-        }
-      }),
-      Interceptor.configurationAttributes
-    );
+    return CONFIG_ATTRIBUTES;
   }
 
   /**

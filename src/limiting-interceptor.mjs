@@ -1,5 +1,22 @@
-import { mergeAttributeDefinitions, prepareAttributesDefinitions } from "pacc";
+import { prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
+
+const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
+  limits: {
+    default: [
+      {
+        count: 10
+      }
+    ],
+    count: {
+      type: "unsigned-integer"
+    },
+    delay: {
+      type: "duration"
+    }
+  },
+  ...Interceptor.configurationAttributes
+});
 
 /**
  * Limits the number of concurrent requests.
@@ -25,36 +42,19 @@ export class LimitingInterceptor extends Interceptor {
   }
 
   static get configurationAttributes() {
-    return mergeAttributeDefinitions(
-      prepareAttributesDefinitions({
-        limits: {
-          default: [
-            {
-              count: 10
-            }
-          ],
-          count: {
-            type: "unsigned-integer"
-          },
-          delay: {
-            type: "duration"
-          }
-        }
-      }),
-      Interceptor.configurationAttributes
-    );
+    return CONFIG_ATTRIBUTES;
   }
 
   constructor(config) {
     super(config);
 
     this.limits = config?.limits
-        ? config.limits
-        : [
-            {
-              count: 10
-            }
-          ];
+      ? config.limits
+      : [
+          {
+            count: 10
+          }
+        ];
   }
 
   toJSON() {

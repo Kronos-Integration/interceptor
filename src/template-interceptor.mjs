@@ -1,9 +1,15 @@
 import { Interceptor } from "./interceptor.mjs";
-import {
-  mergeAttributeDefinitions,
-  prepareAttributesDefinitions
-} from "pacc";
+import { prepareAttributesDefinitions } from "pacc";
 import { expand } from "./util.mjs";
+
+const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
+  request: {
+    description: "request template",
+    default: {},
+    type: "object"
+  },
+  ...Interceptor.configurationAttributes
+});
 
 /**
  * Map params into requests.
@@ -17,16 +23,7 @@ export class TemplateInterceptor extends Interceptor {
   }
 
   static get configurationAttributes() {
-    return mergeAttributeDefinitions(
-      prepareAttributesDefinitions({
-        request: {
-          description: "request template",
-          default: {},
-          type: "object"
-        }
-      }),
-      Interceptor.configurationAttributes
-    );
+    return CONFIG_ATTRIBUTES;
   }
 
   async receive(endpoint, next, params) {
