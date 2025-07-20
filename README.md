@@ -32,7 +32,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
 *   [Interceptor](#interceptor)
     *   [Parameters](#parameters)
     *   [type](#type)
-    *   [configurationAttributes](#configurationattributes)
+    *   [attributes](#attributes)
     *   [configure](#configure)
         *   [Parameters](#parameters-1)
     *   [toJSONWithOptions](#tojsonwithoptions)
@@ -40,7 +40,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [reset](#reset)
     *   [receive](#receive)
         *   [Parameters](#parameters-3)
-    *   [configurationAttributes](#configurationattributes-1)
+    *   [attributes](#attributes-1)
 *   [LimitingInterceptor](#limitinginterceptor)
     *   [Parameters](#parameters-4)
     *   [name](#name)
@@ -80,7 +80,7 @@ Defaults to the constructors name (class name)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
-### configurationAttributes
+### attributes
 
 Meta description of the configuration.
 
@@ -90,7 +90,7 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Takes attribute values from config parameters
 and copies them over to the object.
-Copying is done according to configurationAttributes.
+Copying is done according to attributes.
 Which means we loop over all configuration attributes
 and then for each attribute decide if we use the default, call
 a setter function or simply assign the attribute value.
@@ -126,7 +126,7 @@ and calls the trailing interceptor.
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
 
-### configurationAttributes
+### attributes
 
 Meta description of the configuration
 
