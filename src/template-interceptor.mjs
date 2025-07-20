@@ -2,13 +2,13 @@ import { Interceptor } from "./interceptor.mjs";
 import { prepareAttributesDefinitions } from "pacc";
 import { expand } from "./util.mjs";
 
-const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
+const ATTRIBUTES = prepareAttributesDefinitions({
   request: {
     description: "request template",
     default: {},
     type: "object"
   },
-  ...Interceptor.configurationAttributes
+  ...Interceptor.attributes
 });
 
 /**
@@ -22,8 +22,8 @@ export class TemplateInterceptor extends Interceptor {
     return "template";
   }
 
-  static get configurationAttributes() {
-    return CONFIG_ATTRIBUTES;
+  static get attributes() {
+    return ATTRIBUTES;
   }
 
   async receive(endpoint, next, params) {

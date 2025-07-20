@@ -14,7 +14,7 @@ export class Interceptor {
    * Meta description of the configuration
    * @return {Object}
    */
-  static get configurationAttributes() {
+  static get attributes() {
     return {};
   }
 
@@ -36,21 +36,21 @@ export class Interceptor {
    * Meta description of the configuration.
    * @return {Object}
    */
-  get configurationAttributes() {
-    return this.constructor.configurationAttributes;
+  get attributes() {
+    return this.constructor.attributes;
   }
 
   /**
    * Takes attribute values from config parameters
    * and copies them over to the object.
-   * Copying is done according to configurationAttributes.
+   * Copying is done according to attributes.
    * Which means we loop over all configuration attributes
    * and then for each attribute decide if we use the default, call
    * a setter function or simply assign the attribute value.
    * @param {Object?} config
    */
   configure(config) {
-    setAttributes(this, config, this.configurationAttributes);
+    setAttributes(this, config, this.attributes);
   }
 
   toString() {
@@ -72,7 +72,7 @@ export class Interceptor {
       return { type: this.type };
     }
 
-    let atts = getAttributes(this, this.configurationAttributes);
+    let atts = getAttributes(this, this.attributes);
 
     if (!options.includePrivate) {
       atts = Object.fromEntries(

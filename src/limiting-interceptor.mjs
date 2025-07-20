@@ -1,7 +1,7 @@
 import { prepareAttributesDefinitions } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
-const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
+const ATTRIBUTES = prepareAttributesDefinitions({
   limits: {
     default: [
       {
@@ -15,7 +15,7 @@ const CONFIG_ATTRIBUTES = prepareAttributesDefinitions({
       type: "duration"
     }
   },
-  ...Interceptor.configurationAttributes
+  ...Interceptor.attributes
 });
 
 /**
@@ -41,8 +41,8 @@ export class LimitingInterceptor extends Interceptor {
     return "request-limit";
   }
 
-  static get configurationAttributes() {
-    return CONFIG_ATTRIBUTES;
+  static get attributes() {
+    return ATTRIBUTES;
   }
 
   constructor(config) {
