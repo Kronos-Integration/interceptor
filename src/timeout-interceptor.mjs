@@ -1,4 +1,4 @@
-import { prepareAttributesDefinitions } from "pacc";
+import { prepareAttributesDefinitions, default_attribute } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -8,6 +8,7 @@ import { Interceptor } from "./interceptor.mjs";
 export class TimeoutInterceptor extends Interceptor {
   static attributes = prepareAttributesDefinitions({
     timeout: {
+      ...default_attribute,
       description: "request timeout",
       default: 1,
       type: "duration"

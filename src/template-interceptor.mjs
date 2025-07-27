@@ -1,5 +1,5 @@
 import { Interceptor } from "./interceptor.mjs";
-import { prepareAttributesDefinitions } from "pacc";
+import { prepareAttributesDefinitions, default_attribute } from "pacc";
 import { expand } from "./util.mjs";
 
 /**
@@ -15,9 +15,10 @@ export class TemplateInterceptor extends Interceptor {
 
   static attributes = prepareAttributesDefinitions({
     request: {
+      ...default_attribute,
+      type: "object",
       description: "request template",
-      default: {},
-      type: "object"
+      default: {}
     },
     ...Interceptor.attributes
   });
