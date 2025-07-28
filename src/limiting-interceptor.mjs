@@ -1,4 +1,9 @@
-import { prepareAttributesDefinitions } from "pacc";
+import {
+  prepareAttributesDefinitions,
+  object_attribute,
+  duration_attribute,
+  count_attribute
+} from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -27,16 +32,18 @@ export class LimitingInterceptor extends Interceptor {
   static attributes = prepareAttributesDefinitions(
     {
       limits: {
+        ...object_attribute,
         default: [
           {
             count: 10
           }
         ],
-        count: {
-          type: "unsigned-integer"
-        },
-        delay: {
-          type: "duration"
+        attributes: {
+          count: { ...count_attribute, default: 10 },
+          delay: {
+            ...duration_attribute,
+            type: "duration"
+          }
         }
       }
     },
