@@ -42,7 +42,7 @@
     "pacc": "^4.4.0"
   },
   "devDependencies": {
-    "@kronos-integration/test-interceptor": "^7.0.30",
+    "@kronos-integration/test-interceptor": "^7.0.31",
     "ava": "^6.4.1",
     "c8": "^10.1.2",
     "documentation": "^14.0.3",

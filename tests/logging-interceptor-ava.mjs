@@ -9,7 +9,7 @@ const e = dummyEndpoint("ep1");
 
 const entries = [];
 
-e.logger = {
+e.owner = {
   info(a) {
     entries.push(a);
   }
