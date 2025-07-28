@@ -24,22 +24,24 @@ export class LimitingInterceptor extends Interceptor {
     return "request-limit";
   }
 
-  static attributes = prepareAttributesDefinitions({
-    limits: {
-      default: [
-        {
-          count: 10
+  static attributes = prepareAttributesDefinitions(
+    {
+      limits: {
+        default: [
+          {
+            count: 10
+          }
+        ],
+        count: {
+          type: "unsigned-integer"
+        },
+        delay: {
+          type: "duration"
         }
-      ],
-      count: {
-        type: "unsigned-integer"
-      },
-      delay: {
-        type: "duration"
       }
     },
-    ...Interceptor.attributes
-  });
+    Interceptor.attributes
+  );
 
   constructor(config) {
     super(config);

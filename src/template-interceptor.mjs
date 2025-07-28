@@ -13,15 +13,17 @@ export class TemplateInterceptor extends Interceptor {
     return "template";
   }
 
-  static attributes = prepareAttributesDefinitions({
-    request: {
-      ...default_attribute,
-      type: "object",
-      description: "request template",
-      default: {}
+  static attributes = prepareAttributesDefinitions(
+    {
+      request: {
+        ...default_attribute,
+        type: "object",
+        description: "request template",
+        default: {}
+      }
     },
-    ...Interceptor.attributes
-  });
+    Interceptor.attributes
+  );
 
   async receive(endpoint, next, params) {
     return next(expand(this.request, params));
