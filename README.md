@@ -41,20 +41,23 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [receive](#receive)
         *   [Parameters](#parameters-3)
     *   [attributes](#attributes-1)
+*   [IntervalInterceptor](#intervalinterceptor)
+    *   [Properties](#properties)
+    *   [name](#name)
 *   [LimitingInterceptor](#limitinginterceptor)
     *   [Parameters](#parameters-4)
-    *   [name](#name)
-*   [LoggingInterceptor](#logginginterceptor)
     *   [name](#name-1)
+*   [LoggingInterceptor](#logginginterceptor)
+    *   [name](#name-2)
 *   [StatsCollectorInterceptor](#statscollectorinterceptor)
     *   [receive](#receive-1)
         *   [Parameters](#parameters-5)
-    *   [name](#name-2)
-*   [TemplateInterceptor](#templateinterceptor)
     *   [name](#name-3)
-*   [TimeoutInterceptor](#timeoutinterceptor)
-    *   [Properties](#properties)
+*   [TemplateInterceptor](#templateinterceptor)
     *   [name](#name-4)
+*   [TimeoutInterceptor](#timeoutinterceptor)
+    *   [Properties](#properties-1)
+    *   [name](#name-5)
 *   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
     *   [Parameters](#parameters-6)
 *   [expand](#expand)
@@ -131,6 +134,20 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 Meta description of the configuration
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+## IntervalInterceptor
+
+**Extends Interceptor**
+
+Only passes requests after inteval time has passed
+
+### Properties
+
+*   `interval` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'interval'
 
 ## LimitingInterceptor
 
