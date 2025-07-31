@@ -1,4 +1,4 @@
-import { Interceptor } from './interceptor.mjs';
+import { Interceptor } from "./interceptor.mjs";
 
 /**
  * Interceptor to collect processing time, number of
@@ -9,7 +9,7 @@ export class StatsCollectorInterceptor extends Interceptor {
    * @return {string} 'collect-request-stats'
    */
   static get name() {
-    return 'collect-request-stats';
+    return "collect-request-stats";
   }
 
   reset() {
@@ -23,13 +23,13 @@ export class StatsCollectorInterceptor extends Interceptor {
   /**
    * Logs the time the requests takes
    */
-  async receive(endpoint,...args) {
+  async receive(endpoint, next, ...args) {
     this.numberOfRequests += 1;
 
     const start = Date.now();
 
     try {
-      const response = await this.connected.receive(...args);
+      const response = await next(...args);
       const now = Date.now();
       const pt = now - start;
       this.totalRequestProcessingTime += pt;
@@ -42,7 +42,7 @@ export class StatsCollectorInterceptor extends Interceptor {
         this.minRequestProcessingTime = pt;
       }
 
-      endpoint.logger.debug(level=>`took ${pt} ms for ${[...args]}`);
+      endpoint.logger.debug(level => `took ${pt} ms for ${[...args]}`);
       return response;
     } catch (err) {
       this.numberOfFailedRequests += 1;
