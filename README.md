@@ -199,6 +199,7 @@ Logs the time the requests takes
 #### Parameters
 
 *   `endpoint` &#x20;
+*   `next` &#x20;
 *   `args` **...any**&#x20;
 
 ### name
