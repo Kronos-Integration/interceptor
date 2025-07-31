@@ -42,7 +42,6 @@ export class StatsCollectorInterceptor extends Interceptor {
         this.minRequestProcessingTime = pt;
       }
 
-      endpoint.logger.debug(level => `took ${pt} ms for ${[...args]}`);
       return response;
     } catch (err) {
       this.numberOfFailedRequests += 1;
