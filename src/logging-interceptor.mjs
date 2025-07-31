@@ -13,14 +13,14 @@ export class LoggingInterceptor extends Interceptor {
 
   async receive(endpoint, next, ...args) {
     const logger = endpoint.owner;
-    logger.info(`${endpoint.identifier}: request ${JSON.stringify([...args])}`);
+    logger.info(`${endpoint.identifier}: > ${JSON.stringify([...args])}`);
 
     try {
       const result = await next(...args);
-      logger.info(`${endpoint.identifier}: result ${result}`);
+      logger.info(`${endpoint.identifier}: < ${result}`);
       return result;
     } catch (e) {
-      logger.error(`${endpoint.identifier}: result ${e}`);
+      logger.error(`${endpoint.identifier}: ${e}`);
       throw e;
     }
   }
