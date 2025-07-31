@@ -25,11 +25,11 @@ test(
   () => 77,
   async (t, interceptor, e, next, result) => {
     t.truthy(
-      entries.find(e => e.match(/request \[1,2\]/)),
+      entries.find(e => e.match(/> \[1,2\]/)),
       "request logged"
     );
     t.truthy(
-      entries.find(e => e.match(/result 77/)),
+      entries.find(e => e.match(/< 77/)),
       "result logged"
     );
   }
