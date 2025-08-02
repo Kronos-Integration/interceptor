@@ -17,7 +17,7 @@ export class LoggingInterceptor extends Interceptor {
 
     try {
       const result = await next(...args);
-      logger.info(`${endpoint.identifier}: < ${result}`);
+      logger.info(`${endpoint.identifier}: < ${result === undefined ? '' : result}`);
       return result;
     } catch (e) {
       logger.error(`${endpoint.identifier}: ${e}`);
