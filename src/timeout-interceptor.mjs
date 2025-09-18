@@ -6,15 +6,17 @@ import { Interceptor } from "./interceptor.mjs";
  * @property {number} timeout
  */
 export class TimeoutInterceptor extends Interceptor {
-  static attributes = prepareAttributesDefinitions({
-    timeout: {
-      ...default_attribute,
-      description: "request timeout",
-      default: 1,
-      type: "duration"
+  static attributes = prepareAttributesDefinitions(
+    {
+      timeout: {
+        ...default_attribute,
+        description: "request timeout",
+        default: 1,
+        type: "duration"
+      }
     },
     Interceptor.attributes
-  });
+  );
 
   /**
    * @return {string} 'timeout'
