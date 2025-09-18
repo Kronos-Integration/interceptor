@@ -13,7 +13,7 @@ export class TimeoutInterceptor extends Interceptor {
       default: 1,
       type: "duration"
     },
-    ...Interceptor.attributes
+    Interceptor.attributes
   });
 
   /**
