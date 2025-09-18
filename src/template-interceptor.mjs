@@ -1,6 +1,5 @@
 import { Interceptor } from "./interceptor.mjs";
-import { prepareAttributesDefinitions, default_attribute } from "pacc";
-import { expand } from "./util.mjs";
+import { expand, prepareAttributesDefinitions, default_attribute } from "pacc";
 
 /**
  * Map params into requests.
@@ -26,6 +25,8 @@ export class TemplateInterceptor extends Interceptor {
   );
 
   async receive(endpoint, next, params) {
-    return next(expand(this.request, params));
+    return next(
+      expand(this.request, { root: params, leadIn: "{{", leadOut: "}}" })
+    );
   }
 }
