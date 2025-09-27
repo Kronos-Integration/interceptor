@@ -39,11 +39,8 @@ export class LimitingInterceptor extends Interceptor {
           }
         ],
         attributes: {
-          count: { ...count_attribute, default: 10 },
-          delay: {
-            ...duration_attribute,
-            type: "duration"
-          }
+          count: count_attribute,
+          delay: duration_attribute
         }
       }
     },
@@ -52,14 +49,7 @@ export class LimitingInterceptor extends Interceptor {
 
   constructor(config) {
     super(config);
-
-    this.limits = config?.limits
-      ? config.limits
-      : [
-          {
-            count: 10
-          }
-        ];
+    this.limits = config?.limits || this.constructor.attributes.limits.default;
   }
 
   toJSON() {
