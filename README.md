@@ -60,8 +60,6 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [name](#name-5)
 *   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
     *   [Parameters](#parameters-6)
-*   [expand](#expand)
-    *   [Parameters](#parameters-7)
 
 ## Endpoint
 
@@ -241,17 +239,6 @@ Rejects promise when it is not resolved within given timeout.
 *   `source` **[Interceptor](#interceptor)**&#x20;
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
-
-## expand
-
-Expands '{{exp}}' expressions.
-
-### Parameters
-
-*   `value` **any**&#x20;
-*   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
-
-Returns **any** expanded value
 
 # install
 
