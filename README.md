@@ -72,7 +72,7 @@ Calls configure() and reset().
 
 ### Parameters
 
-*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** The interceptor configuration object.
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 ### type
 
@@ -167,7 +167,7 @@ default is to reject when more than 10 requests are on the way
 
 ### Parameters
 
-*   `config` &#x20;
+*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 ### name
 
@@ -234,7 +234,7 @@ Rejects promise when it is not resolved within given timeout.
 
 ### Parameters
 
-*   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)**&#x20;
+*   `promise` **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
 *   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** in miliseconds
 *   `source` **[Interceptor](#interceptor)**&#x20;
 
