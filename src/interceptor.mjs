@@ -16,6 +16,10 @@ export class Interceptor {
    */
   static attributes = {};
 
+  /**
+   * 
+   * @param {Object?} config 
+   */
   constructor(config) {
     this.configure(config);
     this.reset();

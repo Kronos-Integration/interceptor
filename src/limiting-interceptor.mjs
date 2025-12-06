@@ -47,9 +47,13 @@ export class LimitingInterceptor extends Interceptor {
     Interceptor.attributes
   );
 
+  /**
+   *
+   * @param {Object?} config
+   */
   constructor(config) {
     super(config);
-    this.limits = config?.limits || this.constructor.attributes.limits.default;
+    this.limits = config?.limits || this.attributes.limits.default;
   }
 
   toJSON() {
