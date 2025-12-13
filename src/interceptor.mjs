@@ -18,7 +18,7 @@ export class Interceptor {
 
   /**
    * 
-   * @param {Object?} config 
+   * @param {Object} [config]
    */
   constructor(config) {
     this.configure(config);
@@ -49,7 +49,7 @@ export class Interceptor {
    * Which means we loop over all configuration attributes
    * and then for each attribute decide if we use the default, call
    * a setter function or simply assign the attribute value.
-   * @param {Object?} config
+   * @param {Object} [config]
    */
   configure(config) {
     setAttributes(this, config, this.attributes);
