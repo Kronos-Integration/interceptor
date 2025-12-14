@@ -1,4 +1,4 @@
-import { prepareAttributesDefinitions, default_attribute } from "pacc";
+import { prepareAttributesDefinitions, duration_ms_attribute } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -9,10 +9,9 @@ export class TimeoutInterceptor extends Interceptor {
   static attributes = prepareAttributesDefinitions(
     {
       timeout: {
-        ...default_attribute,
+        ...duration_ms_attribute,
         description: "request timeout",
-        default: 1,
-        type: "duration"
+        default: "10s",
       }
     },
     Interceptor.attributes
@@ -26,7 +25,7 @@ export class TimeoutInterceptor extends Interceptor {
   }
 
   receive(endpoint, next, ...args) {
-    return rejectUnlessResolvedWithin(next(...args), this.timeout * 1000, this);
+    return rejectUnlessResolvedWithin(next(...args), this.timeout, this);
   }
 }
 

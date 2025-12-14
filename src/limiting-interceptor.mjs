@@ -1,7 +1,7 @@
 import {
   prepareAttributesDefinitions,
   object_attribute,
-  duration_attribute,
+  duration_ms_attribute,
   count_attribute
 } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
@@ -40,7 +40,7 @@ export class LimitingInterceptor extends Interceptor {
         ],
         attributes: {
           count: count_attribute,
-          delay: duration_attribute
+          delay: duration_ms_attribute
         }
       }
     },

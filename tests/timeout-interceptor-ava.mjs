@@ -21,13 +21,13 @@ test(
   interceptorTest,
   TimeoutInterceptor,
   {
-    timeout: 0.015
+    timeout: "15s"
   },
   {
-    timeout: 0.015,
+    timeout: 15000,
     json: {
       type: "timeout",
-      timeout: 0.015
+      timeout: 15000000 
     }
   },
   dummyEndpoint("ep1"),

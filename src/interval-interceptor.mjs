@@ -1,4 +1,4 @@
-import { prepareAttributesDefinitions, default_attribute } from "pacc";
+import { prepareAttributesDefinitions, duration_ms_attribute } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -9,10 +9,9 @@ export class IntervalInterceptor extends Interceptor {
   static attributes = prepareAttributesDefinitions(
     {
       interval: {
-        ...default_attribute,
+        ...duration_ms_attribute,
         description: "min interval between two requests",
-        default: 60000,
-        type: "duration"
+        default: "60s",
       }
     },
     Interceptor.attributes
@@ -28,7 +27,7 @@ export class IntervalInterceptor extends Interceptor {
   async receive(endpoint, next, ...args) {
     const now = new Date();
 
-    if (!this.lastTime || now - this.lastTime > this.interval * 1000) {
+    if (!this.lastTime || now - this.lastTime > this.interval) {
       this.lastTime = now;
       return super.receive(endpoint, next, ...args);
     }

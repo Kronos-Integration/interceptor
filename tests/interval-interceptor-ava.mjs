@@ -9,10 +9,10 @@ test(
   interceptorTest,
   IntervalInterceptor,
   {
-    interval: 1
+    interval: "1s"
   },
   {
-    interval: 1
+    interval: 1000
   },
   dummyEndpoint("ep1"),
   [5],
