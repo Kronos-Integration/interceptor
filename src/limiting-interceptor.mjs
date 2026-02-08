@@ -68,15 +68,12 @@ export class LimitingInterceptor extends Interceptor {
   }
 
   async receive(endpoint, next, ...args) {
-    //console.log(`got #${this.ongoingRequests}`);
-
     for (const limit of this.limits) {
       if (this.ongoingRequests >= limit.count) {
         if (limit.delay === undefined) {
-          throw new Error(`Limit of ongoing requests ${limit.count} reached`);
+          throw new Error(`Limit of ongoing requests ${limit.count} reached`,{ cause: this.ongoingRequests });
         }
 
-        //console.log(`-> delay ${limit.delay}`);
         this.ongoingRequests += 1;
 
         return new Promise((resolve, reject) =>
