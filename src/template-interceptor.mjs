@@ -1,5 +1,5 @@
 import { Interceptor } from "./interceptor.mjs";
-import { expand, prepareAttributesDefinitions, default_attribute } from "pacc";
+import { expand, prepareAttributesDefinitions, object_attribute } from "pacc";
 
 /**
  * Map params into requests.
@@ -15,8 +15,8 @@ export class TemplateInterceptor extends Interceptor {
   static attributes = prepareAttributesDefinitions(
     {
       request: {
-        ...default_attribute,
-        type: "object",
+        ...object_attribute,
+        name: "request",
         description: "request template",
         default: {}
       }

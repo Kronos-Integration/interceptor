@@ -10,6 +10,7 @@ export class IntervalInterceptor extends Interceptor {
     {
       interval: {
         ...duration_ms_attribute,
+        name: "interval",
         description: "min interval between two requests",
         default: "60s",
       }

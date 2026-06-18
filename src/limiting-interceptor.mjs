@@ -33,6 +33,7 @@ export class LimitingInterceptor extends Interceptor {
     {
       limits: {
         ...object_attribute,
+        name: "limits",
         default: [
           {
             count: 10
@@ -40,7 +41,7 @@ export class LimitingInterceptor extends Interceptor {
         ],
         attributes: {
           count: count_attribute,
-          delay: duration_ms_attribute
+          delay: { ...duration_ms_attribute, name: "delay" }
         }
       }
     },
@@ -71,7 +72,9 @@ export class LimitingInterceptor extends Interceptor {
     for (const limit of this.limits) {
       if (this.ongoingRequests >= limit.count) {
         if (limit.delay === undefined) {
-          throw new Error(`Limit of ongoing requests ${limit.count} reached`,{ cause: this.ongoingRequests });
+          throw new Error(`Limit of ongoing requests ${limit.count} reached`, {
+            cause: this.ongoingRequests
+          });
         }
 
         this.ongoingRequests += 1;
