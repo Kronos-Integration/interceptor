@@ -35,7 +35,7 @@
     "lint:docs": "documentation lint ./src**/*.mjs"
   },
   "dependencies": {
-    "pacc": "^10.2.0"
+    "pacc": "^10.4.0"
   },
   "devDependencies": {
     "@kronos-integration/test-interceptor": "^7.0.32",
