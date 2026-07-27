@@ -26,7 +26,7 @@ export class TemplateInterceptor extends Interceptor {
 
   async receive(endpoint, next, params) {
     return next(
-      expand(this.request, { root: params, leadIn: "{{", leadOut: "}}" })
+      expand(this.request, { current: params, leadIn: "{{", leadOut: "}}" })
     );
   }
 }
