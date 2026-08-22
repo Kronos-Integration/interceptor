@@ -50,15 +50,17 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [name](#name-1)
 *   [LoggingInterceptor](#logginginterceptor)
     *   [name](#name-2)
+*   [MonitoringInterceptor](#monitoringinterceptor)
+    *   [name](#name-3)
 *   [StatsCollectorInterceptor](#statscollectorinterceptor)
     *   [receive](#receive-1)
         *   [Parameters](#parameters-5)
-    *   [name](#name-3)
-*   [TemplateInterceptor](#templateinterceptor)
     *   [name](#name-4)
+*   [TemplateInterceptor](#templateinterceptor)
+    *   [name](#name-5)
 *   [TimeoutInterceptor](#timeoutinterceptor)
     *   [Properties](#properties-1)
-    *   [name](#name-5)
+    *   [name](#name-6)
 *   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
     *   [Parameters](#parameters-6)
 
@@ -183,6 +185,14 @@ logs args and result
 ### name
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'logging'
+
+## MonitoringInterceptor
+
+**Extends Interceptor**
+
+### name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'monitor'
 
 ## StatsCollectorInterceptor
 
