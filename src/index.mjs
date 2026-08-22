@@ -5,3 +5,4 @@ export * from "./limiting-interceptor.mjs";
 export * from "./interval-interceptor.mjs";
 export * from "./logging-interceptor.mjs";
 export * from "./template-interceptor.mjs";
+export * from "./monitoring-interceptor.mjs";
