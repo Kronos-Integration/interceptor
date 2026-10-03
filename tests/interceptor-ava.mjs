@@ -1,17 +1,22 @@
 import test from "ava";
-import { dummyEndpoint, interceptorTest } from "@kronos-integration/test-interceptor";
+import {
+  dummyEndpoint,
+  interceptorTest
+} from "@kronos-integration/test-interceptor";
 import { Interceptor } from "@kronos-integration/interceptor";
 
 test(
   interceptorTest,
   Interceptor,
   undefined,
-  { type: "Interceptor", json: { type: 'Interceptor'} },
+  { type: "Interceptor", json: { type: "Interceptor" } },
   dummyEndpoint("ep1"),
-  [1,2,3],
+  [1, 2, 3],
   (...args) => args.map(x => x * x),
   async (t, interceptor, e, next, result) => {
-    t.deepEqual(result,[1,4,9]);
+    t.deepEqual(result, [1, 4, 9]);
+
+    t.deepEqual(interceptor.toJSON(),{type: 'Interceptor'});
   }
 );
 

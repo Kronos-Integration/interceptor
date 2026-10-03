@@ -1,4 +1,10 @@
-import { setAttributes, getAttributes } from "pacc";
+import {
+  addType,
+  setAttributes,
+  extract,
+  type_attribute,
+  SCOPE_RUNTIME
+} from "pacc";
 
 /**
  * @typedef {Object} Endpoint
@@ -14,10 +20,16 @@ export class Interceptor {
    * Meta description of the configuration
    * @return {Object}
    */
-  static attributes = {};
+  static attributes = {
+    type: type_attribute
+  };
+
+  static {
+    addType(this);
+  }
 
   /**
-   * 
+   *
    * @param {Object} [config]
    */
   constructor(config) {
@@ -70,22 +82,22 @@ export class Interceptor {
    * @return {Object} json representation
    */
   toJSONWithOptions(options) {
-    if (!options.includeConfig) {
-      return { type: this.type };
-    }
+    return extract(this, {
+      externalNames: true,
+      filter: attribute => {
+        if (attribute.scope === SCOPE_RUNTIME) {
+          return options.includeRuntimeInfo;
+        }
+        if (attribute.name === "type") {
+          return true;
+        }
 
-    let atts = getAttributes(this, this.attributes);
-
-    if (!options.includePrivate) {
-      atts = Object.fromEntries(
-        Object.entries(atts).filter(([k, v]) => !v.private)
-      );
-    }
-
-    return {
-      type: this.type,
-      ...atts
-    };
+        return (
+          options.includeConfig &&
+          (options.includePrivate || !attribute.private)
+        );
+      }
+    });
   }
 
   /**

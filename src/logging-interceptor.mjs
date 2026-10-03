@@ -1,3 +1,4 @@
+import { addType } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -11,13 +12,19 @@ export class LoggingInterceptor extends Interceptor {
     return "logging";
   }
 
+  static {
+    addType(this);
+  }
+
   async receive(endpoint, next, ...args) {
     const logger = endpoint.owner;
     logger.info(`${endpoint.identifier}: > ${JSON.stringify([...args])}`);
 
     try {
       const result = await next(...args);
-      logger.info(`${endpoint.identifier}: < ${result === undefined ? '' : result}`);
+      logger.info(
+        `${endpoint.identifier}: < ${result === undefined ? "" : result}`
+      );
       return result;
     } catch (e) {
       logger.error(`${endpoint.identifier}: ${e}`);

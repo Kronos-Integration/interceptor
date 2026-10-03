@@ -27,7 +27,7 @@ test(
     timeout: 15000,
     json: {
       type: "timeout",
-      timeout: 15000000 
+      timeout: 15000
     }
   },
   dummyEndpoint("ep1"),

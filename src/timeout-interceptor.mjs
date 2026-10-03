@@ -1,4 +1,4 @@
-import { prepareAttributesDefinitions, duration_ms_attribute } from "pacc";
+import { addType, duration_ms_attribute } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -6,22 +6,24 @@ import { Interceptor } from "./interceptor.mjs";
  * @property {number} timeout
  */
 export class TimeoutInterceptor extends Interceptor {
-  static attributes = prepareAttributesDefinitions(
-    {
-      timeout: {
-        ...duration_ms_attribute,
-        description: "request timeout",
-        default: "10s",
-      }
-    },
-    Interceptor.attributes
-  );
+  static attributes = {
+    timeout: {
+      ...duration_ms_attribute,
+      writable: true,
+      description: "request timeout",
+      default: "100000"
+    }
+  };
 
   /**
    * @return {string} 'timeout'
    */
   static get name() {
     return "timeout";
+  }
+
+  static {
+    addType(this);
   }
 
   receive(endpoint, next, ...args) {

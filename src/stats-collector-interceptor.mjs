@@ -1,3 +1,4 @@
+import { addType } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -12,6 +13,10 @@ export class StatsCollectorInterceptor extends Interceptor {
     return "collect-request-stats";
   }
 
+    static {
+      addType(this);
+    }
+  
   reset() {
     this.numberOfRequests = 0;
     this.numberOfFailedRequests = 0;

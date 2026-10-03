@@ -1,8 +1,8 @@
 import {
-  prepareAttributesDefinitions,
-  object_attribute,
+  addType,
   duration_ms_attribute,
-  count_attribute
+  count_attribute_writable,
+  default_collection_attribute_writable
 } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
@@ -29,39 +29,41 @@ export class LimitingInterceptor extends Interceptor {
     return "request-limit";
   }
 
-  static attributes = prepareAttributesDefinitions(
-    {
-      limits: {
-        ...object_attribute,
-        name: "limits",
-        default: [
-          {
-            count: 10
-          }
-        ],
-        attributes: {
-          count: count_attribute,
-          delay: { ...duration_ms_attribute, name: "delay" }
+  static attributes = {
+    limits: {
+      ...default_collection_attribute_writable,
+      //...object_attribute,
+      name: "limits",
+      default: [
+        {
+          count: 10
         }
+      ],
+      attributes: {
+        count: count_attribute_writable,
+        delay: { ...duration_ms_attribute, name: "delay" }
       }
-    },
-    Interceptor.attributes
-  );
+    }
+  };
+
+  static {
+    addType(this);
+  }
 
   /**
    *
    * @param {Object?} config
    */
-  constructor(config) {
+  /*constructor(config) {
     super(config);
     this.limits = config?.limits || this.attributes.limits.default;
-  }
+  }*/
 
-  toJSON() {
+  /*toJSON() {
     const json = super.toJSON();
     json.limits = this.limits;
     return json;
-  }
+  }*/
 
   reset() {
     this.ongoingResponses = new Set();

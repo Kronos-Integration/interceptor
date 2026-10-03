@@ -8,6 +8,24 @@ import { LimitingInterceptor } from "@kronos-integration/interceptor";
 
 const REQUEST_LIMIT = 2;
 
+test.only("l", t => {
+  const i = new LimitingInterceptor();
+
+  t.deepEqual(i.limits, [{ count: 10 }]);
+
+  console.log(i.limits);
+  console.log(i.toJSON());
+
+  t.deepEqual(i.toJSON(), {
+    limits: [
+      {
+        count: 10
+      }
+    ],
+    type: "request-limit"
+  });
+});
+
 test(
   interceptorTest,
   LimitingInterceptor,

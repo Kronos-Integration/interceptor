@@ -1,5 +1,5 @@
+import { addType, expand, object_attribute_writable } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
-import { expand, prepareAttributesDefinitions, object_attribute } from "pacc";
 
 /**
  * Map params into requests.
@@ -12,17 +12,24 @@ export class TemplateInterceptor extends Interceptor {
     return "template";
   }
 
-  static attributes = prepareAttributesDefinitions(
-    {
-      request: {
-        ...object_attribute,
-        name: "request",
-        description: "request template",
-        default: {}
-      }
-    },
-    Interceptor.attributes
-  );
+  static attributes = {
+    request: {
+      ...object_attribute_writable,
+      name: "request",
+      description: "request template",
+      default: {}
+    }
+  };
+
+  static {
+    addType(this);
+  }
+
+  toJSONWithOptions(options) {
+    const json = super.toJSONWithOptions(options);
+    json.request = this.request;
+    return json;
+  }
 
   async receive(endpoint, next, params) {
     return next(

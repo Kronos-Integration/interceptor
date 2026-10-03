@@ -1,31 +1,34 @@
-import { prepareAttributesDefinitions, duration_ms_attribute, default_attribute } from "pacc";
+import { addType, duration_ms_attribute } from "pacc";
 import { Interceptor } from "@kronos-integration/interceptor";
 
 /**
  *
  */
 export class MonitoringInterceptor extends Interceptor {
-  static attributes = prepareAttributesDefinitions(
-    {
-      gracePeriod: {
-        ...duration_ms_attribute,
-        name: "gracePeriod",
-        default: "120s"
-      },
-      settingPeriod: {
-        ...duration_ms_attribute,
-        name: "settingPeriod",
-        default: "300s"
-      }
+  static attributes = {
+    gracePeriod: {
+      ...duration_ms_attribute,
+      writable: true,
+      name: "gracePeriod",
+      default: "120s"
     },
-    Interceptor.attributes
-  );
+    settingPeriod: {
+      ...duration_ms_attribute,
+      writable: true,
+      name: "settingPeriod",
+      default: "300s"
+    }
+  };
 
   /**
    * @return {string} 'monitor'
    */
   static get name() {
     return "monitor";
+  }
+
+  static {
+    addType(this);
   }
 
   reset() {
