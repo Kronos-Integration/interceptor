@@ -1,6 +1,6 @@
 import {
   addType,
-  setAttributes,
+  assign,
   extract,
   type_attribute,
   SCOPE_RUNTIME
@@ -47,14 +47,6 @@ export class Interceptor {
   }
 
   /**
-   * Meta description of the configuration.
-   * @return {Object}
-   */
-  get attributes() {
-    return this.constructor.attributes;
-  }
-
-  /**
    * Takes attribute values from config parameters
    * and copies them over to the object.
    * Copying is done according to attributes.
@@ -64,7 +56,7 @@ export class Interceptor {
    * @param {Object} [config]
    */
   configure(config) {
-    setAttributes(this, config, this.attributes);
+    assign(this, config);
   }
 
   toString() {

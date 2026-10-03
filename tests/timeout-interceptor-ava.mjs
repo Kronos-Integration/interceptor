@@ -7,7 +7,6 @@ import {
 import { TimeoutInterceptor } from "@kronos-integration/interceptor";
 
 const next = async delay => {
-  //console.log("REQUEST",delay);
   if (delay < 0) {
     await wait(-delay);
     throw new Error("failed");

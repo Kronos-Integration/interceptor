@@ -50,24 +50,6 @@ export class LimitingInterceptor extends Interceptor {
     addType(this);
   }
 
-  /**
-   *
-   * @param {Object?} config
-   */
-  /*constructor(config) {
-    super(config);
-    this.limits = config?.limits || this.attributes.limits.default;
-  }*/
-
-  toJSONWithOptions(options) {
-    const json = super.toJSONWithOptions(options);
-
-    console.log("LIMITS",this.limits);
-
-    json.limits = this.limits;
-    return json;
-  }
-
   reset() {
     this.ongoingResponses = new Set();
     this.ongoingRequests = 0;

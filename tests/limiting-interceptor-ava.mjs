@@ -23,7 +23,7 @@ test("l", t => {
   });
 });
 
-test.only(
+test(
   interceptorTest,
   LimitingInterceptor,
   {
