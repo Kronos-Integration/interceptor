@@ -1,6 +1,6 @@
 import {
   addType,
-  duration_ms_attribute,
+  duration_ms_attribute_writable,
   count_attribute_writable,
   default_collection_attribute_writable
 } from "pacc";
@@ -32,7 +32,7 @@ export class LimitingInterceptor extends Interceptor {
   static attributes = {
     limits: {
       ...default_collection_attribute_writable,
-      //...object_attribute,
+      constructor: Array,
       name: "limits",
       default: [
         {
@@ -41,7 +41,7 @@ export class LimitingInterceptor extends Interceptor {
       ],
       attributes: {
         count: count_attribute_writable,
-        delay: { ...duration_ms_attribute, name: "delay" }
+        delay: { ...duration_ms_attribute_writable, name: "delay" }
       }
     }
   };
@@ -59,11 +59,14 @@ export class LimitingInterceptor extends Interceptor {
     this.limits = config?.limits || this.attributes.limits.default;
   }*/
 
-  /*toJSON() {
-    const json = super.toJSON();
+  toJSONWithOptions(options) {
+    const json = super.toJSONWithOptions(options);
+
+    console.log("LIMITS",this.limits);
+
     json.limits = this.limits;
     return json;
-  }*/
+  }
 
   reset() {
     this.ongoingResponses = new Set();

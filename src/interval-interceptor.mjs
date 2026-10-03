@@ -1,4 +1,4 @@
-import { addType, duration_ms_attribute } from "pacc";
+import { addType, duration_ms_attribute_writable } from "pacc";
 import { Interceptor } from "./interceptor.mjs";
 
 /**
@@ -8,8 +8,7 @@ import { Interceptor } from "./interceptor.mjs";
 export class IntervalInterceptor extends Interceptor {
   static attributes = {
     interval: {
-      ...duration_ms_attribute,
-      writable: true,
+      ...duration_ms_attribute_writable,
       name: "interval",
       description: "min interval between two requests",
       default: "60s"
