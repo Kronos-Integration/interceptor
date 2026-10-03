@@ -46,7 +46,8 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [Properties](#properties)
     *   [name](#name)
 *   [LimitingInterceptor](#limitinginterceptor)
-    *   [Parameters](#parameters-4)
+    *   [reset](#reset-1)
+        *   [Parameters](#parameters-4)
     *   [name](#name-1)
 *   [LoggingInterceptor](#logginginterceptor)
     *   [name](#name-2)
@@ -168,7 +169,9 @@ Sample config:
 20      : reject
 default is to reject when more than 10 requests are on the way
 
-### Parameters
+### reset
+
+#### Parameters
 
 *   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
