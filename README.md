@@ -46,7 +46,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [Properties](#properties)
     *   [name](#name)
 *   [LimitingInterceptor](#limitinginterceptor)
-    *   [reset](#reset-1)
+    *   [toJSONWithOptions](#tojsonwithoptions-1)
         *   [Parameters](#parameters-4)
     *   [name](#name-1)
 *   [LoggingInterceptor](#logginginterceptor)
@@ -169,10 +169,11 @@ Sample config:
 20      : reject
 default is to reject when more than 10 requests are on the way
 
-### reset
+### toJSONWithOptions
 
 #### Parameters
 
+*   `options` &#x20;
 *   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 ### name
