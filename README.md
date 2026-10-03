@@ -33,7 +33,6 @@ const response = interceptor.receive(endpoint, arg1, arg2);
 *   [Interceptor](#interceptor)
     *   [Parameters](#parameters)
     *   [type](#type)
-    *   [attributes](#attributes)
     *   [configure](#configure)
         *   [Parameters](#parameters-1)
     *   [toJSONWithOptions](#tojsonwithoptions)
@@ -41,13 +40,11 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [reset](#reset)
     *   [receive](#receive)
         *   [Parameters](#parameters-3)
-    *   [attributes](#attributes-1)
+    *   [attributes](#attributes)
 *   [IntervalInterceptor](#intervalinterceptor)
     *   [Properties](#properties)
     *   [name](#name)
 *   [LimitingInterceptor](#limitinginterceptor)
-    *   [toJSONWithOptions](#tojsonwithoptions-1)
-        *   [Parameters](#parameters-4)
     *   [name](#name-1)
 *   [LoggingInterceptor](#logginginterceptor)
     *   [name](#name-2)
@@ -55,7 +52,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [name](#name-3)
 *   [StatsCollectorInterceptor](#statscollectorinterceptor)
     *   [receive](#receive-1)
-        *   [Parameters](#parameters-5)
+        *   [Parameters](#parameters-4)
     *   [name](#name-4)
 *   [TemplateInterceptor](#templateinterceptor)
     *   [name](#name-5)
@@ -63,7 +60,7 @@ const response = interceptor.receive(endpoint, arg1, arg2);
     *   [Properties](#properties-1)
     *   [name](#name-6)
 *   [rejectUnlessResolvedWithin](#rejectunlessresolvedwithin)
-    *   [Parameters](#parameters-6)
+    *   [Parameters](#parameters-5)
 
 ## Endpoint
 
@@ -84,12 +81,6 @@ The instance method returning the type.
 Defaults to the constructors name (class name)
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
-
-### attributes
-
-Meta description of the configuration.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 ### configure
 
@@ -168,13 +159,6 @@ Sample config:
 10 - 19 : 100ms delay
 20      : reject
 default is to reject when more than 10 requests are on the way
-
-### toJSONWithOptions
-
-#### Parameters
-
-*   `options` &#x20;
-*   `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 ### name
 
